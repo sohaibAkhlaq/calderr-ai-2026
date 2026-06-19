@@ -1,19 +1,20 @@
-﻿# CalderR AI Internship 2026
+﻿# CalderR AI Internship — Day 1 Summary
 
-## Project Location
-Desktop/calderr-ai-2026
+Project location: Desktop/calderr-ai-2026
 
-## About Me
-Sohaib Akhlaq
+Author: Sohaib Akhlaq
 
-## Day 1 Setup - Complete
+Status: Day 1 complete — ready to proceed to Day 2
 
-### Python Environment
-- Python 3.11.9
-- Virtual environment: calderr-env
-- pip upgraded to latest version
+Overview
+This repository contains the Day 1 setup for the CalderR AI internship. It captures the local development environment, installed dependencies, and quick-start instructions to reproduce the environment.
 
-### Packages Installed
+Environment
+- Python: 3.11.9
+- Virtual environment: `calderr-env` (included, typically ignored by VCS)
+- `pip` upgraded to the latest available version
+
+Installed packages
 - langchain
 - langchain-groq
 - langchain-community
@@ -34,37 +35,50 @@ Sohaib Akhlaq
 - streamlit
 - PyTorch 2.5.1
 
-### Version Control
+Version control
 - Git configured
 - SSH key generated for GitHub
-- Repository: calderr-ai-2026
+- Repository: `calderr-ai-2026`
 
-### Containerization
+Containerization
 - Docker Desktop installed
-- Dockerfile created
+- `Dockerfile` included for building a project image
 
-### IDE
-- VS Code installed
-- Python, Pylance, Jupyter extensions installed
+IDE
+- Visual Studio Code with Python, Pylance and Jupyter extensions installed
 
-## Project Structure
+Project structure
 Desktop/calderr-ai-2026/
-├── calderr-env/ # Virtual environment (ignored)
-├── .git/ # Git repository
-├── .gitignore # Git ignore rules
-├── .env.template # Environment variables template
-├── requirements.txt # Python dependencies
-├── main.py # Main application
-├── test_setup.py # Verification script
-├── Dockerfile # Docker configuration
-└── README.md # This file
+- `calderr-env/` — Virtual environment (should be ignored by Git)
+- `.git/` — Git repository metadata
+- `.gitignore` — Git ignore rules
+- `.env.template` — Environment variable template
+- `requirements.txt` — Python dependencies
+- `main.py` — Main application entry point
+- `test_setup.py` — Verification script for setup
+- `Dockerfile` — Docker configuration
+- `README.md` — This file
 
+Quick start
+1. Activate the virtual environment (PowerShell):
 
-## Quick Start
-1. Activate environment: .\calderr-env\Scripts\Activate.ps1
-2. Run main: python main.py
-3. Build Docker: docker build -t calderr-ai-2026 .
-4. Run Docker: docker run --rm calderr-ai-2026
+	.\calderr-env\Scripts\Activate.ps1
 
----
-Status: Day 1 Complete - Ready for Day 2
+2. Run the application:
+
+	python main.py
+
+3. Build the Docker image:
+
+	docker build -t calderr-ai-2026 .
+
+4. Run the container:
+
+	docker run --rm calderr-ai-2026
+
+Notes
+- The virtual environment directory is included locally for convenience; it should remain excluded from version control.
+- Refer to `.env.template` for environment variables required by the application.
+
+Acknowledgements
+Day 1 setup completed and verified.

@@ -111,3 +111,5 @@ git push origin main
 ```
 
 Contact the repository maintainer for assistance with key rotation or history scrubbing.
+
+See the detailed Day 2 summary: [day2-summary.txt](day2-summary.txt)

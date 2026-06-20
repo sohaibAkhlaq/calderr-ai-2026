@@ -82,3 +82,32 @@ Notes
 
 Acknowledgements
 Day 1 setup completed and verified.
+
+## Day 2 — Completed
+
+- **Status:** Completed.
+- **Feature added:** `dkeep` — a secure-state persistence helper for development workflows.
+
+Notes:
+- `dkeep` provides encrypted local storage for temporary keys and session data. It is intended for development use only; use a dedicated secret manager for production.
+
+Security reminder:
+- Never commit secrets to the repository. Keep local secrets in a `.env` file and ensure `.env` is listed in `.gitignore`.
+- If `.env` was committed, stop tracking and remove it from history (instructions below).
+
+How to stop tracking `.env` and remove it from Git history:
+
+```bash
+# Stop tracking the .env file and keep it locally
+git rm --cached .env
+git commit -m "Stop tracking .env and add to .gitignore"
+git push origin main
+
+# If secrets were committed earlier, remove them from history using BFG or git filter-repo
+# Example (BFG):
+#   bfg --delete-files .env
+#   git reflog expire --expire=now --all && git gc --prune=now --aggressive
+#   git push --force
+```
+
+Contact the repository maintainer for assistance with key rotation or history scrubbing.

@@ -1,10 +1,10 @@
-﻿# CalderR AI Internship — Day 1 Summary
+﻿# CalderR AI Internship 
 
 Project location: Desktop/calderr-ai-2026
 
 Author: Sohaib Akhlaq
 
-Status: Day 1 complete — ready to proceed to Day 2
+Status: Week 0 Completed
 
 Overview
 This repository contains the Day 1 setup for the CalderR AI internship. It captures the local development environment, installed dependencies, and quick-start instructions to reproduce the environment.

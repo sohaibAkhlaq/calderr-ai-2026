@@ -1,0 +1,49 @@
+WEEK 1 - DAY 1: LLM FOUNDATIONS
+================================
+
+Key Concepts Learned:
+
+1. Tokens
+   - Unit of text processed by LLMs
+   - ~4 characters = 1 token
+   - ~75 words = 100 tokens
+   - Models charge per token
+
+2. Context Window
+   - Maximum tokens model can process
+   - llama-3.3-70b: 128,000 tokens
+   - llama-3.1-8b: 128,000 tokens
+   - mixtral-8x7b: 32,768 tokens
+
+3. Temperature
+   - Controls randomness of output
+   - 0.0 = Deterministic (always same)
+   - 0.7 = Balanced (recommended)
+   - 1.5+ = Creative/Random
+
+4. Transformer Architecture
+   - Self-attention mechanism
+   - Multi-head attention
+   - Positional encoding
+   - Feed-forward networks
+
+5. Training vs Inference
+   - Training: Learning from data
+   - Inference: Generating responses
+
+6. Available Groq Models
+   - llama-3.3-70b-versatile: Best quality
+   - llama-3.1-8b-instant: Fastest
+   - mixtral-8x7b-32768: Balanced
+
+7. Key Takeaways from Karpathy Video
+   - LLMs predict next token
+   - Training is massive pattern recognition
+   - Emergent abilities appear at scale
+   - RLHF improves helpfulness
+
+8. Temperature Experiment Results
+   - 0.0: Repetitive, deterministic
+   - 0.7: Creative but coherent
+   - 1.5+: More creative, risk of incoherence
+   - 2.0: Highly random, often nonsensical

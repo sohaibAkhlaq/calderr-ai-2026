@@ -1,0 +1,50 @@
+WEEK 1 - DAY 2: AGENTIC AI CONCEPTS
+====================================
+
+Key Concepts Learned:
+
+1. Agent Loop
+   Perceive → Reason → Plan → Act → Observe → Repeat
+   - Perceive: Receive and understand input
+   - Reason: Analyze the problem
+   - Plan: Decide the action
+   - Act: Execute the action
+   - Observe: See the result
+   - Repeat: Continue until goal achieved
+
+2. Reactive vs Proactive Agents
+   - Reactive: Responds only to input (like a chatbot)
+   - Proactive: Takes initiative, plans ahead (like an agent)
+
+3. Tools
+   - Functions an agent can call
+   - Extend agent capabilities beyond text generation
+   - Examples: search, calculator, database, API calls
+
+4. Memory
+   - Conversation history
+   - Context across interactions
+   - Enables coherent multi-turn conversations
+
+5. ReAct Pattern
+   - Reasoning + Acting combined
+   - Paper: "ReAct: Synergizing Reasoning and Acting in LLMs"
+   - Agent thinks (reasons) about what to do, then acts
+
+6. Key Distinctions
+   - Language Model: Generates text based on patterns
+   - Agent: Uses tools, makes decisions, takes actions
+   - Agent adds: Planning, tool use, memory, decision-making
+
+7. Why Agents Matter
+   - Can perform complex tasks
+   - Use external tools
+   - Make decisions autonomously
+   - Learn from interactions
+
+Implementation:
+- Manual ReAct agent built without any framework
+- 3 tools: search_database, calculate, get_current_time
+- Tool selection based on keyword matching
+- Full agent loop implemented
+- CLI with /history, /help, /exit commands

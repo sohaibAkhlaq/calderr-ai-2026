@@ -1,7 +1,7 @@
 ﻿# CalderR AI Internship
 **Project location:** Desktop/calderr-ai-2026
 **Author:** Sohaib Akhlaq
-**Status:** Week 1 Day 1 Complete
+**Status:** Week 1 Day 2 Complete
 
 ---
 
@@ -70,6 +70,38 @@ This repository contains the complete setup and daily progress for the CalderR A
 
 ---
 
+### Day 2 — Agentic AI Concepts (Complete)
+**Status:** ✅ Complete
+
+**What was covered:**
+
+- ReAct pattern: Reasoning + Acting in LLMs
+- Agent Loop: Perceive → Reason → Plan → Act → Observe → Repeat
+- Reactive vs Proactive agents
+- Tools, memory, and planning concepts
+- Agent decision-making and tool selection
+
+**Implementation:**
+
+- `react_agent.py` — Manual ReAct agent built without any framework. Implements 3 tools:
+  - `search_database()` — Mock database for facts (capitals, populations, inventors)
+  - `calculate()` — Math expression evaluation using eval()
+  - `get_current_time()` — Current date and time retrieval
+  - Tool selection based on keyword matching
+  - Full agent loop with verbose logging
+  - CLI with /history, /help, /exit commands
+- `week1day2.txt` — Detailed notes on agentic AI concepts
+
+**Key Learnings:**
+
+- Language Model: Generates text based on patterns
+- Agent: Uses tools, makes decisions, takes actions
+- Agent adds: Planning, tool use, memory, decision-making
+- ReAct combines reasoning and acting in a loop
+- Tools extend agent capabilities beyond text generation
+
+---
+
 ## Project Structure
 
 ```
@@ -88,7 +120,9 @@ Desktop/calderr-ai-2026/
 ├── test_groq_monday.py          # Week 1 Day 1 model testing
 ├── temperature_experiment.py    # Week 1 Day 1 temperature testing
 ├── cli_chatbot.py               # Week 1 Day 1 CLI chatbot
+├── react_agent.py               # Week 1 Day 2 Manual ReAct Agent
 ├── week1day1.txt                # Week 1 Day 1 notes
+├── week1day2.txt                # Week 1 Day 2 notes
 ├── notebooks/
 │   ├── 01_first_llm_call.ipynb  # Day 2 Jupyter notebook
 │   └── README.md                # Notebook documentation
@@ -116,6 +150,7 @@ python test_groq_stream.py        # Day 2: Streaming example
 python test_groq_monday.py        # Week 1 Day 1: Model testing
 python temperature_experiment.py  # Week 1 Day 1: Temperature testing
 python cli_chatbot.py             # Week 1 Day 1: CLI chatbot
+python react_agent.py             # Week 1 Day 2: Manual ReAct Agent
 ```
 
 ### Launch Jupyter Lab
@@ -150,7 +185,7 @@ docker run --rm calderr-ai-2026
 |-----|-------|--------|
 | Week 0 | Environment Setup | ✅ Complete |
 | Day 1 | LLM Foundations | ✅ Complete |
-| Day 2 | Agentic AI Concepts | ⏳ Upcoming |
+| Day 2 | Agentic AI Concepts | ✅ Complete |
 | Day 3 | LangChain Core | ⏳ Upcoming |
 | Day 4 | Prompt Engineering | ⏳ Upcoming |
 | Day 5 | Integration & Demo | ⏳ Upcoming |

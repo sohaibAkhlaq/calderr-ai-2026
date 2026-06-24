@@ -1,0 +1,47 @@
+WEEK 1 - DAY 3: LANGCHAIN CORE
+================================
+
+Key Concepts Learned:
+
+1. LCEL (LangChain Expression Language)
+   - The pipe operator (|) for chaining components
+   - Makes chains readable and composable
+   - Supports streaming, batching, async
+
+2. Runnables
+   - Base interface for all chainable objects
+   - prompt | llm | parser
+   - All implement the Runnable interface
+
+3. RunnablePassthrough
+   - Passes data through unchanged
+   - Used to pass user input to multiple places
+   - Example: {"context": retriever, "question": RunnablePassthrough()}
+
+4. RunnableParallel
+   - Runs multiple chains in parallel
+   - Returns dictionary with all results
+   - Example: RunnableParallel({"a": chain1, "b": chain2})
+
+5. RAG (Retrieval-Augmented Generation)
+   - Retrieve relevant documents from vectorstore
+   - Use as context for LLM
+   - Improves accuracy on custom data
+
+6. ChromaDB (in-memory)
+   - Vector database for storing embeddings
+   - In-memory mode for development
+   - Supports similarity search
+
+7. Chain Patterns:
+   Pattern 1: Simple Chain - prompt | llm | parser
+   Pattern 2: With RunnablePassthrough - passes data through
+   Pattern 3: RunnableParallel - multiple chains in parallel
+
+Implementation:
+- document_qa_chain.py: Complete RAG pipeline
+  - Load document → Split → Embed → Store → Retrieve → Answer
+- chain_patterns.py: 3 different chain patterns
+
+Key Takeaway:
+LCEL makes LangChain chains modular, composable, and production-ready.

@@ -1,7 +1,7 @@
 ﻿# CalderR AI Internship
 **Project location:** Desktop/calderr-ai-2026
 **Author:** Sohaib Akhlaq
-**Status:** Week 1 Day 2 Complete
+**Status:** Week 1 Day 3 Complete
 
 ---
 
@@ -22,9 +22,10 @@ This repository contains the complete setup and daily progress for the CalderR A
 
 - langchain, langchain-groq, langchain-community, langgraph
 - groq, openai, pydantic, python-dotenv
-- fastapi, uvicorn, chromadb, sentence-transformers
+- fastapi, uvicorn, chromadb
 - httpx, rich, typer, pytest, jupyter, streamlit
-- PyTorch 2.5.1
+- PyTorch 2.12.1 (CPU-only for Windows compatibility)
+- rank-bm25 (for keyword-based retrieval)
 
 ### Version Control
 
@@ -102,7 +103,55 @@ This repository contains the complete setup and daily progress for the CalderR A
 
 ---
 
-## Project Structure
+### Day 3 — LangChain Core (Complete)
+**Status:** ✅ Complete
+
+**What was covered:**
+
+- LCEL (LangChain Expression Language) and the pipe operator (`|`)
+- Runnable, RunnablePassthrough, RunnableParallel
+- RAG (Retrieval-Augmented Generation) pattern
+- Document loading, splitting, and retrieval
+- BM25 keyword-based retrieval (no embeddings required)
+- Three different chain patterns with LCEL
+
+**Implementation:**
+
+- `document_qa_chain.py` — Complete RAG pipeline with BM25 retriever:
+  - Load document → Split into chunks → Create BM25 retriever → Build RAG chain → Answer questions
+  - Interactive Q&A system with conversation
+- `chain_patterns.py` — 3 different chain patterns:
+  1. **Simple Chain:** `prompt | llm | parser`
+  2. **RunnablePassthrough:** Passes data through unchanged
+  3. **RunnableParallel:** Multiple chains in parallel
+- `week1day3.txt` — Detailed notes on LangChain Core concepts
+
+**Key Learnings:**
+
+- **LCEL:** Makes chains readable, composable, and production-ready
+- **Runnable:** Base interface for all chainable objects
+- **RunnablePassthrough:** Passes data through to multiple places
+- **RunnableParallel:** Runs multiple chains simultaneously
+- **RAG:** Improves accuracy by retrieving relevant context
+- **BM25:** Effective keyword-based retrieval without embeddings
+
+---
+
+## Environment Notes (Windows Fix)
+
+### PyTorch DLL Issue (RESOLVED)
+The original installation encountered `OSError: [WinError 1114]` when importing PyTorch due to mixed GPU/CPU builds. 
+
+**Solution:**
+- Reinstalled PyTorch CPU-only from official repository: `pip install torch --index-url https://download.pytorch.org/whl/cpu`
+- Removed problematic `sentence-transformers` dependency
+- Switched to BM25 retriever for keyword-based search (no embeddings needed)
+
+### Requirements Files
+- `requirements-minimal.txt` — Lightweight setup (LangChain + Groq + BM25, no heavy ML)
+- `requirements-windows.txt` — Full stack (includes optional extras)
+
+---
 
 ```
 Desktop/calderr-ai-2026/
@@ -112,6 +161,8 @@ Desktop/calderr-ai-2026/
 ├── .env                         # Environment variables (gitignored)
 ├── .env.template                # Environment variable template
 ├── requirements.txt             # Python dependencies
+├── requirements-minimal.txt     # Minimal Windows-compatible dependencies
+├── requirements-windows.txt     # Full Windows setup
 ├── main.py                      # Main application entry point
 ├── test_setup.py                # Week 0 verification script
 ├── test_env.py                  # API key verification
@@ -121,8 +172,11 @@ Desktop/calderr-ai-2026/
 ├── temperature_experiment.py    # Week 1 Day 1 temperature testing
 ├── cli_chatbot.py               # Week 1 Day 1 CLI chatbot
 ├── react_agent.py               # Week 1 Day 2 Manual ReAct Agent
+├── document_qa_chain.py         # Week 1 Day 3 Document Q&A Chain
+├── chain_patterns.py            # Week 1 Day 3 Chain Patterns
 ├── week1day1.txt                # Week 1 Day 1 notes
 ├── week1day2.txt                # Week 1 Day 2 notes
+├── week1day3.txt                # Week 1 Day 3 notes
 ├── notebooks/
 │   ├── 01_first_llm_call.ipynb  # Day 2 Jupyter notebook
 │   └── README.md                # Notebook documentation
@@ -137,11 +191,13 @@ Desktop/calderr-ai-2026/
 ## Quick Start
 
 ### Activate Virtual Environment (PowerShell)
+
 ```powershell
 .\calderr-env\Scripts\Activate.ps1
 ```
 
 ### Run Applications
+
 ```powershell
 python main.py                    # Week 0: Main application
 python test_env.py                # API key verification
@@ -151,6 +207,8 @@ python test_groq_monday.py        # Week 1 Day 1: Model testing
 python temperature_experiment.py  # Week 1 Day 1: Temperature testing
 python cli_chatbot.py             # Week 1 Day 1: CLI chatbot
 python react_agent.py             # Week 1 Day 2: Manual ReAct Agent
+python document_qa_chain.py       # Week 1 Day 3: Document Q&A Chain
+python chain_patterns.py          # Week 1 Day 3: Chain Patterns
 ```
 
 ### Launch Jupyter Lab
@@ -186,6 +244,6 @@ docker run --rm calderr-ai-2026
 | Week 0 | Environment Setup | ✅ Complete |
 | Day 1 | LLM Foundations | ✅ Complete |
 | Day 2 | Agentic AI Concepts | ✅ Complete |
-| Day 3 | LangChain Core | ⏳ Upcoming |
+| Day 3 | LangChain Core | ✅ Complete |
 | Day 4 | Prompt Engineering | ⏳ Upcoming |
 | Day 5 | Integration & Demo | ⏳ Upcoming |

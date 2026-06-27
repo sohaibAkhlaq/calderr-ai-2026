@@ -181,4 +181,20 @@ calderr-ai-2026/
 
 ---
 
+## Week 1 Projects Completed (✅)
+
+### Intermediate Project (1-I-B): Prompt Engineering Evaluator
+- Generates 3 prompts per task
+- Tests and scores on accuracy, brevity, helpfulness
+- Rich CLI with tables and panels
+- JSON report export
+
+### Production Project (1-P-B): Multi-Model Comparison Engine
+- Tests 2+ models on 5+ tasks
+- Async parallel execution
+- Statistical analysis with rich visualizations
+- HTML + JSON reports
+
+---
+
 **Week 1 Complete — Ready for Week 2!** 🚀

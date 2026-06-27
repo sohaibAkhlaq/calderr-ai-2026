@@ -1,73 +1,79 @@
-# Week 1 Weekly Assessment
-
-## Overview
-
-This assessment summarizes the key concepts learned during Week 1 of the CalderR AI internship. The responses below are written in a clear, professional format and reflect the main ideas from the lectures and practical exercises.
-
----
+# Week 1 - Weekly Assessment
 
 ## Conceptual Questions
 
-### 1. Difference Between a Language Model and an Agent
+### Q1: Explain the difference between a language model and an agent. What capabilities does an agent add?
 
-A language model is a system that generates text by predicting the next token based on patterns learned from training data. It is primarily focused on language generation and response creation.
+**Answer:**
+A **language model** is a neural network trained to predict the next token given previous tokens. It generates text based on learned patterns from training data.
 
-An agent extends this capability by adding:
+An **agent** builds on a language model by adding:
+- **Tools**: Ability to call external functions (search, calculator, database, APIs)
+- **Planning**: Deciding what actions to take to achieve a goal
+- **Memory**: Maintaining and using context across conversations
+- **Decision-making**: Choosing which tools to use and when
+- **Autonomy**: Taking actions without explicit step-by-step instructions
+- **Reflection**: Evaluating results and adjusting approach
 
-- Tool use for tasks such as searching, calculation, or database access
-- Planning to decide the next best action
-- Memory to maintain context across steps or conversations
-- Decision-making to choose among available actions
-- Autonomy to carry out tasks with limited human guidance
-
-In short, a language model can answer questions, while an agent can reason, act, and interact with external systems.
-
----
-
-### 2. Context Window in Agentic Systems
-
-The context window is the maximum amount of information a model can process at one time, usually measured in tokens.
-
-It matters because it affects:
-
-- How much conversation history the model can remember
-- How much tool output can be included in a single step
-- The maximum size of documents or prompts that can be processed
-- The overall cost and latency of the model
-
-For agentic systems, a larger context window allows longer reasoning chains and better handling of multi-step tasks.
+The key difference is that a language model only generates text, while an agent takes action in the world.
 
 ---
 
-### 3. ReAct Pattern
+### Q2: What is the 'context window' and why does it matter for agentic systems?
 
-The ReAct pattern combines reasoning and acting in an iterative loop. The model observes the situation, reasons about the best next step, takes an action using a tool, and then observes the result before continuing.
+**Answer:**
+The **context window** is the maximum number of tokens a model can process in a single request.
 
-Typical loop:
+**Why it matters for agents:**
+- **Memory**: Agents can only "remember" what fits in the context window
+- **Tool usage**: Tool outputs must fit within the context window
+- **Conversation length**: Limits how long a conversation can be
+- **Document processing**: Limits how much information can be processed at once
+- **Cost**: Larger context windows are more expensive
 
-1. Perceive the input
-2. Reason about the goal
-3. Plan the next action
-4. Act using a tool or function
-5. Observe the result
-6. Repeat if necessary
+**Example:**
+- llama-3.3-70b: 128,000 tokens → can process entire books
+- Smaller models: 4,096 tokens → limited to short documents
 
-Use ReAct when a task is complex, multi-step, or requires external tools. Use a simple chain when the workflow is fixed and predictable.
+---
+
+### Q3: Describe the ReAct pattern. When would you use it versus a simple chain?
+
+**Answer:**
+**ReAct** = Reasoning + Acting pattern where the agent alternates between thinking and doing.
+
+**The Loop:**
+
+Perceive → Reason → Plan → Act → Observe → Repeat
+
+**When to use ReAct vs Simple Chain:**
+
+| Simple Chain | ReAct Pattern |
+|--------------|---------------|
+| Fixed sequence of steps | Dynamic decision-making |
+| Predictable tasks | Complex, open-ended tasks |
+| No tool usage | Heavy tool usage |
+| One-shot tasks | Multi-step reasoning |
+| Example: Q&A with static docs | Example: Research assistant |
+
+**Use ReAct when:** You need the agent to think, use tools, and adapt based on results.
+
+**Use Simple Chain when:** You have a fixed process that never changes.
 
 ---
 
 ## Technical Questions
 
-### 4. LCEL in LangChain
+### Q4: What is LCEL in LangChain? Write a 5-line example using the pipe operator.
 
-LCEL, or LangChain Expression Language, is a declarative way to compose LangChain workflows using the pipe operator (`|`). It makes chains readable, modular, and easy to extend.
+**Answer:**
+**LCEL** (LangChain Expression Language) is a declarative way to compose chains using the pipe operator `|`.
 
-Example:
-
+**Example:**
 ```python
+from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_groq import ChatGroq
 
 prompt = ChatPromptTemplate.from_template("Answer: {question}")
 llm = ChatGroq(model="llama-3.1-8b-instant")
@@ -77,56 +83,183 @@ chain = prompt | llm | parser
 response = chain.invoke({"question": "What is AI?"})
 ```
 
-This example shows a simple pipeline:
+This chains three components:
 
-- Prompt: formats the user input
-- LLM: generates the answer
-- Parser: extracts the final response text
+1. **Prompt** → formats the input
+2. **LLM** → processes the prompt
+3. **Parser** → extracts the string response
 
 ---
 
-### 5. Temperature in LLM Sampling
+### Q5: Explain the role of temperature in LLM sampling. When would you set it to 0?
 
-Temperature controls the randomness of the model’s output.
+**Answer:**
+**Temperature** controls the randomness of the model's output by scaling the logits before softmax.
 
-| Temperature | Effect | Typical Use |
+| Temperature | Effect | Use Case |
 |---|---|---|
-| 0.0 | Deterministic and consistent | Math, code, factual extraction |
-| 0.3–0.5 | Slightly creative but still controlled | Classification and structured tasks |
-| 0.7 | Balanced and natural | General chat and everyday use |
-| 1.0+ | More creative and varied | Brainstorming and storytelling |
-| 2.0 | Highly random and potentially inconsistent | Experimental creative writing |
+| 0.0 | Deterministic, always same output | Math, code, exact answers, testing |
+| 0.3–0.5 | Slightly creative, predictable | Data extraction, classification |
+| 0.7 | Balanced, creative but coherent | General chat, most tasks |
+| 1.0+ | Creative, varied responses | Storytelling, brainstorming |
+| 2.0 | Highly random, may be incoherent | Creative writing experiments |
 
-Temperature should be set to 0 when the task requires repeatable, precise, and stable results.
+**When to set temperature to 0:**
 
----
-
-### 6. Simple Agent Architecture for a Customer Support Chatbot
-
-A simple customer support agent can be designed with the following flow:
-
-User Input → Intent Classifier → Tool Selector → Tool Execution → Response Generator → User
-
-Suggested components:
-
-- Intent Classifier: identifies the user’s goal
-- Tool Selector: decides which tool to use
-- Memory: keeps track of the conversation history
-- Response Generator: creates the final answer
-- Escalation Handler: transfers to a human if required
-
-Useful tools:
-
-- Knowledge Base Search for FAQs and documentation
-- Order Lookup for tracking and delivery status
-- Account Management for profile and password tasks
-- Product Database for product information
-- Status Check for outages and service issues
-
-This architecture allows the bot to answer routine requests efficiently while knowing when to escalate complex cases.
+- When you need **consistent, repeatable answers**
+- For tasks requiring **exact precision** (math, code, fact extraction)
+- For **testing and evaluation** (same input → same output)
+- When you want **deterministic behavior**
 
 ---
 
-## Final Reflection
+## Design Question
 
-Week 1 provided a strong foundation in both the theory and implementation of modern AI systems. The most important lessons were understanding how LLMs work, how agents extend them with tools and reasoning, and how prompt design can shape output quality and behavior.
+### Q6: Design a simple agent architecture for a customer support chatbot. What tools would it need?
+
+**Answer:**
+
+**Architecture:**
+
+```text
+User Input → Intent Classifier → Tool Selector → Execution → Response Generator → User
+```
+
+**Components:**
+
+1. **Intent Classifier**: Determines what the user wants
+2. **Tool Selector**: Chooses which tool to use
+3. **Memory**: Stores conversation history
+4. **Response Generator**: Creates final response
+
+**Tools Needed:**
+
+- **Knowledge Base Search**: Search FAQ, documentation, help articles
+- **Order Lookup**: Check order status, tracking numbers
+- **Account Management**: Update preferences, reset passwords
+- **Escalation**: Transfer to human agent when needed
+- **Product Database**: Search product information, pricing
+- **Status Check**: Check system status, outages
+
+**Workflow:**
+
+1. User: "Where is my order #12345?"
+2. Agent: Classifies intent → Selects Order Lookup tool
+3. Tool: Returns order status
+4. Agent: Generates response with tracking info
+5. Follow-up: "Is there anything else I can help with?"
+
+**Guardrails:**
+
+- Never share personal information
+- Escalate if user is frustrated
+- Stay within scope (don't answer off-topic questions)
+
+---
+
+## Week 1 Completion Checklist
+
+- [ ] All 5 daily learning sessions completed (Mon–Fri)
+- [ ] Lab 1.1 - Groq CLI chatbot built and working
+- [ ] Lab 1.2 - Manual ReAct loop implemented without a framework
+- [ ] Lab 1.3 - Prompt A/B test completed with documented findings
+- [ ] Weekly Assessment questions answered in writing
+- [ ] One Intermediate project chosen, built, and pushed to GitHub
+- [ ] One Production project chosen, built, and pushed to GitHub
+- [ ] Both projects have complete README files with setup instructions
+- [ ] Architecture diagram prepared for Friday's standup review
+- [ ] Demo rehearsed and ready to present in under 2 minutes
+
+---
+
+## Standup Preparation
+
+### 1. Demo Script (2 minutes)
+
+Demo: Professional Chatbot
+
+1. "I built a professional CLI chatbot with 5 different personas"
+2. Show: Persona selection (general, technical, creative, academic, mentor)
+3. Show: Conversation with memory
+4. Show: /history command
+5. Show: /stats command
+6. Show: Response quality
+
+### 2. Technical Question
+
+**"What surprised you most this week?"**
+
+> "The biggest surprise was how much prompt engineering impacts output quality. The same LLM can produce completely different responses based on the system prompt. A concise prompt gives brief answers, while a detailed prompt gives comprehensive responses. This means the LLM's capability is fixed, but we can dramatically change its behavior through prompting."
+
+### 3. Architecture Diagram
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│ CHATBOT ARCHITECTURE                                       │
+│                                                             │
+│ ┌─────────┐ ┌──────────┐ ┌─────────┐ ┌────────┐            │
+│ │ User    │──▶│ Intent   │──▶│ Tool    │──▶│ Action │            │
+│ │ Input   │  │ Classify │  │ Select  │  │ Exec   │            │
+│ └─────────┘ └──────────┘ └─────────┘ └────────┘            │
+│ ▲                                                           │
+│ │                                                           │
+│ ▼                                                           │
+│ ┌─────────┐ ┌──────────┐ ┌─────────┐ ┌────────┐            │
+│ │ User    │◀──│ Response │◀──│ Generate│◀──│ Observe│            │
+│ │ Output  │  │ Format   │  │ Response│  │ Result │            │
+│ └─────────┘ └──────────┘ └─────────┘ └────────┘            │
+│                                                             │
+│ ┌─────────────────────────────────────────────────────┐       │
+│ │ MEMORY LAYER                                      │       │
+│ │ Conversation History · Context · Session State     │       │
+│ └─────────────────────────────────────────────────────┘       │
+│                                                             │
+│ ┌─────────────────────────────────────────────────────┐       │
+│ │ TOOLS LAYER                                       │       │
+│ │ Search · Calculate · Knowledge Base · Database     │       │
+│ └─────────────────────────────────────────────────────┘       │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 4. Code Review Snippet
+
+```python
+# Most interesting code: Persona-based agent with memory
+
+class ProfessionalChatbot:
+    def __init__(self, persona="general"):
+        self.personas = {
+            "general": "You are a helpful AI assistant.",
+            "technical": "You are a senior software engineer.",
+            "creative": "You are a creative writer.",
+            "academic": "You are a university professor.",
+            "mentor": "You are a patient mentor."
+        }
+
+        self.prompt = ChatPromptTemplate.from_messages([
+            ("system", self.personas[persona]),
+            MessagesPlaceholder(variable_name="history"),
+            ("user", "{input}")
+        ])
+
+        self.chain = self.prompt | llm | StrOutputParser()
+
+    def chat(self, user_input):
+        self.messages.append(HumanMessage(content=user_input))
+        response = self.chain.invoke({
+            "history": self.messages[:-1],
+            "input": user_input
+        })
+        self.messages.append(AIMessage(content=response))
+        return response
+```
+
+### 5. Blockers
+
+**Technical Challenge:** PyTorch DLL error on Windows
+
+**Solution:**
+
+- Switched from sentence-transformers to BM25 retriever
+- No embeddings needed for keyword-based retrieval
+- Cleaner, faster, Windows-compatible

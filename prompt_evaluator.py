@@ -360,7 +360,7 @@ async def main():
     
     # Save report
     filename = f"prompt_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-    with open(filename, "w") as f:
+    with open(filename, "w", encoding="utf-8") as f:
         json.dump(report.model_dump(), f, indent=2, default=str)
     
     console.print(f"\n[green]✓[/green] Report saved to: {filename}")

@@ -102,7 +102,7 @@ class TaskLoader:
         """Load tasks from YAML file or return defaults"""
         
         if file_path and os.path.exists(file_path):
-            with open(file_path, 'r') as f:
+            with open(file_path, 'r', encoding='utf-8') as f:
                 data = yaml.safe_load(f)
                 return data.get('tasks', TaskLoader.DEFAULT_TASKS)
         
@@ -285,7 +285,7 @@ class ReportGenerator:
                 "task_count": stats.task_count
             }
         
-        with open(filename, 'w') as f:
+        with open(filename, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2)
     
     @staticmethod
@@ -430,7 +430,7 @@ class ReportGenerator:
         </html>
         """
         
-        with open(filename, 'w') as f:
+        with open(filename, 'w', encoding='utf-8') as f:
             f.write(html)
 
 # ─── Main Application ───

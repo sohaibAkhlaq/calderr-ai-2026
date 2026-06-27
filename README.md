@@ -1,246 +1,184 @@
-﻿# CalderR AI Internship
+# CalderR AI Internship
 
-Project Location: Desktop/calderr-ai-2026  
-Author: Sohaib Akhlaq  
-Status: Week 1 Day 4 Complete
+**Project Location:** `Desktop/calderr-ai-2026`
+**Author:** Sohaib Akhlaq
+**Status:** Week 1 Day 5 Complete ✅
 
 ---
 
 ## Overview
 
-This repository documents the complete setup, learning progress, and hands-on implementation completed during the CalderR AI internship. It includes environment configuration, foundational AI concepts, agentic systems, LangChain workflows, and prompt engineering experiments.
+This repository documents the complete setup, learning progress, and hands‑on implementation completed during the CalderR AI internship. It covers environment configuration, foundational AI concepts, agentic systems, LangChain workflows, prompt‑engineering experiments, and a fully integrated professional chatbot.
 
 ---
 
 ## Project Goals
 
-The objective of this project is to build practical experience in:
-
-- Working with large language models through APIs
-- Understanding agentic AI design patterns
-- Building simple LLM-based applications with Python
-- Exploring prompt engineering and persona-driven prompting
-- Creating reusable, readable project documentation
+- Work with large language models via APIs
+- Understand agentic AI design patterns
+- Build simple LLM‑based applications in Python
+- Explore prompt engineering and persona‑driven prompting
+- Create reusable, readable project documentation
+- Integrate all concepts into a production‑ready demo
 
 ---
 
-## Week 0: Environment Setup
+## Environment Summary
 
-### Environment Summary
+- **Python:** 3.11.9
+- **Virtual environment:** `calderr-env`
+- **pip:** latest
+- **Git:** SSH configured
 
-- Python 3.11.9
-- Virtual environment: calderr-env
-- pip upgraded to the latest version
-- Git configured with SSH authentication
+### Installed Tools & Libraries
 
-### Installed Tools and Libraries
-
-- LangChain, LangChain Groq, LangChain Community, LangGraph
-- Groq, OpenAI, Pydantic, python-dotenv
+- LangChain, LangChain‑Groq, LangChain‑Community, LangGraph
+- Groq, OpenAI, Pydantic, python‑dotenv
 - FastAPI, Uvicorn, ChromaDB
 - HTTPX, Rich, Typer, PyTest, Jupyter, Streamlit
-- PyTorch 2.12.1 (CPU-only for Windows compatibility)
-- rank-bm25 for keyword-based retrieval
+- PyTorch 2.12.1 (CPU‑only, Windows compatible)
+- rank‑bm25 for keyword‑based retrieval
 
 ### Development Environment
 
-- Docker Desktop installed and configured
-- VS Code configured with Python, Pylance, and Jupyter support
+- Docker Desktop installed & configured
+- VS Code with Python, Pylance, and Jupyter extensions
 
 ---
 
-## Week 1: AI Fundamentals
+## Week 0 – Environment Setup
 
-### Day 1 — LLM Foundations
-
-Status: ✅ Completed
-
-Topics covered:
-- Transformer architecture and self-attention
-- Tokenization and context windows
-- Temperature and sampling behavior
-- Training vs inference
-- Model comparison using Groq APIs
-
-Implemented files:
-- test_groq_monday.py
-- temperature_experiment.py
-- cli_chatbot.py
-- week1day1.txt
-
-Key findings:
-- llama-3.1-8b-instant offered the fastest responses for prototyping
-- llama-3.3-70b-versatile delivered stronger output quality
-- Temperature 0.0 produced deterministic output, while higher values increased creativity
-
-### Day 2 — Agentic AI Concepts
-
-Status: ✅ Completed
-
-Topics covered:
-- ReAct pattern: Reasoning + Acting
-- Agent loop design
-- Reactive vs proactive agents
-- Tool use, planning, and memory
-
-Implemented files:
-- react_agent.py
-- week1day2.txt
-
-Key learning:
-- An agent extends a language model by adding decision-making, plans, tools, and actions.
-
-### Day 3 — LangChain Core
-
-Status: ✅ Completed
-
-Topics covered:
-- LCEL and the pipe operator
-- Runnable, RunnablePassthrough, and RunnableParallel
-- RAG workflow fundamentals
-- Document loading, chunking, and retrieval
-- BM25-based retrieval
-
-Implemented files:
-- document_qa_chain.py
-- chain_patterns.py
-- week1day3.txt
-
-Key learning:
-- LangChain enables composable, readable, and production-ready LLM workflows.
-
-### Day 4 — Prompt Engineering
-
-Status: ✅ Completed
-
-Topics covered:
-- System prompts and instruction design
-- Zero-shot vs few-shot prompting
-- Chain-of-thought reasoning principles
-- Persona-based prompt design
-
-Implemented files:
-- prompt_engineering_lab.py
-- persona_agent.py
-- weekly_assessment.md
-
-Key learning:
-- Prompt design heavily influences clarity, structure, tone, and task performance.
-
----
-
-## Environment Notes
-
-### PyTorch Windows Compatibility
-
-A Windows-specific PyTorch issue was resolved by reinstalling the CPU-only package from the official PyTorch repository. This also avoided dependency conflicts and allowed the project to remain lightweight and compatible.
-
-### Requirements Files
-
-- requirements-minimal.txt: Lightweight setup for local experimentation
-- requirements-windows.txt: Broader Windows-compatible dependency set
-
----
-
-## Repository Structure
-
-```text
-Desktop/calderr-ai-2026/
-├── calderr-env/                 # Virtual environment (ignored by Git)
-├── .git/                        # Git metadata
-├── .gitignore                   # Ignore rules
-├── .env                         # Local environment variables
-├── .env.template                # Environment variable template
-├── requirements.txt             # Main dependency list
-├── requirements-minimal.txt     # Minimal dependency setup
-├── requirements-windows.txt     # Windows-specific dependency setup
-├── main.py                      # Main application entry point
-├── test_setup.py                # Week 0 verification script
-├── test_env.py                  # API key verification
-├── test_groq.py                 # First Groq API test
-├── test_groq_stream.py          # Streaming example
-├── test_groq_monday.py          # Day 1 model testing
-├── temperature_experiment.py    # Temperature experiments
-├── cli_chatbot.py               # Day 1 CLI chatbot
-├── react_agent.py               # Day 2 manual ReAct agent
-├── document_qa_chain.py         # Day 3 document Q&A chain
-├── chain_patterns.py            # Day 3 LangChain chain examples
-├── prompt_engineering_lab.py    # Day 4 prompt engineering lab
-├── persona_agent.py             # Day 4 persona-based agent
-├── weekly_assessment.md         # Week 1 assessment
-├── week1day1.txt                # Day 1 notes
-├── week1day2.txt                # Day 2 notes
-├── week1day3.txt                # Day 3 notes
-├── notebooks/                   # Jupyter notebooks
-├── Dockerfile                   # Docker configuration
-├── day1-summary.txt             # Day 1 summary
-├── day2-summary.txt             # Day 2 summary
-└── README.md                    # Project documentation
+```powershell
+# Activate virtual environment
+.\calderr-env\Scripts\Activate.ps1
 ```
+
+- Created virtual environment `calderr-env`
+- Upgraded pip and installed the above dependencies
+- Configured Git with SSH keys
+
+---
+
+## Week 1 – AI Fundamentals
+
+### Day 1 – LLM Foundations (✅)
+- Topics: Transformers, tokenisation, temperature, inference vs training
+- Implemented: `test_groq_monday.py`, `temperature_experiment.py`, `cli_chatbot.py`
+
+### Day 2 – Agentic AI Concepts (✅)
+- Topics: ReAct pattern, agent loop, tool use, planning
+- Implemented: `react_agent.py`
+
+### Day 3 – LangChain Core (✅)
+- Topics: LCEL pipeline, Runnable, RunnablePassthrough, RunnableParallel, BM25 retrieval
+- Implemented: `document_qa_chain.py`, `chain_patterns.py`
+
+### Day 4 – Prompt Engineering (✅)
+- Topics: System prompts, few‑shot, chain‑of‑thought, persona prompting
+- Implemented: `prompt_engineering_lab.py`, `persona_agent.py`, `weekly_assessment.md`
+
+### Day 5 – Integration & Demo (✅)
+- Built a **Professional Chatbot** with:
+  - Five personas (general, technical, creative, academic, mentor)
+  - Conversation memory & statistics (tokens, turns, duration)
+  - Rich terminal UI (panels, tables, markdown)
+  - Commands: `/exit`, `/clear`, `/history`, `/stats`, `/help`
+- Updated `architecture_diagram.md` with Mermaid diagrams
+- Completed `weekly_assessment.md`
+
+---
+
+## Architecture Diagram
+
+The repository now includes `architecture_diagram.md` which visualises the chatbot architecture, agent loop, and data flow using Mermaid.
 
 ---
 
 ## Quick Start
 
-### Activate the virtual environment
-
 ```powershell
+# Activate environment
 .\calderr-env\Scripts\Activate.ps1
+
+# Install dependencies (if not already installed)
+pip install -r requirements.txt
+
+# Run the professional chatbot
+python professional_chatbot.py
 ```
 
-### Run the examples
-
-```powershell
-python main.py
-python test_env.py
-python test_groq.py
-python test_groq_stream.py
-python test_groq_monday.py
-python temperature_experiment.py
-python cli_chatbot.py
-python react_agent.py
-python document_qa_chain.py
-python chain_patterns.py
-python prompt_engineering_lab.py
-python persona_agent.py
-```
-
-### Launch Jupyter Lab
+### Jupyter Lab
 
 ```powershell
 jupyter lab
 ```
 
-### Build and run with Docker
+### Docker
 
 ```powershell
 docker build -t calderr-ai-2026 .
+# Run container
 docker run --rm calderr-ai-2026
+```
+
+---
+
+## Repository Structure
+
+```
+calderr-ai-2026/
+├─ .git/                     # Git metadata
+├─ .gitignore                # Ignored files (env, __pycache__, etc.)
+├─ .env.template             # Template for environment variables
+├─ requirements.txt          # Full dependency list
+├─ requirements-minimal.txt  # Minimal setup for local experiments
+├─ requirements-windows.txt  # Windows‑specific dependencies
+├─ main.py                   # Entry point (Week 0)
+├─ test_*.py                 # Verification and experiment scripts
+├─ professional_chatbot.py   # Week 5 professional chatbot
+├─ architecture_diagram.md   # Mermaid diagrams of architecture & agent loop
+├─ weekly_assessment.md      # Completed assessment
+├─ README.md                 # **(this file)**
+├─ ... (other source files as listed above)
 ```
 
 ---
 
 ## Security Notes
 
-- Do not commit .env files to version control
-- Refer to .env.template for required environment variables
-- The Groq free tier allows a limited number of API requests per day
+- **Never** commit `.env` files – they contain API keys.
+- Keep your Groq API key secret; use the `.env` template to provide it locally.
+- Review Git history before pushing to ensure no credentials are leaked.
 
 ---
 
 ## GitHub Repository
 
-https://github.com/sohaibAkhlaq/calderr-ai-2026
+[https://github.com/sohaibAkhlaq/calderr-ai-2026](https://github.com/sohaibAkhlaq/calderr-ai-2026)
 
 ---
 
-## Week Progress
+## Week 1 Progress Summary
 
 | Week/Day | Topic | Status |
-|---|---|---|
-| Week 0 | Environment Setup | ✅ Complete |
-| Day 1 | LLM Foundations | ✅ Complete |
-| Day 2 | Agentic AI Concepts | ✅ Complete |
-| Day 3 | LangChain Core | ✅ Complete |
-| Day 4 | Prompt Engineering | ✅ Complete |
-| Day 5 | Integration & Demo | ⏳ Upcoming |
+|----------|-------|--------|
+| Week 0   | Environment Setup | ✅ Complete |
+| Day 1    | LLM Foundations | ✅ Complete |
+| Day 2    | Agentic AI Concepts | ✅ Complete |
+| Day 3    | LangChain Core | ✅ Complete |
+| Day 4    | Prompt Engineering | ✅ Complete |
+| Day 5    | Integration & Demo | ✅ Complete |
+
+---
+
+## Labs Completed (Week 1)
+
+| Lab | Description | Status |
+|-----|-------------|--------|
+| Lab 1.1 | Groq CLI chatbot with history, `/clear`, `/exit` | ✅ Complete |
+| Lab 1.2 | Manual ReAct agent with search, calculate, time tools | ✅ Complete |
+| Lab 1.3 | Prompt A/B testing with five system prompts | ✅ Complete |
+
+---
+
+**Week 1 Complete — Ready for Week 2!** 🚀

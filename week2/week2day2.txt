@@ -1,0 +1,24 @@
+Week 2 Status Check
+Completed:
+Day	Topic	Files	Status
+Mon	Advanced Prompting	lab2.1_cot_pipeline.py, lab2.1_cot_prompts.py	[Pass]
+Tue	Structured Outputs	lab2.1_structured_extractor.py, lab2.1_pydantic_models.py, lab2.1_extraction_comparison.py	[Pass]
+
+Labs Status:
+Lab	Description	Status
+Lab 2.1	Structured Output Extractor	[Complete]
+Lab 2.2	Multi-Tool Research Agent	[Pending] (Wed)
+Lab 2.3	Error Recovery Agent	[Pending] (Thu)
+
+Projects Status:
+Project	Category	Status
+Project 2-I	Intermediate	[Not Started]
+Project 2-P	Production	[Not Started]
+
+Pending:
+Lab 2.2 - Multi-Tool Research Agent (Wednesday)
+Lab 2.3 - Error Recovery Agent (Thursday)
+Intermediate Project (Friday)
+Production Project (Friday)
+Weekly Assessment (Friday)
+Standup Preparation (Friday)

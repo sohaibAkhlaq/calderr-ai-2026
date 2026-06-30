@@ -197,4 +197,25 @@ calderr-ai-2026/
 
 ---
 
-**Week 1 Complete — Ready for Week 2!** 🚀
+## Week 2 Progress Summary (In Progress)
+
+| Week/Day | Topic | Status |
+|----------|-------|--------|
+| Day 1    | Advanced Prompting | Complete |
+| Day 2    | Structured Outputs | Complete |
+| Day 3    | Multi-Tool Research Agent | Pending |
+| Day 4    | Error Recovery Agent | Pending |
+| Day 5    | Intermediate & Production Projects | Pending |
+
+---
+
+## Labs Completed (Week 2)
+
+| Lab | Description | Status |
+|-----|-------------|--------|
+| Lab 2.1 | Advanced Prompting Techniques & CoT Pipeline | Complete |
+| Lab 2.2 | Structured Output Extractor with Pydantic | Complete |
+
+---
+
+**Week 2 — In Progress!**

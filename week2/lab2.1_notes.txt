@@ -50,3 +50,66 @@ Files Created:
 - lab2.1_notes.txt: This file
 
 Status: Day 1 Complete
+
+WEEK 2 - DAY 2: STRUCTURED OUTPUTS
+====================================
+
+Key Concepts Learned:
+
+1. Pydantic v2 Models
+   - BaseModel for defining data schemas
+   - Field() for field descriptions and validation
+   - Type hints for type safety
+   - Automatic JSON schema generation
+
+2. Validators
+   - @validator: Field-level validation
+   - @field_validator: New in v2
+   - @model_validator: Cross-field validation
+   - Custom validation logic
+
+3. Model Config
+   - json_schema_extra: Examples in JSON schema
+   - Extra fields handling
+   - Field aliases
+
+4. Field Types
+   - Literal: Restricted values
+   - Optional: Nullable fields
+   - List, Dict: Collections
+   - EmailStr, HttpUrl: Special types
+   - datetime, date: Time types
+
+5. Structured Output Extraction
+   - PydanticOutputParser: Parse LLM output to Pydantic
+   - get_format_instructions(): Generate JSON schema prompt
+   - with_structured_output(): LangChain method
+
+6. Comparison of Methods
+   - String Output: Unreliable, no validation
+   - JSON Output: Semi-reliable, manual validation
+   - Pydantic Output: Reliable, built-in validation
+
+Models Built:
+1. UserProfile - User with nested addresses
+2. SentimentResult - Sentiment analysis with scores
+3. FinancialTransaction - Transaction with validation
+4. JobPostingExtended - Extended job posting
+5. ResearchPaper - Paper with authors and citations
+
+Lab 2.1 Output:
+- Extracted job postings from 4 test cases
+- Validated against Pydantic schema
+- Successfully handled different text formats
+
+Key Learning:
+Pydantic makes structured output extraction reliable,
+type-safe, and production-ready.
+
+Files Created:
+- lab2.1_structured_extractor.py: Main extraction tool
+- lab2.1_pydantic_models.py: 5 complex models
+- lab2.1_extraction_comparison.py: Method comparison
+- lab2.1_notes.txt: This file
+
+Status: Day 2 Complete

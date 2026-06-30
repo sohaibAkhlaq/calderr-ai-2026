@@ -1,0 +1,21 @@
+Week 2 Day 1: COMPLETE
+
+What was covered:
+- Chain-of-Thought (CoT) Prompting
+- Tree-of-Thought (ToT) Prompting
+- Self-Consistency
+- Meta-Prompting
+- Prompt Chaining
+- Negative Prompting
+
+Files Created:
+- lab2.1_cot_pipeline.py - Full evaluation pipeline comparing 10 problems
+- lab2.1_cot_prompts.py - 6 prompting technique demonstrations
+- lab2.1_notes.txt - Notes and key takeaways
+
+Key Findings:
+- CoT improves accuracy on reasoning tasks by 20-30%
+- CoT adds 2-3 seconds to response time
+- Different prompting techniques suit different tasks
+
+Ready for Day 2 - Structured Outputs

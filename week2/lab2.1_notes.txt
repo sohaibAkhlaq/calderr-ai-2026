@@ -1,0 +1,52 @@
+WEEK 2 - DAY 1: ADVANCED PROMPTING
+====================================
+
+1. Chain-of-Thought (CoT) Prompting
+   - Definition: Asking the model to reason step by step before answering
+   - Why it works: Makes reasoning explicit, improves accuracy on complex tasks
+   - When to use: Math, logic, multi-step reasoning problems
+   - Example: "Let me think step by step: 1. ... 2. ... 3. ... Therefore..."
+
+2. Tree-of-Thought (ToT) Prompting
+   - Definition: Exploring multiple reasoning paths before converging on an answer
+   - Why it works: Considers alternatives, finds better solutions
+   - When to use: Open-ended problems, creative tasks, planning
+   - Example: "Approach 1: ... Approach 2: ... Approach 3: ... Best solution: ..."
+
+3. Self-Consistency
+   - Definition: Generate multiple answers and take the most consistent one
+   - Why it works: Majority vote reduces errors
+   - When to use: High-stakes reasoning, ambiguous problems
+   - Example: Run 3 times, pick answer that appears most often
+
+4. Meta-Prompting
+   - Definition: Asking the model to evaluate and improve its own response
+   - Why it works: Self-correction leads to higher quality
+   - When to use: High-quality outputs needed, refinement tasks
+   - Example: "Evaluate your answer... What would you improve? Improved version:"
+
+5. Prompt Chaining
+   - Definition: Breaking a complex task into multiple sequential prompts
+   - Why it works: Each step focuses on one subtask
+   - When to use: Complex multi-step tasks, document processing
+   - Example: Step 1: Extract key points -> Step 2: Expand -> Step 3: Synthesize
+
+6. Negative Prompting
+   - Definition: Specifying what NOT to do in the prompt
+   - Why it works: Prevents unwanted content, enforces constraints
+   - When to use: Constrained generation, avoiding jargon, tone control
+   - Example: "DO NOT use: jargon, DO NOT: mention companies"
+
+CO TASK COMPARISON RESULTS:
+---------------------------
+Without CoT: Faster but error-prone
+With CoT: More accurate on reasoning tasks
+
+Key Insight: CoT adds 2-3 seconds but improves accuracy significantly.
+
+Files Created:
+- lab2.1_cot_pipeline.py: Full CoT evaluation pipeline
+- lab2.1_cot_prompts.py: 6 prompting technique demonstrations
+- lab2.1_notes.txt: This file
+
+Status: Day 1 Complete

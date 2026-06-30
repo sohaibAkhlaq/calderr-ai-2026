@@ -1,0 +1,36 @@
+{
+  "task_description": "give me world cup winner list",
+  "test_case": "2026 worldcup",
+  "prompts_evaluated": [
+    {
+      "prompt_name": "Prompt 20...",
+      "prompt_text": "Provide a list of all the World Cup winners.",
+      "response": "Since the 2026 FIFA World Cup has not yet taken place (it's scheduled for 2026), I'll provide you with the list of previous World Cup winners. Here it is:\n\n1. 1930 - Uruguay\n2. 1934 - Italy\n3. 1938 - Italy\n4. 1950 - Uruguay\n5. 1954 - West Germany\n6. 1958 - Brazil\n7. 1962 - Brazil\n8. 1966 - England\n9. 1970 - Brazil\n10. 1974 - West Germany\n11. 1978 - Argentina\n12. 1982 - Italy\n13. 1986 - Argentina\n14. 1990 - West Germany\n15. 1994 - Brazil\n16. 1998 - France\n17. 2002 - Brazil\n18. 2006 - Italy\n19. 2010 - Spain\n20. 2014 - Germany\n21. 2018 - France\n22. 2022 - Argentina\n\nWe'll have to wait and see who wins the 2026 FIFA World Cup!",
+      "word_count": 133,
+      "char_count": 630,
+      "time_taken": 0.6414806842803955,
+      "accuracy_score": 10.0,
+      "brevity_score": 8.0,
+      "helpfulness_score": 10.0,
+      "overall_score": 9.333333333333334
+    },
+    {
+      "prompt_name": "Prompt 20...",
+      "prompt_text": "I need a comprehensive and chronological list of FIFA World Cup winners, including the year they won and the country they represented, please provide this information in a clear and organized format.",
+      "response": "Since the 2026 FIFA World Cup has not yet occurred, I'll provide you with the list of previous FIFA World Cup winners, and I'll make sure to update the information once the 2026 tournament takes place.\n\nHere's the list of FIFA World Cup winners from 1930 to 2022:\n\n1. **1930**: Uruguay\n2. **1934**: Italy\n3. **1938**: Italy\n4. **1950**: Uruguay\n5. **1954**: West Germany\n6. **1958**: Brazil\n7. **1962**: Brazil\n8. **1966**: England\n9. **1970**: Brazil\n10. **1974**: West Germany\n11. **1978**: Argentina\n12. **1982**: Italy\n13. **1986**: Argentina\n14. **1990**: West Germany\n15. **1994**: Brazil\n16. **1998**: France\n17. **2002**: Brazil\n18. **2006**: Italy\n19. **2010**: Spain\n20. **2014**: Germany\n21. **2018**: France\n22. **2022**: Argentina\n\nPlease note that the 2026 FIFA World Cup is scheduled to take place in the United States, Canada, and Mexico from June 14 to July 22, 2026. I'll be happy to update this list once the tournament is completed and a new champion is crowned.",
+      "word_count": 162,
+      "char_count": 982,
+      "time_taken": 0.8373429775238037,
+      "accuracy_score": 10.0,
+      "brevity_score": 6.0,
+      "helpfulness_score": 10.0,
+      "overall_score": 8.666666666666666
+    }
+  ],
+  "best_prompt": "Prompt 20...",
+  "best_score": 9.333333333333334,
+  "recommendations": [
+    "All prompts performed well. Consider increasing test complexity."
+  ],
+  "generated_at": "2026-06-28T00:39:39.850130"
+}

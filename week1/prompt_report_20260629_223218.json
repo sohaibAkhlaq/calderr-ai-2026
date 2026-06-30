@@ -1,0 +1,50 @@
+{
+  "task_description": "best comedy movie",
+  "test_case": "hollywood",
+  "prompts_evaluated": [
+    {
+      "prompt_name": "Prompt 20...",
+      "prompt_text": "What is the best comedy movie of all time?",
+      "response": "Hollywood has produced many hilarious comedy movies over the years. While opinions may vary, here are some of the most popular and critically acclaimed comedy movies from Hollywood:\n\n1. **The Hangover (2009)**: A raunchy and outrageous film about a wild night in Vegas that no one can remember.\n2. **Monty Python and the Holy Grail (1975)**: A classic British comedy that has become a cult favorite, set in the Middle Ages with a hilarious cast of characters.\n3. **Airplane! (1980)**: A parody of disaster movies, full of slapstick humor and witty one-liners.\n4. **The 40-Year-Old Virgin (2005)**: A comedy classic about a man who's still a virgin at 40, starring Steve Carell in his breakout role.\n5. **Groundhog Day (1993)**: A clever and funny film about a weatherman stuck in a time loop, reliving the same day over and over.\n6. **Dumb and Dumber (1994)**: A silly and entertaining movie about two dim-witted friends on a cross-country road trip.\n7. **Anchorman: The Legend of Ron Burgundy (2004)**: A quirky and hilarious film about a group of news anchors in the 1970s.\n8. **Bridesmaids (2011)**: A female-led comedy about a group of friends clashing as they prepare for a wedding.\n9. **Superbad (2007)**: A coming-of-age comedy about two high school friends trying to score booze for a party.\n10. **Ghostbusters (1984)**: A classic supernatural comedy about a team of paranormal investigators.\n\nBut, if I had to pick just one... **The Hangover (2009)** is often considered one of the best comedy movies of all time, with its perfect blend of humor, relatability, and outrageousness.\n\nWhat's your favorite comedy movie from Hollywood?",
+      "word_count": 269,
+      "char_count": 1640,
+      "time_taken": 1.089015007019043,
+      "accuracy_score": 9.0,
+      "brevity_score": 2.0,
+      "helpfulness_score": 8.0,
+      "overall_score": 6.333333333333333
+    },
+    {
+      "prompt_name": "Prompt 20...",
+      "prompt_text": "I need a recommendation for the best comedy movie, please provide a title and explain why it stands out from others in terms of originality, comedic timing, and overall entertainment value, considering factors such as awards, critic reviews, and audience reception.",
+      "response": "Hollywood has produced countless comedy classics, but one movie that stands out from the rest is \"The Hangover\" (2009). Here's why:\n\n**Originality:** \"The Hangover\" has a unique premise that sets it apart from other comedies. The movie follows a group of friends who wake up after a wild night in Las Vegas with no memory of what happened the night before. As they try to piece together the events of the previous night, they encounter a series of hilarious and unexpected situations.\n\n**Comedic Timing:** The movie boasts a talented cast, including Bradley Cooper, Ed Helms, and Zach Galifianakis, who deliver outstanding comedic performances. The timing of the jokes, the physical comedy, and the witty one-liners all come together to create a laugh-out-loud experience.\n\n**Awards and Critic Reviews:** \"The Hangover\" was a critical and commercial success, grossing over $467 million worldwide. It received widespread critical acclaim, with an 78% approval rating on Rotten Tomatoes. The movie also won several awards, including the Golden Globe Award for Best Motion Picture - Musical or Comedy.\n\n**Audience Reception:** The movie has become a cultural phenomenon, with audiences quoting lines and referencing scenes from the movie. The success of \"The Hangover\" can be attributed to its relatable characters, outrageous humor, and the fact that it taps into the universal experience of waking up after a night out and wondering what happened.\n\n**Why it stands out:** \"The Hangover\" stands out from other comedies due to its:\n\n1. **Relatable premise:** Who hasn't had a night out and woken up with a fuzzy memory?\n2. **Outrageous humor:** The movie pushes the boundaries of comedy, with hilarious and often ridiculous situations.\n3. **Lovable characters:** The cast is well-developed and likable, making it easy to become invested in their misadventures.\n4. **Cultural impact:** \"The Hangover\" has become a cultural touchstone, with references to the movie appearing in everyday conversation.\n\nOverall, \"The Hangover\" is a comedy masterpiece that has become a staple of modern Hollywood. Its unique premise, talented cast, and outrageous humor make it a must-see for anyone looking for a laugh-out-loud comedy experience.",
+      "word_count": 344,
+      "char_count": 2224,
+      "time_taken": 1.334458827972412,
+      "accuracy_score": 9.0,
+      "brevity_score": 2.0,
+      "helpfulness_score": 8.0,
+      "overall_score": 6.333333333333333
+    },
+    {
+      "prompt_name": "Prompt 20...",
+      "prompt_text": "Imagine you're a comedy connoisseur, tasked with creating the ultimate laugh-out-loud movie marathon, and you can only choose one film to kick it off - think along the lines of classics like \"Airplane!\" or \"The Hangover\", or more recent hits like \"The Death of Stalin\" or \"Crazy Rich Asians\", what movie would you pick and why, considering its ability to balance witty dialogue, physical humor, and satirical commentary?",
+      "response": "I think you might be referring to the TV series \"Hollywood\" created by Ryan Murphy, but I'm assuming you meant to suggest a movie. If that's the case, I'd like to propose an alternative: \"Tropic Thunder\" (2008) or \"The Grand Budapest Hotel\" (2014) wouldn't be a bad choice, but if I had to pick a single film to kick off the ultimate laugh-out-loud movie marathon, I'd choose \"Monty Python and the Holy Grail\" (1975).\n\nHere's why:\n\n1. **Timeless humor**: This classic British comedy has stood the test of time, and its humor remains relatable and hilarious to this day.\n2. **Witty dialogue**: The film is full of clever, absurd, and satirical dialogue that will keep you laughing out loud.\n3. **Physical humor**: The movie features plenty of slapstick comedy, silly characters, and over-the-top situations that will have you giggling.\n4. **Satirical commentary**: \"Monty Python and the Holy Grail\" pokes fun at the legend of King Arthur, the Middle Ages, and societal norms, making it a clever and thought-provoking comedy.\n5. **Cult following**: This film has a massive cult following, and its quotes and references have become a part of pop culture.\n\nSome of the most iconic scenes and characters in the movie include:\n\n* The Knights Who Say \"Ni!\"\n* The Black Knight\n* The Bridge of Death\n* King Arthur's quest for the Holy Grail\n* The hilarious song and dance numbers\n\nOverall, \"Monty Python and the Holy Grail\" is a masterclass in comedy that will set the tone for an unforgettable laugh-out-loud movie marathon. Its unique blend of wit, absurdity, and satire will have you and your friends quoting lines and laughing together for hours on end.",
+      "word_count": 279,
+      "char_count": 1648,
+      "time_taken": 2.0240590572357178,
+      "accuracy_score": 10.0,
+      "brevity_score": 2.0,
+      "helpfulness_score": 10.0,
+      "overall_score": 7.333333333333333
+    }
+  ],
+  "best_prompt": "Prompt 20...",
+  "best_score": 7.333333333333333,
+  "recommendations": [
+    "Prompt 'Prompt 20......' needs better conciseness. Focus on key points.",
+    "Prompt 'Prompt 20......' needs better conciseness. Focus on key points.",
+    "Prompt 'Prompt 20......' needs better conciseness. Focus on key points."
+  ],
+  "generated_at": "2026-06-29T22:32:18.726639"
+}

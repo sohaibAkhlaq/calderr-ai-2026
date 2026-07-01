@@ -203,7 +203,7 @@ calderr-ai-2026/
 |----------|-------|--------|
 | Day 1    | Advanced Prompting | Complete |
 | Day 2    | Structured Outputs | Complete |
-| Day 3    | Multi-Tool Research Agent | Pending |
+| Day 3    | Multi-Tool Research Agent | Complete |
 | Day 4    | Error Recovery Agent | Pending |
 | Day 5    | Intermediate & Production Projects | Pending |
 
@@ -215,6 +215,7 @@ calderr-ai-2026/
 |-----|-------------|--------|
 | Lab 2.1 | Advanced Prompting Techniques & CoT Pipeline | Complete |
 | Lab 2.2 | Structured Output Extractor with Pydantic | Complete |
+| Lab 2.3 | Multi-Tool Research Agent | Complete |
 
 ---
 

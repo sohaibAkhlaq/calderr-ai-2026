@@ -1,0 +1,63 @@
+WEEK 2 - DAY 3: TOOL CALLING BASICS
+====================================
+
+Key Concepts Learned:
+
+1. Tool Schemas (OpenAI Format)
+   - name: Function name
+   - description: What the function does
+   - parameters: JSON schema for arguments
+   - required: Required parameters
+   - properties: Type and description of each parameter
+
+2. Tool Definition with @tool Decorator
+   - from langchain_core.tools import tool
+   - Define function with docstring
+   - Docstring becomes the tool description
+   - Args become the parameter schema
+
+3. Tool Selection Logic
+   - Keyword-based routing
+   - Score-based selection
+   - Best matching tool based on keywords
+
+4. Tool Calling Lifecycle
+   Step 1: User Input
+   Step 2: Model Reasoning
+   Step 3: Tool Selection
+   Step 4: Tool Execution
+   Step 5: Result Processing
+   Step 6: Response Generation
+
+5. Tool Binding
+   - llm.bind_tools(tools)
+   - Binds tools to the model
+   - Model automatically decides when to call tools
+
+6. ToolMessage
+   - Message type for tool responses
+   - Contains tool call ID and result
+   - Used in tool calling loop
+
+7. 5 Tools Implemented:
+   - search_database: Mock database search
+   - calculate: Mathematical calculations
+   - format_date: Date formatting
+   - convert_currency: Currency conversion
+   - summarize_text: Text summarization
+
+8. Tool Registry Pattern
+   - Centralized tool management
+   - Keyword-based routing
+   - Tool metadata storage
+
+Key Learning:
+Tool calling allows LLMs to interact with external systems,
+making them capable of performing actions, not just generating text.
+
+Files Created:
+- lab2.2_multi_tool_agent.py: 5-tool agent with routing
+- lab2.2_tool_calling_demo.py: Tool binding, schema, lifecycle
+- lab2.2_notes.txt: This file
+
+Status: Day 3 Complete

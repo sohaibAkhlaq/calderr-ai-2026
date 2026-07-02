@@ -2,7 +2,7 @@
 
 **Project Location:** `Desktop/calderr-ai-2026`
 **Author:** Sohaib Akhlaq
-**Status:** Week 1 Day 5 Complete ✅
+**Status:** Week 2 Day 4 Complete
 
 ---
 
@@ -61,23 +61,23 @@ This repository documents the complete setup, learning progress, and hands‑on 
 
 ## Week 1 – AI Fundamentals
 
-### Day 1 – LLM Foundations (✅)
+### Day 1 – LLM Foundations (Complete)
 - Topics: Transformers, tokenisation, temperature, inference vs training
 - Implemented: `test_groq_monday.py`, `temperature_experiment.py`, `cli_chatbot.py`
 
-### Day 2 – Agentic AI Concepts (✅)
+### Day 2 – Agentic AI Concepts (Complete)
 - Topics: ReAct pattern, agent loop, tool use, planning
 - Implemented: `react_agent.py`
 
-### Day 3 – LangChain Core (✅)
+### Day 3 – LangChain Core (Complete)
 - Topics: LCEL pipeline, Runnable, RunnablePassthrough, RunnableParallel, BM25 retrieval
 - Implemented: `document_qa_chain.py`, `chain_patterns.py`
 
-### Day 4 – Prompt Engineering (✅)
+### Day 4 – Prompt Engineering (Complete)
 - Topics: System prompts, few‑shot, chain‑of‑thought, persona prompting
 - Implemented: `prompt_engineering_lab.py`, `persona_agent.py`, `weekly_assessment.md`
 
-### Day 5 – Integration & Demo (✅)
+### Day 5 – Integration & Demo (Complete)
 - Built a **Professional Chatbot** with:
   - Five personas (general, technical, creative, academic, mentor)
   - Conversation memory & statistics (tokens, turns, duration)
@@ -162,12 +162,12 @@ calderr-ai-2026/
 
 | Week/Day | Topic | Status |
 |----------|-------|--------|
-| Week 0   | Environment Setup | ✅ Complete |
-| Day 1    | LLM Foundations | ✅ Complete |
-| Day 2    | Agentic AI Concepts | ✅ Complete |
-| Day 3    | LangChain Core | ✅ Complete |
-| Day 4    | Prompt Engineering | ✅ Complete |
-| Day 5    | Integration & Demo | ✅ Complete |
+| Week 0   | Environment Setup | Complete |
+| Day 1    | LLM Foundations | Complete |
+| Day 2    | Agentic AI Concepts | Complete |
+| Day 3    | LangChain Core | Complete |
+| Day 4    | Prompt Engineering | Complete |
+| Day 5    | Integration & Demo | Complete |
 
 ---
 
@@ -175,13 +175,13 @@ calderr-ai-2026/
 
 | Lab | Description | Status |
 |-----|-------------|--------|
-| Lab 1.1 | Groq CLI chatbot with history, `/clear`, `/exit` | ✅ Complete |
-| Lab 1.2 | Manual ReAct agent with search, calculate, time tools | ✅ Complete |
-| Lab 1.3 | Prompt A/B testing with five system prompts | ✅ Complete |
+| Lab 1.1 | Groq CLI chatbot with history, `/clear`, `/exit` | Complete |
+| Lab 1.2 | Manual ReAct agent with search, calculate, time tools | Complete |
+| Lab 1.3 | Prompt A/B testing with five system prompts | Complete |
 
 ---
 
-## Week 1 Projects Completed (✅)
+## Week 1 Projects Completed (Complete)
 
 ### Intermediate Project (1-I-B): Prompt Engineering Evaluator
 - Generates 3 prompts per task
@@ -199,13 +199,13 @@ calderr-ai-2026/
 
 ## Week 2 Progress Summary (In Progress)
 
-| Week/Day | Topic | Status |
-|----------|-------|--------|
-| Day 1    | Advanced Prompting | Complete |
-| Day 2    | Structured Outputs | Complete |
-| Day 3    | Multi-Tool Research Agent | Complete |
-| Day 4    | Error Recovery Agent | Pending |
-| Day 5    | Intermediate & Production Projects | Pending |
+| Day | Topic | Status |
+|-----|-------|--------|
+| Monday | Advanced Prompting | Complete |
+| Tuesday | Structured Outputs | Complete |
+| Wednesday | Tool Calling Basics | Complete |
+| Thursday | External APIs as Tools | Complete |
+| Friday | Intermediate & Production Projects | Pending |
 
 ---
 
@@ -213,9 +213,18 @@ calderr-ai-2026/
 
 | Lab | Description | Status |
 |-----|-------------|--------|
-| Lab 2.1 | Advanced Prompting Techniques & CoT Pipeline | Complete |
-| Lab 2.2 | Structured Output Extractor with Pydantic | Complete |
-| Lab 2.3 | Multi-Tool Research Agent | Complete |
+| Lab 2.1 | Structured Output Extractor | Complete |
+| Lab 2.2 | Multi-Tool Research Agent | Complete |
+| Lab 2.3 | Error Recovery Agent | Complete |
+
+---
+
+## Projects Status (Week 2)
+
+| Project | Category | Status |
+|---------|----------|--------|
+| Project 2-I | Intermediate | Pending (Friday) |
+| Project 2-P | Production | Pending (Friday) |
 
 ---
 

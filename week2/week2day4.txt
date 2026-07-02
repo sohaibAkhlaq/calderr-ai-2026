@@ -1,0 +1,73 @@
+WEEK 2 - DAY 4: EXTERNAL APIS AS TOOLS
+========================================
+
+Day 4 Focus: External API Integration
+
+What was covered:
+
+1. HTTP Tools with httpx
+   - Async HTTP client
+   - GET requests with params
+   - JSON response handling
+   - Timeout configuration
+
+2. Custom Exception Hierarchy
+   - APIError (base class)
+   - RateLimitError (HTTP 429)
+   - TimeoutError (request timeout)
+
+3. Exponential Backoff
+   - Formula: delay = min(base * 2^attempt, max_delay)
+   - Jitter added to avoid thundering herd problem
+   - Prevents overwhelming APIs on retry
+
+4. Retry Logic with call_api_with_retry()
+   - Max retries configurable
+   - Different handling per status code
+   - Waits between attempts using backoff
+
+5. Fallback Chains
+   - Primary tool -> Secondary tool -> Tertiary tool
+   - Graceful degradation when APIs fail
+   - Mock data as final fallback
+
+6. Real External APIs Integrated:
+   - Open-Meteo (weather, free, no key required)
+   - CurrentsAPI (news headlines, free tier)
+   - ExchangeRate-API (currency conversion, free tier)
+
+7. Tools Built with @tool Decorator:
+   - get_weather(city): Real-time weather via Open-Meteo
+   - get_news(keyword): News headlines with mock fallback
+   - convert_currency(amount, from, to): Live exchange rates
+
+8. ErrorRecoveryAgent class
+   - execute_with_retry(): Retry loop with backoff
+   - log_attempt(): Tracks all attempts with timestamps
+   - show_logs(): Rich table of execution history
+   - Fallback chain support
+
+9. NewsResearchAgent class
+   - extract_entities(): NER via LLM (people, orgs, locations, dates)
+   - classify_topics(): Topic labeling via LLM
+   - summarize_findings(): Multi-article summarization
+
+Key Learnings:
+- Never call external APIs without retry logic in production
+- Always have a fallback (mock data or cached response)
+- Jitter prevents multiple agents hitting the same API simultaneously
+- Async tools are essential for non-blocking API calls
+
+Files Created:
+- lab2.3_external_api_tools.py: Full implementation with 3 APIs, error recovery agent, news research agent
+- lab2.3_notes.txt: Concept notes and API references
+- week2day4.txt: This file
+
+APIs Used:
+- Weather: open-meteo.com (free, no key)
+- News:    currentsapi.services (free tier)
+- Currency: exchangerate-api.com (free tier)
+
+Status: Day 4 Complete
+
+Ready for Day 5 - Intermediate and Production Projects

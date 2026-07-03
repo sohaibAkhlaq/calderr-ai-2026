@@ -32,7 +32,7 @@ cd C:\Users\USER\Desktop\calderr-ai-2026
 ### Step 2 — Launch the app
 
 ```powershell
-python -m streamlit run week2/project2_p_c_financial_analysis.py
+calderr-env\Scripts\python.exe -m streamlit run week2/project2_p_c_financial_analysis.py
 ```
 
 The browser opens automatically at `http://localhost:8501`.

@@ -30,8 +30,8 @@ This repository documents the complete setup, learning progress, and hands-on im
 cd C:\Users\USER\Desktop\calderr-ai-2026
 .\calderr-env\Scripts\Activate.ps1
 
-# All Week 1 and Week 2 scripts are now available.
-# No extra installs needed — streamlit, plotly, httpx, etc. all included.
+# All Week 1 and Week 2 scripts now work inside calderr-env.
+# streamlit, plotly, httpx, langchain, pydantic — all installed.
 ```
 
 After activation, run any project with a single command:
@@ -44,7 +44,8 @@ python week1/professional_chatbot.py
 python week2/project2_i_c_api_aggregator.py
 
 # Week 2: Financial Data Analysis Agent (Streamlit)
-python -m streamlit run week2/project2_p_c_financial_analysis.py
+# Use calderr-env python explicitly — streamlit is installed there
+calderr-env\Scripts\python.exe -m streamlit run week2/project2_p_c_financial_analysis.py
 ```
 
 ---

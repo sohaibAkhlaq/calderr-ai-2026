@@ -369,9 +369,9 @@ class CodeExecutor:
             "import plotly.express as px\n"
             "import plotly.graph_objects as go\n"
             "import numpy as np\n"
-            "import json, sys, warnings\n"
+            "import json, sys, warnings, io\n"
             "warnings.filterwarnings('ignore')\n"
-            f"df = pd.read_json({json.dumps(df.to_json())})\n"
+            f"df = pd.read_json(io.StringIO({json.dumps(df.to_json())}))\n"
             f"_fig_path = {json.dumps(fig_path)}\n\n"
         )
 

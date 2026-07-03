@@ -1,0 +1,71 @@
+WEEK 2 - DAY 5: INTEGRATION + DEMO
+====================================
+
+Day 5 Focus: Bringing All Week 2 Learning Together
+
+What was covered:
+
+1. API Aggregator Agent (Intermediate Project)
+   - asyncio.gather for parallel tool calls (3 APIs simultaneously)
+   - BriefingReport Pydantic schema (Day 2 pattern)
+   - Chain-of-thought LLM synthesis prompt (Day 1 pattern)
+   - Exponential backoff on every API call (Day 4 pattern)
+   - Output saved as .md and .html reports
+   - Financial morning briefing: weather + currency + news
+
+2. Financial Data Analysis Agent (Production Streamlit App)
+   - Streamlit production UI with professional dark theme
+   - Five analysis tool types: describe, plot, correlate, filter, stats (Day 3 pattern)
+   - Code generation via Groq LLM with CoT prompt (Day 1 pattern)
+   - AnalysisResult Pydantic structured output (Day 2 pattern)
+   - Live currency rate fetch with retry and fallback (Day 4 pattern)
+   - Subprocess-sandboxed code execution with 30s timeout
+   - Plotly interactive charts rendered in Streamlit
+   - Three download buttons: Markdown report, Python code, JSON result
+   - Session history tracked across all analyses
+
+3. Weekly Assessment Completed
+   - Q1: CoT vs ToT prompting
+   - Q2: Structured output importance in production
+   - Q3: Tool-calling lifecycle with ASCII diagram
+   - Q4: Pydantic model for job posting extraction
+   - Q5: Exponential backoff with formula
+   - Q6: Full send_email tool schema design
+   - 2-minute standup demo script
+
+4. Week 2 README Created
+   - Full architecture documentation for both projects
+   - Streamlit Cloud deployment instructions
+   - API sources table (all free, no key required)
+   - Week 2 learning outcomes table
+
+Key Learnings:
+- asyncio.gather makes parallel API calls trivially simple
+- Pydantic makes agent outputs machine-readable and validatable
+- CoT prompting dramatically improves generated code quality
+- Subprocess sandboxing is essential for safe code execution
+- Streamlit enables rapid deployment of production AI apps
+
+Files Created:
+- project2_i_c_api_aggregator.py:   CLI morning briefing agent
+- project2_p_c_financial_analysis.py: Streamlit financial analysis app
+- week2_assessment.md:              Full assessment Q&A
+- README.md (week2/):               Project documentation
+- requirements-streamlit.txt:       Lean deps for Streamlit Cloud
+- week2day5.txt:                    This file
+
+APIs Used:
+- Weather:  open-meteo.com (free, no key)
+- Currency: exchangerate-api.com (free, no key)
+- News:     gnews.io (free fallback to mock data)
+
+How to Run:
+  # API Aggregator (CLI)
+  python week2/project2_i_c_api_aggregator.py
+
+  # Financial Analysis Agent (Streamlit)
+  python -m streamlit run week2/project2_p_c_financial_analysis.py
+
+Status: Week 2 Day 5 COMPLETE - All projects delivered and committed
+
+Week 2 is DONE. Ready for Week 3.

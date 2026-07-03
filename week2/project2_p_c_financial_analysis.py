@@ -203,7 +203,7 @@ class DatasetProfile(BaseModel):
     rows:    int
     columns: int
     nulls:   int
-    schema:  List[ColumnSchema]
+    col_schema: List[ColumnSchema]
 
 class AnalysisResult(BaseModel):
     question:    str
@@ -255,7 +255,7 @@ def profile_dataset(df: pd.DataFrame) -> DatasetProfile:
         rows=len(df),
         columns=len(df.columns),
         nulls=int(df.isnull().sum().sum()),
-        schema=cols,
+        col_schema=cols,
     )
 
 # ─── Tool Registry (Day 3 — Tool Calling Pattern) ───────────────────────────
@@ -550,7 +550,7 @@ def main() -> None:
     tab_preview, tab_schema, tab_stats = st.tabs(["Preview", "Schema", "Descriptive Statistics"])
 
     with tab_preview:
-        st.dataframe(df.head(20), use_container_width=True, height=320)
+        st.dataframe(df.head(20), width='stretch', height=320)
 
     with tab_schema:
         schema_rows = [
@@ -561,13 +561,13 @@ def main() -> None:
                 "Unique": c.unique,
                 "Sample Values": c.sample,
             }
-            for c in profile.schema
+            for c in profile.col_schema
         ]
-        st.dataframe(pd.DataFrame(schema_rows), use_container_width=True)
+        st.dataframe(pd.DataFrame(schema_rows), width='stretch')
 
     with tab_stats:
         try:
-            st.dataframe(df.describe(include="all").T, use_container_width=True)
+            st.dataframe(df.describe(include="all").T, width='stretch')
         except Exception:
             st.warning("Descriptive statistics could not be computed for this dataset.")
 
@@ -632,7 +632,7 @@ def main() -> None:
             xaxis=dict(gridcolor="#21262d", zerolinecolor="#21262d"),
             yaxis=dict(gridcolor="#21262d", zerolinecolor="#21262d"),
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
     # Text output
     if output_text:

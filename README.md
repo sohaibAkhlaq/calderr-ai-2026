@@ -2,7 +2,7 @@
 
 **Project Location:** `Desktop/calderr-ai-2026`  
 **Author:** Sohaib Akhlaq  
-**Status:** Week 2 Complete
+**Status:** Week 3 In Progress
 
 ---
 
@@ -110,6 +110,11 @@ calderr-ai-2026/
     ├── week2_assessment.md
     ├── week2day1.txt ... week2day5.txt
     └── README.md
+│
+└── WEEK 3/                       # Week 3: Embeddings, RAG & Vector DBs
+    ├── lab3_1.py                 # Semantic Search CLI & PCA
+    ├── WEEK3DAY1.txt             # Day 1 Journal
+    └── WEEK 3 WORK.md            # 7-Day Schedule
 ```
 
 ---
@@ -189,6 +194,18 @@ Full run guide with sample CSVs + 18 test questions: `week2/project2_p_c_run_gui
 
 ---
 
+## Week 3 — Embeddings, RAG & Vector Databases
+
+| Day | Topic | Status | Key Files |
+|---|---|---|---|
+| Monday | Embeddings Deep Dive | Complete | `WEEK 3/lab3_1.py`, `WEEK 3/WEEK3DAY1.txt` |
+| Tuesday | Vector Databases | Pending | |
+| Wednesday | Naive RAG Architecture | Pending | |
+| Thursday | Advanced Retrieval | Pending | |
+| Friday | RAG Evaluation & Assessment | Pending | |
+
+---
+
 ## Labs Completed
 
 | Lab | Week | Description | Status |
@@ -199,6 +216,7 @@ Full run guide with sample CSVs + 18 test questions: `week2/project2_p_c_run_gui
 | Lab 2.1 | 2 | Structured output extractor (Pydantic job posting parser) | Complete |
 | Lab 2.2 | 2 | Multi-tool research agent with 5 tools + routing | Complete |
 | Lab 2.3 | 2 | Error recovery agent with real APIs + retry + fallbacks | Complete |
+| Lab 3.1 | 3 | Semantic search CLI, embedding models, PCA visualization | Complete |
 
 ---
 
@@ -234,3 +252,4 @@ Full run guide with sample CSVs + 18 test questions: `week2/project2_p_c_run_gui
 | Week 0 | Environment Setup | Complete |
 | Week 1 | AI Fundamentals | Complete |
 | Week 2 | Advanced AI Patterns | Complete |
+| Week 3 | Embeddings, RAG & Vector Databases | In Progress |

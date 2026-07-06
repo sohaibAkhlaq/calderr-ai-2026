@@ -1,0 +1,30 @@
+First of all, I started Day 1 by studying the core theory behind embeddings. I learned that text can be converted into numbers, and these numbers are plotted in a high-dimensional space so the computer can understand semantic meaning.
+
+Then, I installed the necessary tools like `sentence-transformers`, `numpy`, `scikit-learn`, and `wikipedia` to build my semantic search engine.
+
+After that, I wrote a Python script (lab3_1.py) that fetches 100 sentences from a Wikipedia article about "Artificial Intelligence". 
+
+Next, I used the `sentence-transformers` library to embed these 100 sentences into vectors using two different models: `all-MiniLM-L6-v2` and `bge-small-en-v1.5`. I built a command-line interface (CLI) that takes a user query, embeds it, and then calculates the "cosine similarity" to find the most relevant sentences from the Wikipedia text.
+
+Finally, I used a technique called PCA (Principal Component Analysis) to squash the high-dimensional vectors down to 2 dimensions and plotted them on a 2D graph so I could visually see how the sentences cluster together based on their meaning!
+
+---
+### What I Learned & Concept Definitions:
+
+**1. Embeddings:**
+* **Definition:** An embedding is a list of numbers (a vector) that represents the semantic meaning of a piece of text (like a word, sentence, or document).
+* **What I Learned:** Instead of just looking for exact keyword matches, embeddings capture the *context* and *intent* of the text. Sentences that mean similar things will have vectors that are closer together in the vector space.
+* **Example:** The sentence "The puppy played in the yard" and "A small dog ran on the grass" don't share many keywords, but their embeddings will be very close together because they mean the same thing.
+
+**2. Vector Space:**
+* **Definition:** A mathematical space where each vector is plotted as a point. If the vector has 384 numbers (like MiniLM), it is plotted in a 384-dimensional space.
+* **What I Learned:** We can't visualize 384 dimensions, but mathematically, we can calculate the distance between any two points in this space to see how related they are.
+
+**3. Cosine Similarity:**
+* **Definition:** A metric used to measure how similar two vectors are. It calculates the cosine of the angle between two vectors.
+* **What I Learned:** A cosine similarity of 1 means the vectors point in the exact same direction (identical meaning). A score of 0 means they are completely orthogonal (unrelated), and -1 means they are opposites.
+* **Example:** If my query is "How do computers learn?" and a sentence is "Machine learning involves algorithms", the angle between their vectors will be very small, resulting in a high cosine similarity score (e.g., 0.85).
+
+**4. PCA (Principal Component Analysis):**
+* **Definition:** A dimensionality reduction technique that takes data with many dimensions (e.g., 384) and reduces it to fewer dimensions (e.g., 2 or 3) while trying to keep as much of the original variance (information) as possible.
+* **What I Learned:** Since human brains can only understand 2D or 3D spaces, PCA is perfect for visualizing embeddings. I used it to take my 384-dimension sentence vectors and plot them on a 2D scatter plot to see how similar sentences grouped together!

@@ -1,0 +1,30 @@
+First of all, I started Day 2 by diving into Vector Databases and how to properly process documents before embedding them.
+
+I learned that we can't just pass whole documents into an embedding model. We have to split them up into smaller "chunks". Then we store these chunks in a Vector Database like ChromaDB or FAISS, along with metadata (like what page it came from).
+
+Next, I wrote a Python script (lab3_2.py) that simulates loading 50 PDF pages. I used LangChain's `RecursiveCharacterTextSplitter` to break the pages down into chunks of 200 characters with an overlap of 20 characters so no sentences get awkwardly cut in half.
+
+Then, I embedded these chunks and stored them in `ChromaDB`. I created a persistent database on the disk, and successfully performed a query using a metadata filter to only search for answers on "Page 42".
+
+Finally, I explored `FAISS` (Facebook AI Similarity Search). I generated 10,000 mock vectors and compared two different indexing strategies:
+1. `IndexFlatL2` - which checks every single vector to find the exact closest match.
+2. `IndexIVFFlat` - which groups vectors into clusters so it can search way faster (Approximate Nearest Neighbors).
+
+---
+### What I Learned & Concept Definitions:
+
+**1. Text Splitting (Chunking):**
+* **Definition:** Breaking large text documents into smaller, manageable chunks.
+* **What I Learned:** AI models have limited context windows, so we chunk text to embed small pieces of information. Using an "overlap" ensures context isn't lost if a sentence crosses the boundary of a chunk.
+
+**2. ChromaDB:**
+* **Definition:** An open-source vector database designed for building AI applications with embeddings.
+* **What I Learned:** It handles storing embeddings, the original text, and metadata all together. You can query it using semantic search *and* SQL-like metadata filters at the same time!
+
+**3. Metadata Filtering:**
+* **Definition:** Searching vector databases by combining semantic vector search with hard filters on metadata (e.g., date, source, page number).
+* **What I Learned:** This is crucial for accuracy. If a user asks a question about a specific document, we can filter by `source="document_A"` *before* doing the semantic search, preventing hallucinations from other documents.
+
+**4. FAISS (Facebook AI Similarity Search):**
+* **Definition:** A library developed by Facebook for extremely efficient similarity search and clustering of dense vectors.
+* **What I Learned:** `IndexFlatL2` is perfect for small datasets because it gives 100% accurate results. But for massive datasets, we must use Approximate Nearest Neighbor (ANN) indexes like `IndexIVFFlat` to speed up the search by clustering similar vectors into "Voronoi cells".

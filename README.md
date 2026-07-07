@@ -113,7 +113,9 @@ calderr-ai-2026/
 │
 └── WEEK 3/                       # Week 3: Embeddings, RAG & Vector DBs
     ├── lab3_1.py                 # Semantic Search CLI & PCA
+    ├── lab3_2.py                 # Vector DBs & Chunking
     ├── WEEK3DAY1.txt             # Day 1 Journal
+    ├── WEEK3DAY2.txt             # Day 2 Journal
     └── WEEK 3 WORK.md            # 7-Day Schedule
 ```
 
@@ -199,7 +201,7 @@ Full run guide with sample CSVs + 18 test questions: `week2/project2_p_c_run_gui
 | Day | Topic | Status | Key Files |
 |---|---|---|---|
 | Monday | Embeddings Deep Dive | Complete | `WEEK 3/lab3_1.py`, `WEEK 3/WEEK3DAY1.txt` |
-| Tuesday | Vector Databases | Pending | |
+| Tuesday | Vector Databases | Complete | `WEEK 3/lab3_2.py`, `WEEK 3/WEEK3DAY2.txt` |
 | Wednesday | Naive RAG Architecture | Pending | |
 | Thursday | Advanced Retrieval | Pending | |
 | Friday | RAG Evaluation & Assessment | Pending | |

@@ -1,4 +1,7 @@
+import faiss
+import torch
 import os
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -48,7 +51,7 @@ def evaluate_rag(docs, embeddings, chunk_size, k_val):
     
     # Setup LLM & Chain
     try:
-        llm = ChatGroq(model="llama3-8b-8192", temperature=0)
+        llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
     except Exception as e:
         print("Error initializing Groq LLM (missing API key?). Using mock responses.")
         llm = None

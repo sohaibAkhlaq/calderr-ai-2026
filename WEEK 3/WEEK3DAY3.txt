@@ -1,0 +1,29 @@
+First of all, I started Day 3 by learning about the complete RAG (Retrieval-Augmented Generation) Architecture. I learned how the Ingestion Pipeline (loading, splitting, embedding, storing) connects to the Query Pipeline (retrieving, generating).
+
+Next, I wrote a Python script (lab3_3_naive_rag.py) to build a "Naive RAG" pipeline. I simulated 50 pages of an AI engineering manual, injected some hidden facts into specific pages, and ran an experiment!
+
+I tested the impact of chunk sizes and 'K' values (the number of chunks retrieved).
+I created one pipeline with small chunks (256 tokens) and k=3, and another pipeline with large chunks (1024 tokens) and k=10.
+
+Then, I used LangChain's `create_retrieval_chain` to hook my ChromaDB retriever up to a Groq LLM (`llama3-8b-8192`). I asked 5 specific questions based on the hidden facts.
+
+I learned that chunk size heavily impacts quality! Small chunks (256) with small k (3) give the LLM very precise information but might miss the broader context if the answer is spread out. Large chunks (1024) with high k (10) give the LLM massive context, but it uses up the LLM's context window quickly and can confuse the model with irrelevant noise (often called the "Lost in the Middle" problem).
+
+---
+### What I Learned & Concept Definitions:
+
+**1. Naive RAG Architecture:**
+* **Definition:** The standard, most basic implementation of RAG. It blindly retrieves the top-K most similar chunks and stuffs them into the LLM prompt.
+* **What I Learned:** It works well for simple questions but fails when questions require reasoning across multiple documents, or when the semantic search returns irrelevant chunks just because they share keywords.
+
+**2. Chunk Size Tuning:**
+* **Definition:** The process of finding the optimal size (in characters or tokens) for splitting documents.
+* **What I Learned:** There is no "perfect" chunk size. 256 is great for precise facts. 1024 is better for general summaries. It's a trade-off between precision (small chunks) and context (large chunks).
+
+**3. The 'K' Value (Top-K):**
+* **Definition:** The number of documents/chunks the retriever pulls from the vector database to give to the LLM.
+* **What I Learned:** If K=3, the LLM only sees the 3 best matches. If K=10, it sees 10. Higher K means a higher chance of finding the answer, but it increases token cost, latency, and can confuse the LLM with too much irrelevant information.
+
+**4. create_retrieval_chain (LangChain):**
+* **Definition:** A built-in LangChain function that takes a user query, passes it to a retriever, gets the documents, and passes them to the LLM along with the original question.
+* **What I Learned:** It abstracts away the manual prompt engineering of having to explicitly write `Context: {doc1} {doc2}`. It handles the injection of context automatically!

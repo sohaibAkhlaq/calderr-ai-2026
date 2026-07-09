@@ -115,9 +115,11 @@ calderr-ai-2026/
     ├── lab3_1.py                 # Semantic Search CLI & PCA
     ├── lab3_2.py                 # Vector DBs & Chunking
     ├── lab3_3_naive_rag.py       # Naive RAG & Chunk Tuning
+    ├── lab3_4_advanced_retrieval.py # Hybrid Search & Re-ranking
     ├── WEEK3DAY1.txt             # Day 1 Journal
     ├── WEEK3DAY2.txt             # Day 2 Journal
     ├── WEEK3DAY3.txt             # Day 3 Journal
+    ├── WEEK3DAY4.txt             # Day 4 Journal
     └── WEEK 3 WORK.md            # 7-Day Schedule
 ```
 
@@ -205,7 +207,7 @@ Full run guide with sample CSVs + 18 test questions: `week2/project2_p_c_run_gui
 | Monday | Embeddings Deep Dive | Complete | `WEEK 3/lab3_1.py`, `WEEK 3/WEEK3DAY1.txt` |
 | Tuesday | Vector Databases | Complete | `WEEK 3/lab3_2.py`, `WEEK 3/WEEK3DAY2.txt` |
 | Wednesday | Naive RAG Architecture | Complete | `WEEK 3/lab3_3_naive_rag.py`, `WEEK 3/WEEK3DAY3.txt` |
-| Thursday | Advanced Retrieval | Pending | |
+| Thursday | Advanced Retrieval | Complete | `WEEK 3/lab3_4_advanced_retrieval.py`, `WEEK 3/WEEK3DAY4.txt` |
 | Friday | RAG Evaluation & Assessment | Pending | |
 
 ---

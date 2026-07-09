@@ -1,0 +1,26 @@
+First of all, I started Day 4 by learning about "Advanced Retrieval" techniques to make RAG systems much more accurate. Relying purely on Semantic Search (like we did yesterday) isn't always enough because it can struggle with exact keyword matching (like searching for a specific ID number or obscure proper noun).
+
+Next, I wrote a Python script (lab3_4_advanced_retrieval.py) that implements three powerful techniques:
+
+1. Hybrid Search: I combined a traditional keyword search algorithm called BM25 with our dense semantic embeddings. I used LangChain's `EnsembleRetriever` to merge the results 50/50. This gives us the best of both worlds!
+2. Cross-Encoder Re-ranking: Traditional embeddings (Bi-Encoders) are fast but lose nuance. I downloaded a Cross-Encoder model (`cross-encoder/ms-marco-MiniLM-L-6-v2`) which takes BOTH the user's query and the retrieved document together and scores how relevant they are to each other. I used this to re-sort the results from the hybrid search, ensuring the absolute best match is at the very top.
+3. Multi-Query Retrieval: Users often ask poorly phrased questions. I hooked up a Groq LLM to automatically take the user's original query and generate 3 variations of it. We run all 3 variations through the vector database, gather all the unique results, and return them. This significantly increases the chances of finding the right document!
+
+---
+### What I Learned & Concept Definitions:
+
+**1. BM25 (Best Matching 25):**
+* **Definition:** A traditional, highly effective keyword-based search algorithm. It ranks documents based on the exact frequency of words, punishing common words (like "the") and rewarding rare, specific words.
+* **What I Learned:** It is completely different from embeddings because it has zero understanding of "meaning". If you search "automobile", it won't find a document containing "car". That's why we combine it with semantic search!
+
+**2. Hybrid Search:**
+* **Definition:** Combining sparse retrievers (BM25 keyword search) with dense retrievers (Vector Embedding search).
+* **What I Learned:** This is basically mandatory for production-level RAG. You need embeddings to understand context and synonyms, but you need BM25 to guarantee exact matches for names, SKUs, or acronyms.
+
+**3. Cross-Encoder (Re-ranking):**
+* **Definition:** A type of Transformer model that takes two pieces of text simultaneously (Query + Document) and outputs a single relevancy score.
+* **What I Learned:** They are extremely slow compared to vector searches because you can't pre-compute them. Therefore, you do a fast vector search to retrieve the top 20 chunks, and THEN use a Cross-Encoder to re-rank just those 20 chunks to find the absolute most relevant top 3 chunks to send to the LLM.
+
+**4. Multi-Query Retrieval:**
+* **Definition:** Using an LLM to rewrite the user's prompt into multiple variations from different perspectives, then retrieving documents for all variations.
+* **What I Learned:** This is a great way to overcome the limitations of distance-based similarity. It expands the search space and makes the system much more resilient to typos or vague user questions.

@@ -1,0 +1,31 @@
+First of all, I started Day 5 by learning about how to properly EVALUATE a RAG system. Up until now, we've been building RAG pipelines (Naive RAG on Day 3, Advanced Retrieval on Day 4), but we never actually measured how good they are! Today I learned that "vibes-based testing" (just trying a few queries and eyeballing the answers) is not enough for production. We need hard numbers.
+
+Next, I wrote a Python script (lab3_5_rag_evaluation.py) that builds a complete RAG system from scratch, creates an evaluation dataset of 8 question-answer pairs, and then runs three RAGAS-style evaluation metrics on every single question.
+
+I also completed the Weekly Assessment section at the end, where I answered 5 conceptual questions about everything I learned this week (embeddings, chunk sizes, cross-encoders, multi-tenant design, BM25 vs semantic search).
+
+---
+### What I Learned & Concept Definitions:
+
+**1. Context Precision:**
+* **Definition:** Out of all the chunks the retriever pulled from the vector database, how many of them were actually relevant to the question?
+* **What I Learned:** If I ask about "Docker" and the retriever returns 3 chunks, but only 1 of them is actually about Docker (the other 2 are about Kubernetes and Git), then the Context Precision is only 0.33 (33%). This means the retriever is wasting the LLM's context window with irrelevant information, which can lead to hallucinations.
+
+**2. Answer Relevancy:**
+* **Definition:** How much overlap exists between the generated answer and the expected ground truth answer?
+* **What I Learned:** This measures whether the LLM actually answered the question correctly. A high score means the answer closely matches the expected answer. A low score means the LLM either hallucinated, gave a vague answer, or misunderstood the question.
+
+**3. Faithfulness:**
+* **Definition:** Can the generated answer be traced back to the retrieved context? In other words, did the LLM make stuff up, or did it stick to the facts from the documents?
+* **What I Learned:** This is arguably the most important metric for RAG! A faithfulness score of 1.0 means every single word in the answer came from the retrieved documents. A low score means the LLM is hallucinating (making up information that isn't in the context).
+
+**4. RAGAS (Retrieval Augmented Generation Assessment):**
+* **Definition:** An open-source framework for evaluating RAG pipelines. It provides automated metrics like Faithfulness, Answer Relevancy, Context Precision, and Context Recall.
+* **What I Learned:** RAGAS automates what I did manually in my script. In production, you would use the RAGAS library to run these metrics automatically on hundreds of test questions, generating a comprehensive evaluation report.
+
+**5. Weekly Assessment Highlights:**
+* Embeddings capture semantic meaning in vector space, enabling similarity search.
+* Chunk size is a precision vs. context tradeoff (256 = precise, 1024 = broad).
+* Cross-Encoders re-rank results by reading query + document together.
+* Multi-tenant RAG uses collection-level isolation with metadata filtering.
+* Hybrid search (BM25 + semantic) covers both exact keyword and meaning-based retrieval.

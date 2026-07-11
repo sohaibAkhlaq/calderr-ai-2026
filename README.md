@@ -115,6 +115,9 @@ calderr-ai-2026/
     ├── lab3_1.py                 # Semantic Search CLI & PCA
     ├── lab3_2.py                 # Vector DBs & Chunking
     ├── lab3_3_naive_rag.py       # Naive RAG & Chunk Tuning
+    ├── intermediate_project/     # Day 6: Hybrid Search Engine
+    │   ├── hybrid_search_engine.py
+    │   └── README.md
     ├── lab3_4_advanced_retrieval.py # Hybrid Search & Re-ranking
     ├── lab3_5_rag_evaluation.py  # RAG Evaluation & Weekly Assessment
     ├── WEEK3DAY1.txt             # Day 1 Journal
@@ -211,6 +214,26 @@ Full run guide with sample CSVs + 18 test questions: `week2/project2_p_c_run_gui
 | Wednesday | Naive RAG Architecture | Complete | `WEEK 3/lab3_3_naive_rag.py`, `WEEK 3/WEEK3DAY3.txt` |
 | Thursday | Advanced Retrieval | Complete | `WEEK 3/lab3_4_advanced_retrieval.py`, `WEEK 3/WEEK3DAY4.txt` |
 | Friday | RAG Evaluation & Assessment | Complete | `WEEK 3/lab3_5_rag_evaluation.py`, `WEEK 3/WEEK3DAY5.txt` |
+| Saturday | Intermediate Project | Complete | `WEEK 3/intermediate_project/` |
+
+### Week 3 Projects
+
+#### Project 3-I-C: Hybrid Search Engine (Intermediate)
+
+A CLI search tool that ingests PDF documents and provides intelligent hybrid search combining BM25 keyword search + semantic vector search + cross-encoder re-ranking. Includes built-in evaluation on 30 queries.
+
+```powershell
+python "WEEK 3/intermediate_project/hybrid_search_engine.py"
+```
+
+Full architecture, usage, and evaluation details: `WEEK 3/intermediate_project/README.md`
+
+**Week 3 patterns used:**
+- Day 1: Sentence-Transformer Embeddings (`all-MiniLM-L6-v2`)
+- Day 2: ChromaDB Vector Storage & Document Chunking with Metadata
+- Day 3: Full RAG Pipeline (load → split → embed → store → retrieve → generate)
+- Day 4: BM25 Hybrid Search, EnsembleRetriever, Cross-Encoder Re-ranking
+- Day 5: Evaluation Metrics (Context Precision, Answer Relevancy, Faithfulness)
 
 ---
 

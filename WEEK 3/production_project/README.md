@@ -10,7 +10,7 @@ I chose **Option B: Real-Time Research Engine** for the Day 7 Production Project
 | Week 3 Day | Concept Learned | Used in This Project |
 |---|---|---|
 | Day 1 (Monday) | Sentence-Transformer Embeddings | `HuggingFaceEmbeddings(all-MiniLM-L6-v2)` in `engine.py` |
-| Day 2 (Tuesday) | ChromaDB, Vector Storage, Document Chunking | `RecursiveCharacterTextSplitter` + ChromaDB persistence in `engine.py` |
+| Day 2 (Tuesday) | FAISS, Vector Storage, Document Chunking | `RecursiveCharacterTextSplitter` + FAISS persistence in `engine.py` |
 | Day 3 (Wednesday) | Naive RAG Pipeline (load→split→embed→store→retrieve) | The 7-step sequential pipeline is the backbone of `engine.py` |
 | Day 4 (Thursday) | Hybrid BM25 + Semantic Search, Cross-Encoder Re-ranking | `EnsembleRetriever` (40% BM25, 60% Semantic) + `CrossEncoder` in `engine.py` |
 | Day 5 (Friday) | RAG Evaluation Metrics | `test_suite.py` evaluates Relevancy and Precision on 10 real queries |
@@ -41,8 +41,8 @@ I chose **Option B: Real-Time Research Engine** for the Day 7 Production Project
 │  Step 2: _load_documents()   ─── PyPDFLoader             │
 │  Step 3: _split_documents()  ─── RecursiveTextSplitter   │
 │  Step 4: _create_embeddings()─── all-MiniLM-L6-v2        │
-│  Step 5: _create_vector_store()─ ChromaDB (persistent)   │
-│  Step 6: _create_retriever() ─── BM25 + Chroma Ensemble  │
+│  Step 5: _create_vector_store()─ FAISS (persistent)      │
+│  Step 6: _create_retriever() ─── BM25 + FAISS Ensemble   │
 │  Step 7: _load_reranker()    ─── ms-marco CrossEncoder    │
 │                                                          │
 │   ┌───────────────────────────────────────────────────┐  │
@@ -80,13 +80,13 @@ Step 4 — Embedding Model
    └── Then: ResearchEngineError(EMBED) raised → Pipeline ABORTS
              Streamlit shows: "Could not load embedding model."
 
-Step 5 — ChromaDB Vector Store
+Step 5 — FAISS Vector Store
    ├── If: Disk permission denied / out of disk space
    └── Then: ResearchEngineError(STORE) raised → Pipeline ABORTS
              Streamlit shows: "Vector store initialization failed."
 
 Step 6 — Retriever Assembly
-   ├── If: BM25 / Chroma retriever fails to assemble
+   ├── If: BM25 / FAISS retriever fails to assemble
    └── Then: ResearchEngineError(RETRIEVE) raised → Pipeline ABORTS
              Streamlit shows: "Retriever assembly failed."
 
@@ -171,7 +171,7 @@ WEEK 3/production_project/
 ├── docs/               # Auto-created: downloaded PDF files
 │   ├── attention_is_all_you_need.pdf
 │   └── bert_pretraining.pdf
-├── chroma_db/          # Auto-created: persistent ChromaDB vector store
+├── faiss_db/           # Auto-created: persistent FAISS vector store
 └── test_results.json   # Auto-created: test results after running test_suite.py
 ```
 
@@ -184,8 +184,7 @@ WEEK 3/production_project/
 | `streamlit` | ≥1.28 | Web UI framework |
 | `langchain` | ≥0.2 | RAG orchestration |
 | `sentence-transformers` | ≥2.7 | Embedding model |
-| `chromadb` | ≥0.5 | Persistent vector store |
-| `faiss-cpu` | ≥1.7.4 | In-memory vector index |
+| `faiss-cpu` | ≥1.7.4 | Persistent vector store & index |
 | `rank_bm25` | ≥0.2.2 | BM25 keyword retrieval |
 | `pypdf` | ≥3.0 | PDF text extraction |
 
@@ -199,7 +198,7 @@ WEEK 3/production_project/
 
 ### Vector Database (Day 2)
 **Definition:** A specialized database optimized for storing and querying embedding vectors. Unlike traditional databases (SQL), vector DBs find the "nearest neighbor" vectors to a query vector.
-- **Used in:** `_create_vector_store()` using ChromaDB with persistence
+- **Used in:** `_create_vector_store()` using FAISS with local persistence
 
 ### RAG Pipeline (Day 3)
 **Definition:** Retrieval-Augmented Generation. Instead of asking an LLM to answer from memory, we first retrieve relevant documents from a knowledge base and feed them as context.

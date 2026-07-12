@@ -41,7 +41,7 @@ from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
 
-# NOTE: HuggingFaceEmbeddings, Chroma, BM25Retriever, EnsembleRetriever,
+# NOTE: HuggingFaceEmbeddings, FAISS, BM25Retriever, EnsembleRetriever,
 #       and CrossEncoder are imported LAZILY inside each method to avoid
 #       loading torch at module import time.
 
@@ -99,7 +99,7 @@ class EngineStatus:
 
 BASE_DIR        = os.path.dirname(os.path.abspath(__file__))
 DOCS_DIR        = os.path.join(BASE_DIR, "docs")
-CHROMA_DIR      = os.path.join(BASE_DIR, "chroma_db")
+FAISS_DIR        = os.path.join(BASE_DIR, "faiss_db")
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 RERANKER_MODEL  = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 CHUNK_SIZE      = 512
@@ -253,23 +253,23 @@ class ResearchEngine:
     # ── Step 5: Store (LAZY IMPORT) ───────────────────────────────────────────
     def _create_vector_store(self, splits: List[Document], embeddings):
         """
-        Embeds chunks and persists them in ChromaDB.
-        LAZY IMPORT: Chroma is imported HERE.
+        Embeds chunks and persists them in FAISS.
+        LAZY IMPORT: FAISS is imported HERE.
         FAILURE: Raises ResearchEngineError(STORE).
         """
         try:
-            from langchain_chroma import Chroma
-            return Chroma.from_documents(
+            from langchain_community.vectorstores import FAISS
+            vectorstore = FAISS.from_documents(
                 documents=splits,
-                embedding=embeddings,
-                collection_name="research_engine_v1",
-                persist_directory=CHROMA_DIR,
+                embedding=embeddings
             )
+            vectorstore.save_local(FAISS_DIR)
+            return vectorstore
         except Exception as e:
             raise ResearchEngineError(
                 PipelineStage.STORE,
-                f"ChromaDB initialization failed.\n"
-                f"Check disk permissions for '{CHROMA_DIR}'.\nError: {e}",
+                f"FAISS initialization failed.\n"
+                f"Check disk permissions for '{FAISS_DIR}'.\nError: {e}",
             )
 
     # ── Step 6: Retriever (LAZY IMPORT) ───────────────────────────────────────
@@ -335,7 +335,7 @@ class ResearchEngine:
             _progress(f"Step 4/7 -- Loading embedding model ({EMBEDDING_MODEL})...")
             embeddings = self._create_embeddings()
 
-            _progress(f"Step 5/7 -- Building ChromaDB ({len(self._splits)} chunks)...")
+            _progress(f"Step 5/7 -- Building FAISS index ({len(self._splits)} chunks)...")
             vectorstore = self._create_vector_store(self._splits, embeddings)
 
             _progress("Step 6/7 -- Assembling Hybrid Retriever (BM25 + Semantic)...")

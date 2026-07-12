@@ -1,0 +1,97 @@
+{
+  "total": 13,
+  "passed": 12,
+  "failed": 1,
+  "tests": [
+    {
+      "test": "Engine Initialization",
+      "status": "PASS"
+    },
+    {
+      "test": "Chunk Count Validation",
+      "status": "PASS",
+      "chunks": 243
+    },
+    {
+      "test": "Empty Query Handling",
+      "status": "PASS"
+    },
+    {
+      "test": "Q01: What is the Transformer architecture?",
+      "status": "PASS",
+      "relevancy": 1.0,
+      "reranker_score": 6.49,
+      "top_result_excerpt": "Figure 1: The Transformer - model architecture.\nThe Transformer follows this overall architecture using stacked self-att"
+    },
+    {
+      "test": "Q02: How does scaled dot-product attention work?",
+      "status": "PASS",
+      "relevancy": 1.0,
+      "reranker_score": 8.16,
+      "top_result_excerpt": "inside of scaled dot-product attention by masking out (setting to \u2212\u221e) all values in the input\nof the softmax which corre"
+    },
+    {
+      "test": "Q03: What optimizer was used for training the Transformer?",
+      "status": "FAIL",
+      "relevancy": 0.33,
+      "reranker_score": 0.25,
+      "top_result_excerpt": "We trained a 4-layer transformer with dmodel = 1024on the Wall Street Journal (WSJ) portion of the\nPenn Treebank [25], a"
+    },
+    {
+      "test": "Q04: What are positional encodings and why are they needed?",
+      "status": "PASS",
+      "relevancy": 1.0,
+      "reranker_score": 2.89,
+      "top_result_excerpt": "bottoms of the encoder and decoder stacks. The positional encodings have the same dimension dmodel\nas the embeddings, so"
+    },
+    {
+      "test": "Q05: How many encoder layers does the base Transformer model have?",
+      "status": "PASS",
+      "relevancy": 1.0,
+      "reranker_score": 6.49,
+      "top_result_excerpt": "Figure 1: The Transformer - model architecture.\nThe Transformer follows this overall architecture using stacked self-att"
+    },
+    {
+      "test": "Q06: What is BERT and how is it different from a standard language model?",
+      "status": "PASS",
+      "relevancy": 1.0,
+      "reranker_score": 3.09,
+      "top_result_excerpt": "BERT: Pre-training of Deep Bidirectional Transformers for\nLanguage Understanding\nJacob Devlin Ming-Wei Chang Kenton Lee "
+    },
+    {
+      "test": "Q07: How is BERT pre-trained?",
+      "status": "PASS",
+      "relevancy": 1.0,
+      "reranker_score": 7.74,
+      "top_result_excerpt": "ford et al., 2018), BERT is designed to pre-\ntrain deep bidirectional representations from\nunlabeled text by jointly con"
+    },
+    {
+      "test": "Q08: What tasks was BERT fine-tuned on?",
+      "status": "PASS",
+      "relevancy": 0.67,
+      "reranker_score": 7.78,
+      "top_result_excerpt": "A.5 Illustrations of Fine-tuning on Different\nTasks\nThe illustration of \ufb01ne-tuning BERT on different\ntasks can be seen i"
+    },
+    {
+      "test": "Q09: What is multi-head attention?",
+      "status": "PASS",
+      "relevancy": 1.0,
+      "reranker_score": 6.71,
+      "top_result_excerpt": "output values. These are concatenated and once again projected, resulting in the final values, as\ndepicted in Figure 2.\n"
+    },
+    {
+      "test": "Q10: What regularization was used to prevent overfitting?",
+      "status": "PASS",
+      "relevancy": 1.0,
+      "reranker_score": -1.11,
+      "top_result_excerpt": "layer. arXiv preprint arXiv:1701.06538, 2017.\n[33] Nitish Srivastava, Geoffrey E Hinton, Alex Krizhevsky, Ilya Sutskever"
+    }
+  ],
+  "summary": {
+    "total": 13,
+    "passed": 12,
+    "failed": 1,
+    "pass_rate": 92.3,
+    "avg_query_relevancy": 0.9
+  }
+}

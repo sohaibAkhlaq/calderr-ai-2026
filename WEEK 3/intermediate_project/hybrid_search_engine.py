@@ -7,6 +7,7 @@ processes it, and provides hybrid search (BM25 + Semantic) with
 cross-encoder re-ranking.
 """
 
+# pyrefly: ignore [missing-import]
 import faiss
 import torch
 import os
@@ -24,6 +25,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 from langchain_community.retrievers import BM25Retriever
+# pyrefly: ignore [missing-import]
 from langchain.retrievers import EnsembleRetriever
 from langchain_community.document_loaders import PyPDFLoader
 from sentence_transformers import CrossEncoder
@@ -57,8 +59,8 @@ class PipelineError(Exception):
 # 1. DOCUMENT INGESTION (Strict Error Handling)
 # ============================================================
 def download_sample_pdf():
-    """Download a real AI paper (Attention Is All You Need) for testing."""
-    print("\n[STEP 1] Downloading 'Attention Is All You Need' PDF...")
+    """Download a 'attention is all you need' PDF for testing."""
+    print("\n[STEP 1] Downloading 'attention is all you need' PDF...")
     os.makedirs(PDF_DIR, exist_ok=True)
     pdf_path = os.path.join(PDF_DIR, "attention_is_all_you_need.pdf")
 
@@ -93,9 +95,9 @@ def load_documents(pdf_path):
     if not docs:
         raise PipelineError("PDF was loaded, but 0 pages of text were extracted! Cannot proceed.")
 
-    # Tag all docs with topic 'transformers' for evaluation
+    # Tag all docs with topic 'python' for evaluation
     for doc in docs:
-        doc.metadata["topic"] = "transformers"
+        doc.metadata["topic"] = "python"
         
     print(f"  Successfully loaded {len(docs)} pages.")
     return docs
@@ -304,7 +306,7 @@ def main():
             print("\nType your query and press Enter. Type 'quit' to exit.")
             while True:
                 try:
-                    query = input("\n🔍 Query: ").strip()
+                    query = input("\n Query: ").strip()
                 except (EOFError, KeyboardInterrupt):
                     break
                 if not query or query.lower() in ('quit', 'exit', 'q'):

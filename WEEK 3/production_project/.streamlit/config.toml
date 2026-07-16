@@ -1,12 +1,12 @@
 [theme]
-base = "light"
-primaryColor = "#1B4FE4"
+primaryColor = "#2E86AB"
 backgroundColor = "#FFFFFF"
-secondaryBackgroundColor = "#F4F6FA"
-textColor = "#1A1A2E"
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#262730"
 font = "sans serif"
 
 [server]
-headless = true
-enableCORS = false
-enableXsrfProtection = false
+maxUploadSize = 200
+
+[browser]
+gatherUsageStats = false

@@ -2,7 +2,7 @@
 
 **Project Location:** `Desktop/calderr-ai-2026`  
 **Author:** Sohaib Akhlaq  
-**Status:** Week 3 In Progress
+**Status:** Week 3 Complete
 
 ---
 
@@ -235,6 +235,26 @@ Full architecture, usage, and evaluation details: `WEEK 3/intermediate_project/R
 - Day 4: BM25 Hybrid Search, EnsembleRetriever, Cross-Encoder Re-ranking
 - Day 5: Evaluation Metrics (Context Precision, Answer Relevancy, Faithfulness)
 
+#### Project 3-P-C: RAG Evaluation Benchmark (Production)
+
+An advanced RAG Evaluation Benchmark dashboard deployed on Streamlit, comparing multiple chunk sizes, embedding models, and retrieval strategies (Semantic, BM25 Hybrid, Cross-Encoder Reranking) across 10 evaluation queries.
+
+**Features:**
+- **Dynamic Leaderboard:** Automatically ranks the best RAG configuration.
+- **Plotly Visualizations:** Interactive charts for response times and metrics.
+- **Robust Error Handling:** Recovers from library initialization and network errors gracefully.
+- **Export Reports:** Downloads statistical comparison reports as JSON.
+
+##### CLI Mode:
+```powershell
+python "WEEK 3/production_project/project3_p_c_rag_benchmark.py"
+```
+
+##### Streamlit UI Mode:
+```powershell
+streamlit run "WEEK 3/production_project/project3_p_c_rag_benchmark.py" -- --streamlit
+```
+
 ---
 
 ## Labs Completed
@@ -283,4 +303,4 @@ Full architecture, usage, and evaluation details: `WEEK 3/intermediate_project/R
 | Week 0 | Environment Setup | Complete |
 | Week 1 | AI Fundamentals | Complete |
 | Week 2 | Advanced AI Patterns | Complete |
-| Week 3 | Embeddings, RAG & Vector Databases | In Progress |
+| Week 3 | Embeddings, RAG & Vector Databases | Complete |

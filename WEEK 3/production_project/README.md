@@ -1,217 +1,188 @@
-# 🔬 Real-Time Research Engine
-## Week 3 Production Project — Day 7 (Option B)
+# Week 3 Production Project — RAG Evaluation Benchmark (Option C)
+
+## 📌 Project Choice: Option C — RAG Evaluation Benchmark
+
+I chose **Option C: RAG Evaluation Benchmark** because it is the only production project that applies **ALL 5 days** of Week 3 learning into a reusable evaluation framework. Options A and B only build single RAG pipelines, but Option C requires systematic testing across **6 configurations**, statistical comparison, and publishable report generation — making it a genuine benchmarking tool for future projects.
 
 ---
 
-## 📌 Why This Project?
+## 🛡️ Pipeline Error Handling & Fault Tolerance (Production Ready)
 
-I chose **Option B: Real-Time Research Engine** for the Day 7 Production Project because it is the only option that brings together **every concept learned across all 5 days of Week 3** and packages it into a real web application a real user can interact with:
+Per enterprise requirements, this pipeline has been heavily refactored to include strict error boundaries. If a critical step fails, the pipeline intentionally aborts with a clean `PipelineError` rather than silently passing empty context and causing LLM hallucinations down the line.
 
-| Week 3 Day | Concept Learned | Used in This Project |
-|---|---|---|
-| Day 1 (Monday) | Sentence-Transformer Embeddings | `HuggingFaceEmbeddings(all-MiniLM-L6-v2)` in `engine.py` |
-| Day 2 (Tuesday) | FAISS, Vector Storage, Document Chunking | `RecursiveCharacterTextSplitter` + FAISS persistence in `engine.py` |
-| Day 3 (Wednesday) | Naive RAG Pipeline (load→split→embed→store→retrieve) | The 7-step sequential pipeline is the backbone of `engine.py` |
-| Day 4 (Thursday) | Hybrid BM25 + Semantic Search, Cross-Encoder Re-ranking | `EnsembleRetriever` (40% BM25, 60% Semantic) + `CrossEncoder` in `engine.py` |
-| Day 5 (Friday) | RAG Evaluation Metrics | `test_suite.py` evaluates Relevancy and Precision on 10 real queries |
+### Expected Failure Flows:
+1. **Missing or Corrupted PDF (Step 1 & 2):**
+   - *Scenario:* The `attention_is_all_you_need.pdf` file fails to download or is corrupted.
+   - *Action:* The pipeline catches the HTTP/IO error and immediately aborts with a `PipelineError`.
+2. **Chunking Failure (Step 3):**
+   - *Scenario:* The PDF is loaded, but 0 chunks are produced (e.g. an image-only PDF with no text).
+   - *Action:* The pipeline detects 0 chunks and raises a `PipelineError`, preventing empty Vector DB initialization.
+3. **Embedding Model Failure (Step 4):**
+   - *Scenario:* HuggingFace Hub is down or the model name is invalid.
+   - *Action:* The exception is caught, and the pipeline halts safely.
+4. **Vector Store Failure (Step 5):**
+   - *Scenario:* Read/Write permission error on disk or ChromaDB failure.
+   - *Action:* Caught and aborted safely.
+5. **Unknown Retrieval Strategy:**
+   - *Scenario:* A config has an unrecognized `retrieval_strategy` value.
+   - *Action:* A `PipelineError` is raised with a descriptive message.
+6. **Per-Query Failures (Graceful Degradation):**
+   - *Scenario:* A single evaluation query fails (e.g. LLM timeout).
+   - *Action:* The error is logged, the query is skipped, and evaluation continues. The final `success_rate` metric reflects the proportion of successful queries.
 
----
-
-## 🏗️ System Architecture
-
-```
-┌──────────────────────────────────────────────────────────┐
-│                    STREAMLIT FRONTEND                     │
-│                        app.py                            │
-│  ┌──────────────┐  ┌──────────────────────────────────┐  │
-│  │   Sidebar    │  │         Main Panel               │  │
-│  │ - Initialize │  │  - Query Input                   │  │
-│  │ - Status     │  │  - Result Cards                  │  │
-│  │ - Error Flow │  │  - Metadata Badges               │  │
-│  │ - Samples    │  │  - Query History                 │  │
-│  └──────┬───────┘  └──────────────┬───────────────────┘  │
-└─────────┼────────────────────────┼──────────────────────┘
-          │ engine.initialize()    │ engine.search(query)
-          ▼                        ▼
-┌──────────────────────────────────────────────────────────┐
-│                 RESEARCH ENGINE BACKEND                  │
-│                       engine.py                          │
-│                                                          │
-│  Step 1: _download_pdfs()    ─── SSL-safe urllib         │
-│  Step 2: _load_documents()   ─── PyPDFLoader             │
-│  Step 3: _split_documents()  ─── RecursiveTextSplitter   │
-│  Step 4: _create_embeddings()─── all-MiniLM-L6-v2        │
-│  Step 5: _create_vector_store()─ FAISS (persistent)      │
-│  Step 6: _create_retriever() ─── BM25 + FAISS Ensemble   │
-│  Step 7: _load_reranker()    ─── ms-marco CrossEncoder    │
-│                                                          │
-│   ┌───────────────────────────────────────────────────┐  │
-│   │  search(query) → retrieve → rerank → SearchResult │  │
-│   └───────────────────────────────────────────────────┘  │
-└──────────────────────────────────────────────────────────┘
-```
+All unexpected runtime errors are routed through a global exception handler that gracefully shuts down the program and prints a formatted stack trace.
 
 ---
 
-## 🛡️ Error Handling & Fault Tolerance
+## 🧠 Concepts Applied & Where We Learned Them
 
-A production pipeline must never silently fail. Every step has an explicit validation, and if it fails, a `ResearchEngineError` is raised with the **stage name** and a **human-readable recovery message** — the Streamlit UI catches this and displays it to the user without crashing.
+### Day 1 (Monday) — Embeddings Deep Dive
+- **Concept:** Sentence-Transformer Embeddings (`all-MiniLM-L6-v2`)
+- **How it's used in this project:** Every document chunk is converted into a 384-dimensional embedding vector for semantic retrieval.
+- **Learned in:** `lab3_1.py`
 
-### Complete Failure Flow:
+### Day 2 (Tuesday) — Vector Databases & Document Processing
+- **Concept:** ChromaDB Storage + Document Chunking
+- **How it's used in this project:** Tested with multiple chunk sizes (512/50, 1024/100) and stored in ChromaDB with collection-per-config isolation.
+- **Learned in:** `lab3_2.py`
+
+### Day 3 (Wednesday) — Naive RAG Architecture
+- **Concept:** Full RAG Pipeline (Load → Split → Embed → Store → Retrieve → Generate)
+- **How it's used in this project:** Each `RAGConfig` builds a complete pipeline from PDF download through retrieval and evaluation.
+- **Learned in:** `lab3_3_naive_rag.py`
+
+### Day 4 (Thursday) — Advanced Retrieval
+- **Concept:** BM25 Hybrid Search + Cross-Encoder Re-ranking
+- **How it's used in this project:** The `hybrid` and `hybrid_rerank` strategies combine BM25 keyword search (weight 0.4) with semantic retrieval (weight 0.6) via `EnsembleRetriever`, with optional cross-encoder re-ranking using `ms-marco-MiniLM-L-6-v2`.
+- **Learned in:** `lab3_4_advanced_retrieval.py`
+
+### Day 5 (Friday) — RAG Evaluation & Assessment
+- **Concept:** Context Precision, Answer Relevancy, Faithfulness Metrics
+- **How it's used in this project:** All 6 configurations are evaluated on **10 curated questions** about the Attention Is All You Need paper, scoring each metric per query and computing statistical aggregates.
+- **Learned in:** `lab3_5_rag_evaluation.py`
+
+---
+
+## 🏗️ Architecture
 
 ```
-Step 1 — PDF Download
-   ├── If: Network down / bad URL
-   └── Then: ResearchEngineError(DOWNLOAD) raised → Pipeline ABORTS
-             Streamlit shows: "Download failed, check your internet."
-
-Step 2 — Document Loading  
-   ├── If: PDF missing on disk / corrupted / image-only PDF
-   └── Then: ResearchEngineError(LOAD) raised → Pipeline ABORTS
-             Streamlit shows: "PDF could not be parsed."
-
-Step 3 — Text Splitting
-   ├── If: 0 chunks produced (e.g. blank pages)
-   └── Then: ResearchEngineError(SPLIT) raised → Pipeline ABORTS
-             Streamlit shows: "Splitting produced 0 chunks."
-
-Step 4 — Embedding Model
-   ├── If: HuggingFace Hub offline / model corrupted
-   └── Then: ResearchEngineError(EMBED) raised → Pipeline ABORTS
-             Streamlit shows: "Could not load embedding model."
-
-Step 5 — FAISS Vector Store
-   ├── If: Disk permission denied / out of disk space
-   └── Then: ResearchEngineError(STORE) raised → Pipeline ABORTS
-             Streamlit shows: "Vector store initialization failed."
-
-Step 6 — Retriever Assembly
-   ├── If: BM25 / FAISS retriever fails to assemble
-   └── Then: ResearchEngineError(RETRIEVE) raised → Pipeline ABORTS
-             Streamlit shows: "Retriever assembly failed."
-
-Step 7 — Cross-Encoder Re-ranking
-   ├── If: Re-ranker model unavailable
-   └── Then: ⚠️ GRACEFUL FALLBACK — uses hybrid ranking order
-             (Re-ranking is non-critical, so we degrade gracefully)
+Config YAML / UI Input
+         │
+         ▼
+┌─────────────────────────┐
+│   RAGPipelineBuilder    │── Builds pipeline per config
+│   (PDF → Chunk → Embed) │
+└─────────┬───────────────┘
+          │
+          ▼
+┌─────────────────────────┐
+│  Sequential Evaluation  │── 6 configs × 10 queries
+│  Runner (RAGEvaluator)  │   Metrics per query
+└─────────┬───────────────┘
+          │
+          ▼
+┌─────────────────────────┐
+│   Custom Metrics        │── Context Precision
+│   (Local computation)   │   Answer Relevancy
+│                         │   Faithfulness
+│                         │   Response Time
+└─────────┬───────────────┘
+          │
+          ▼
+┌─────────────────────────┐
+│  Statistical Analyzer   │── Sorts & ranks configs
+│  + Report Generator     │   JSON report export
+│                         │   PDF report export
+└─────────┬───────────────┘
+          │
+          ▼
+┌─────────────────────────┐
+│  Streamlit Dashboard    │── Leaderboard table
+│  or CLI Output          │   Plotly bar charts
+│                         │   Metric cards
+│                         │   JSON/PDF download
+└─────────────────────────┘
 ```
 
-### Error Code Flow in `engine.py`:
-```python
-try:
-    results = engine.search(query)
-except ResearchEngineError as e:
-    # Stage-specific, clean error — show to user
-    st.error(f"Failed at: {e.stage.value}\n{e.message}")
-except Exception as e:
-    # Unexpected runtime error — show stack trace
-    st.error(f"Unexpected error: {e}")
-```
+### Retrieval Strategies Evaluated
+
+| Strategy | Description | Components |
+|----------|-------------|------------|
+| `semantic` | Pure dense retrieval | ChromaDB + MiniLM embeddings |
+| `hybrid` | Sparse + dense fusion | BM25 (0.4) + ChromaDB (0.6) via EnsembleRetriever |
+| `hybrid_rerank` | Hybrid + cross-encoder re-ranking | BM25 + ChromaDB + CrossEncoder (`ms-marco-MiniLM-L-6-v2`) |
 
 ---
 
 ## 🚀 How to Run
 
 ### Prerequisites
-Ensure your `calderr-env` virtual environment is active.
+Make sure you have the `calderr-env` virtual environment activated and a `.env` file with your `GROQ_API_KEY` (or pass it via the UI/CLI).
 
+### Install Dependencies
+```powershell
+pip install -r "WEEK 3/production_project/requirements_production.txt"
+```
+
+### Run the Streamlit Dashboard (Interactive UI)
 ```powershell
 cd C:\Users\USER\Desktop\calderr-ai-2026
 .\calderr-env\Scripts\Activate.ps1
+streamlit run "WEEK 3/production_project/project3_p_c_rag_benchmark.py" -- --streamlit
 ```
 
-### Install Dependencies (first time only)
+### Run the CLI Benchmark (No UI)
 ```powershell
-pip install -r "WEEK 3\production_project\requirements.txt"
+python "WEEK 3/production_project/project3_p_c_rag_benchmark.py"
 ```
 
-### Launch the Streamlit App
-```powershell
-cd "WEEK 3\production_project"
-streamlit run app.py
-```
-The browser will automatically open at `http://localhost:8501`.
+### What Happens When You Run It
+1. Downloads **"Attention Is All You Need" (Arxiv PDF)**
+2. Processes the paper through **6 RAG configurations** with varying chunk sizes, retrievers, and `k` values
+3. Evaluates each config against **10 test queries** about the paper's architecture
+4. Computes **Context Precision, Answer Relevancy, Faithfulness, and Response Time**
+5. Displays a ranked **leaderboard** with interactive Plotly charts (Streamlit) or a CLI table
+6. Exports reports in **JSON** and **PDF** formats for further analysis
 
-### First-Run Steps (inside the app):
-1. Click **🚀 Initialize Engine** in the left sidebar.
-2. Wait ~2–3 minutes (downloads PDFs + models on first run).
-3. Once **Engine Status** shows ⬤ Ready, type a query and click **🔍 Search**.
+### Configuration Matrix
+
+| Config Name | Chunk Size | Overlap | Strategy | k |
+|-------------|-----------|---------|----------|---|
+| Semantic_512_3 | 512 | 50 | semantic | 3 |
+| Semantic_512_5 | 512 | 50 | semantic | 5 |
+| Hybrid_512_3 | 512 | 50 | hybrid | 3 |
+| Hybrid_512_5 | 512 | 50 | hybrid | 5 |
+| HybridRerank_512_3 | 512 | 50 | hybrid_rerank | 3 |
+| HybridRerank_1024_3 | 1024 | 100 | hybrid_rerank | 3 |
 
 ---
 
-## 🧪 How to Test
+## 📊 Output & Results
 
-Run the automated test suite to validate the full backend pipeline without the UI:
-
-```powershell
-cd C:\Users\USER\Desktop\calderr-ai-2026
-.\calderr-env\Scripts\python "WEEK 3\production_project\test_suite.py"
-```
-
-This runs:
-- **Phase 1:** Engine initialization (all 7 pipeline steps)
-- **Phase 2:** Vector store chunk count validation
-- **Phase 3:** 10 evaluation queries with keyword-based relevancy scoring
-
-Results are saved to `test_results.json`. Exit code `0` = all pass.
+- **Streamlit Dashboard:** Dark-themed glassmorphic UI with metric cards, leaderboard table, and Plotly bar charts
+- **CLI Mode:** Color-coded terminal output with per-config metrics
+- **JSON Export:** Full timestamped report with all configuration details, downloadable via button (Streamlit) or saved to `benchmark_results.json` (CLI)
+- **PDF Export:** Publishable-quality report with embedded charts, leaderboard table, and per-configuration detail section — ready for sharing
 
 ---
 
-## 📁 Project Structure
+## 🔧 Customization
 
-```
-WEEK 3/production_project/
-├── app.py              # Streamlit UI (Light Theme, professional layout)
-├── engine.py           # Core RAG pipeline with strict error boundaries
-├── test_suite.py       # Automated health check and evaluation script
-├── requirements.txt    # All Python dependencies
-├── README.md           # This file
-├── .streamlit/
-│   └── config.toml     # Light theme + server config
-├── docs/               # Auto-created: downloaded PDF files
-│   ├── attention_is_all_you_need.pdf
-│   └── bert_pretraining.pdf
-├── faiss_db/           # Auto-created: persistent FAISS vector store
-└── test_results.json   # Auto-created: test results after running test_suite.py
+To add new configurations, edit the `CONFIGS` list in `project3_p_c_rag_benchmark.py`:
+
+```python
+RAGConfig(
+    name="MyCustomConfig",
+    chunk_size=768,
+    chunk_overlap=80,
+    embedding_model="all-MiniLM-L6-v2",
+    retrieval_strategy="hybrid_rerank",
+    k=4
+)
 ```
 
----
+To add new test queries, extend the `TEST_QUERIES` list:
 
-## 📦 Key Dependencies
-
-| Package | Version | Purpose |
-|---|---|---|
-| `streamlit` | ≥1.28 | Web UI framework |
-| `langchain` | ≥0.2 | RAG orchestration |
-| `sentence-transformers` | ≥2.7 | Embedding model |
-| `faiss-cpu` | ≥1.7.4 | Persistent vector store & index |
-| `rank_bm25` | ≥0.2.2 | BM25 keyword retrieval |
-| `pypdf` | ≥3.0 | PDF text extraction |
-
----
-
-## 🎓 Concepts Applied (Week 3 Deep Dive)
-
-### Embeddings (Day 1)
-**Definition:** Converting text into high-dimensional numerical vectors that capture semantic meaning. Similar sentences have vectors that are geometrically close to each other in the embedding space.
-- **Used in:** `_create_embeddings()` in `engine.py` using `all-MiniLM-L6-v2`
-
-### Vector Database (Day 2)
-**Definition:** A specialized database optimized for storing and querying embedding vectors. Unlike traditional databases (SQL), vector DBs find the "nearest neighbor" vectors to a query vector.
-- **Used in:** `_create_vector_store()` using FAISS with local persistence
-
-### RAG Pipeline (Day 3)
-**Definition:** Retrieval-Augmented Generation. Instead of asking an LLM to answer from memory, we first retrieve relevant documents from a knowledge base and feed them as context.
-- **Used in:** The 7-step sequential pipeline in `ResearchEngine.initialize()`
-
-### Hybrid Search (Day 4)
-**Definition:** Combining keyword-based search (BM25) with semantic vector search. BM25 finds exact word matches; semantic search finds conceptually similar content. Together they are more robust than either alone.
-- **Used in:** `_create_retriever()` with `EnsembleRetriever(weights=[0.4, 0.6])`
-
-### Cross-Encoder Re-ranking (Day 4)
-**Definition:** A model that jointly scores a (query, document) pair to produce a fine-grained relevancy score. Unlike bi-encoder retrieval (fast but less accurate), cross-encoders see both texts together and are far more accurate.
-- **Used in:** `_load_reranker()` using `ms-marco-MiniLM-L-6-v2`
-
-### Evaluation Metrics (Day 5)
-**Definition:** Measuring RAG pipeline quality systematically using Context Precision (are retrieved chunks relevant?) and Answer Relevancy (does the top result answer the query?).
-- **Used in:** `test_suite.py` keyword-based relevancy scoring across 10 queries
+```python
+{"query": "Your question here?", "expected": "expected keyword"}
+```

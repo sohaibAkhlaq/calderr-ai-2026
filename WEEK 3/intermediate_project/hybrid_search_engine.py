@@ -26,7 +26,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 from langchain_community.retrievers import BM25Retriever
 # pyrefly: ignore [missing-import]
-from langchain.retrievers import EnsembleRetriever
+from langchain_classic.retrievers.ensemble import EnsembleRetriever
 from langchain_community.document_loaders import PyPDFLoader
 from sentence_transformers import CrossEncoder
 

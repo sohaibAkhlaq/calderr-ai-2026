@@ -63,6 +63,30 @@ All unexpected runtime errors are routed through a global exception handler that
 
 ---
 
+## ⚙️ System Design Principles Used
+
+The following design principles guided the architecture of this evaluation framework:
+
+### 1. Modular Monolith — Separation of Concerns
+Each pipeline stage is isolated in its own class (`RAGPipelineBuilder`, `RAGEvaluator`, `ReportGenerator`). This allows independent testing, swapping components, and extending without modifying existing code.
+
+### 2. Configuration-Driven Design
+All RAG parameters are captured in the `RAGConfig` dataclass. Adding a new configuration means instantiating one object — no boilerplate, no code duplication. The `CONFIGS` list is the single source of truth for all benchmarked setups.
+
+### 3. Fail-Fast with PipelineError
+If a critical dependency (PDF, embedding model, vector store) fails, the pipeline raises a `PipelineError` immediately — it never silently falls back to empty context, preventing downstream LLM hallucinations.
+
+### 4. Graceful Degradation (Per-Query)
+Individual query failures are caught, logged, and skipped without aborting the entire evaluation. The `success_rate` metric transparently reports how many queries actually succeeded.
+
+### 5. Strategy Pattern for Retrieval
+The three retrieval strategies (`semantic`, `hybrid`, `hybrid_rerank`) are selected via a string flag in the config. New strategies can be added by extending the `if/elif` block in `build_pipeline()` without touching the evaluator or report generator.
+
+### 6. Dual-Mode Interface (CLI + UI)
+The same evaluation engine runs in both headless CLI mode and Streamlit UI. The entry point (`--streamlit` flag) selects the interface, keeping business logic completely reusable.
+
+---
+
 ## 🏗️ Architecture
 
 ```

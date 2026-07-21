@@ -1,0 +1,37 @@
+Week 4 - Day 2: Branching & Loops in LangGraph
+
+1. Conditional Edges
+   - Edges that decide where to go next based on current state
+   - Router function returns a string matching a node name
+   - Types: if-else (binary), switch (multi-path), loop (continue/exit), priority (ordered checks)
+
+2. Router Function Pattern
+   def router(state: StateType) -> str:
+       if condition_a:
+           return "node_a"
+       elif condition_b:
+           return "node_b"
+       return "node_c"
+
+3. Classification Router
+   - Routes queries to different handlers based on classification
+   - Categories: general (everyday Q&A), technical (domain questions), sensitive (safety/ethics)
+
+4. Self-Correcting Loop
+   generate -> validate -> [respond | regenerate]
+   - Generate: produce initial output
+   - Validate: check quality (accuracy, completeness, clarity)
+   - Regenerate: produce improved output with feedback
+   - Bounded retries: max 3 attempts to prevent infinite loops
+
+5. Graph Registration
+   graph.add_conditional_edges(
+       "source_node",
+       router_function,
+       {"return_a": "node_a", "return_b": "node_b"}
+   )
+
+6. Key State Fields for Loops
+   - attempts / max_attempts: track and bound retry count
+   - is_success: termination signal from validation
+   - messages: audit trail via add_messages reducer

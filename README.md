@@ -266,6 +266,7 @@ streamlit run "WEEK 3/production_project/project3_p_c_rag_benchmark.py" -- --str
 | Day | Topic | Status | Key Files |
 |---|---|---|---|
 | Monday | LangGraph Foundations | Complete | `Week 4/lab4.1_document_processing.py`, `Week 4/day1_concepts.txt` |
+| Tuesday | Branching & Loops | Complete | `Week 4/lab4.2_self_correcting_loop.py`, `Week 4/day2_concepts.txt` |
 
 ### Week 4 Projects
 
@@ -285,6 +286,7 @@ streamlit run "WEEK 3/production_project/project3_p_c_rag_benchmark.py" -- --str
 | Lab 2.3 | 2 | Error recovery agent with real APIs + retry + fallbacks | Complete |
 | Lab 3.1 | 3 | Semantic search CLI, embedding models, PCA visualization | Complete |
 | Lab 4.1 | 4 | LangGraph workflow: load → validate → chunk → embed → confirm | Complete |
+| Lab 4.2 | 4 | Self-correcting agent loop with classification router and bounded retries | Complete |
 
 ---
 

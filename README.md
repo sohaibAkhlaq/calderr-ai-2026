@@ -2,7 +2,7 @@
 
 **Project Location:** `Desktop/calderr-ai-2026`  
 **Author:** Sohaib Akhlaq  
-**Status:** Week 3 Complete
+**Status:** Week 4 In Progress
 
 ---
 
@@ -126,6 +126,10 @@ calderr-ai-2026/
     ├── WEEK3DAY4.txt             # Day 4 Journal
     ├── WEEK3DAY5.txt             # Day 5 Journal
     └── WEEK 3 WORK.md            # 7-Day Schedule
+│
+└── Week 4/                       # Week 4: LangGraph & Agentic Workflows
+    ├── lab4.1_document_processing.py # LangGraph Document Processing Lab
+    └── day1_concepts.txt         # Day 1 Concepts
 ```
 
 ---
@@ -257,6 +261,18 @@ streamlit run "WEEK 3/production_project/project3_p_c_rag_benchmark.py" -- --str
 
 ---
 
+## Week 4 — LangGraph & Agentic Workflows
+
+| Day | Topic | Status | Key Files |
+|---|---|---|---|
+| Monday | LangGraph Foundations | Complete | `Week 4/lab4.1_document_processing.py`, `Week 4/day1_concepts.txt` |
+
+### Week 4 Projects
+
+*(To be added as week progresses)*
+
+---
+
 ## Labs Completed
 
 | Lab | Week | Description | Status |
@@ -268,6 +284,7 @@ streamlit run "WEEK 3/production_project/project3_p_c_rag_benchmark.py" -- --str
 | Lab 2.2 | 2 | Multi-tool research agent with 5 tools + routing | Complete |
 | Lab 2.3 | 2 | Error recovery agent with real APIs + retry + fallbacks | Complete |
 | Lab 3.1 | 3 | Semantic search CLI, embedding models, PCA visualization | Complete |
+| Lab 4.1 | 4 | LangGraph workflow: load → validate → chunk → embed → confirm | Complete |
 
 ---
 
@@ -304,3 +321,4 @@ streamlit run "WEEK 3/production_project/project3_p_c_rag_benchmark.py" -- --str
 | Week 1 | AI Fundamentals | Complete |
 | Week 2 | Advanced AI Patterns | Complete |
 | Week 3 | Embeddings, RAG & Vector Databases | Complete |
+| Week 4 | LangGraph & Agentic Workflows | In Progress |

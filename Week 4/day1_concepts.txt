@@ -1,0 +1,17 @@
+Week 4 - Day 1: LangGraph Foundations
+
+1. What is LangGraph?
+LangGraph is a framework for building stateful, multi-agent applications using graph-based orchestration.
+Unlike linear chains, it allows branching, loops, pause/resume, and complex decision-making.
+
+2. State → Node → Edge Mental Model
+- State: Data flowing through the graph, defined as a TypedDict.
+- Node: A function that processes the state and returns updates.
+- Edge: Connections between nodes defining the flow (regular, conditional, entry, exit).
+
+3. TypedDict State Schema
+Defines the structure of a dictionary, providing type safety and autocomplete.
+Reducers (like add_messages) define how to update state fields.
+
+4. Conditional Edges
+Edges that decide where to go next based on current state (e.g. routing based on document size).

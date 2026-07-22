@@ -1,0 +1,31 @@
+Week 4 - Day 3: Stateful Agents and Human-in-the-Loop Workflows
+
+1. TypedDict State Schemas
+   - Define the shape of state carried through a LangGraph workflow.
+   - Make the workflow easier to debug, extend, and reason about.
+   - Common fields include input values, intermediate results, flags, and messages.
+
+2. Reducers and State Accumulation
+   - add_messages appends new messages to the existing message list.
+   - Other reducers such as operator.add can accumulate numeric values.
+   - Default behavior is to overwrite a field unless a reducer is specified.
+
+3. Multi-Turn and Stateful Patterns
+   - State can carry information across multiple nodes and multiple review rounds.
+   - This is useful for chat agents, approval systems, and self-correcting loops.
+   - Persistent state enables resume, review, and iteration without losing context.
+
+4. Human-in-the-Loop Workflow
+   - A node can route content to human review when the system is uncertain.
+   - The workflow may then either approve, reject, or request revision.
+   - Stateful checkpoints preserve progress and allow review to continue safely.
+
+5. Practical Pattern
+   - classify -> [approve | reject | review]
+   - review -> [process | revise]
+   - revise -> [review | process]
+
+6. Key Takeaways
+   - State should be explicit and typed.
+   - Reducers control how updates combine with existing values.
+   - Human review is easier to manage when state is persisted and clearly structured.

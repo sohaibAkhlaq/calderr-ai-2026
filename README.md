@@ -2,7 +2,7 @@
 
 **Project Location:** `Desktop/calderr-ai-2026`  
 **Author:** Sohaib Akhlaq  
-**Status:** Week 4 In Progress
+**Status:** Week 4 Day 3 Complete
 
 ---
 
@@ -129,7 +129,11 @@ calderr-ai-2026/
 │
 └── Week 4/                       # Week 4: LangGraph & Agentic Workflows
     ├── lab4.1_document_processing.py # LangGraph Document Processing Lab
-    └── day1_concepts.txt         # Day 1 Concepts
+    ├── lab4.2_self_correcting_loop.py # Self-correcting loop lab
+    ├── lab4.3_approval_workflow.py # Stateful approval workflow lab
+    ├── day1_concepts.txt         # Day 1 Concepts
+    ├── day2_concepts.txt         # Day 2 Concepts
+    └── day3_concepts.txt         # Day 3 Concepts
 ```
 
 ---
@@ -267,10 +271,17 @@ streamlit run "WEEK 3/production_project/project3_p_c_rag_benchmark.py" -- --str
 |---|---|---|---|
 | Monday | LangGraph Foundations | Complete | `Week 4/lab4.1_document_processing.py`, `Week 4/day1_concepts.txt` |
 | Tuesday | Branching & Loops | Complete | `Week 4/lab4.2_self_correcting_loop.py`, `Week 4/day2_concepts.txt` |
+| Wednesday | Stateful Agents & Human-in-the-Loop | Complete | `Week 4/lab4.3_approval_workflow.py`, `Week 4/day3_concepts.txt` |
 
 ### Week 4 Projects
 
-*(To be added as week progresses)*
+#### Lab 4.3: Stateful Approval Workflow
+
+A LangGraph workflow for content moderation that routes content through auto-approve, auto-reject, and human-review steps. The workflow uses a TypedDict state schema, reducer-based message accumulation, and revision loops for bounded human-in-the-loop review.
+
+```powershell
+python "Week 4/lab4.3_approval_workflow.py"
+```
 
 ---
 
@@ -287,6 +298,7 @@ streamlit run "WEEK 3/production_project/project3_p_c_rag_benchmark.py" -- --str
 | Lab 3.1 | 3 | Semantic search CLI, embedding models, PCA visualization | Complete |
 | Lab 4.1 | 4 | LangGraph workflow: load → validate → chunk → embed → confirm | Complete |
 | Lab 4.2 | 4 | Self-correcting agent loop with classification router and bounded retries | Complete |
+| Lab 4.3 | 4 | Stateful approval workflow with TypedDict state, reducers, and human review | Complete |
 
 ---
 
@@ -323,4 +335,4 @@ streamlit run "WEEK 3/production_project/project3_p_c_rag_benchmark.py" -- --str
 | Week 1 | AI Fundamentals | Complete |
 | Week 2 | Advanced AI Patterns | Complete |
 | Week 3 | Embeddings, RAG & Vector Databases | Complete |
-| Week 4 | LangGraph & Agentic Workflows | In Progress |
+| Week 4 | LangGraph & Agentic Workflows | Complete for Day 3 |

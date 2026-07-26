@@ -2,8 +2,8 @@
 
 **Project Location:** `Desktop/calderr-ai-2026`  
 **Author:** Sohaib Akhlaq  
-**Status:** Week 4 Day 3 Complete
-
+**Status:** Week 4 Fully Complete (All 5 Days)
+ 
 ---
 
 ## Overview
@@ -272,15 +272,31 @@ streamlit run "WEEK 3/production_project/project3_p_c_rag_benchmark.py" -- --str
 | Monday | LangGraph Foundations | Complete | `Week 4/lab4.1_document_processing.py`, `Week 4/day1_concepts.txt` |
 | Tuesday | Branching & Loops | Complete | `Week 4/lab4.2_self_correcting_loop.py`, `Week 4/day2_concepts.txt` |
 | Wednesday | Stateful Agents & Human-in-the-Loop | Complete | `Week 4/lab4.3_approval_workflow.py`, `Week 4/day3_concepts.txt` |
+| Thursday | Human-in-the-Loop Interrupts | Complete | `Week 4/lab4.3_hitl_approval_workflow.py`, `Week 4/day4_concepts.txt` |
+| Friday | Production Graphs & Persistence | Complete | `Week 4/lab4.4_production_graph.py`, `Week 4/day5_concepts.txt` |
 
 ### Week 4 Projects
 
 #### Lab 4.3: Stateful Approval Workflow
 
-A LangGraph workflow for content moderation that routes content through auto-approve, auto-reject, and human-review steps. The workflow uses a TypedDict state schema, reducer-based message accumulation, and revision loops for bounded human-in-the-loop review.
+A LangGraph workflow for content moderation that routes content through auto-approve, auto-reject, and human-review steps.
 
 ```powershell
 python "Week 4/lab4.3_approval_workflow.py"
+```
+
+#### Project 4-P-A: AI-Powered Hiring Pipeline Platform (Production Project)
+
+An enterprise-grade hiring and resume evaluation engine engineered using **LangGraph**, **FastAPI**, **Streamlit**, and **SQLite**. Features candidate match scoring, automated bias detection node, tailored interview question generation, human-in-the-loop (`interrupt()`) HR review, and persistent SQLite audit trails.
+
+##### Streamlit UI Mode:
+```powershell
+calderr-env\Scripts\python.exe -m streamlit run "Week 4/production_project/app_streamlit.py"
+```
+
+##### FastAPI REST API Mode:
+```powershell
+calderr-env\Scripts\python.exe "Week 4/production_project/app_api.py"
 ```
 
 ---
@@ -335,4 +351,4 @@ python "Week 4/lab4.3_approval_workflow.py"
 | Week 1 | AI Fundamentals | Complete |
 | Week 2 | Advanced AI Patterns | Complete |
 | Week 3 | Embeddings, RAG & Vector Databases | Complete |
-| Week 4 | LangGraph & Agentic Workflows | Complete for Day 3 |
+| Week 4 | LangGraph & Agentic Workflows | Complete (All 5 Days) |

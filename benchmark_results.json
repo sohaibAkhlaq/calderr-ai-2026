@@ -1,0 +1,84 @@
+{
+  "timestamp": "2026-07-17T15:01:00.923057",
+  "total_configs": 6,
+  "configs": [
+    {
+      "name": "Semantic_512_3",
+      "chunk_size": 512,
+      "chunk_overlap": 50,
+      "embedding_model": "all-MiniLM-L6-v2",
+      "retrieval_strategy": "semantic",
+      "k": 3,
+      "context_precision": 0.6,
+      "answer_relevancy": 0.4,
+      "faithfulness": 0.2,
+      "response_time": 0.025,
+      "success_rate": 1.0
+    },
+    {
+      "name": "Semantic_512_5",
+      "chunk_size": 512,
+      "chunk_overlap": 50,
+      "embedding_model": "all-MiniLM-L6-v2",
+      "retrieval_strategy": "semantic",
+      "k": 5,
+      "context_precision": 1.0,
+      "answer_relevancy": 0.4,
+      "faithfulness": 0.2,
+      "response_time": 0.024,
+      "success_rate": 1.0
+    },
+    {
+      "name": "Hybrid_512_3",
+      "chunk_size": 512,
+      "chunk_overlap": 50,
+      "embedding_model": "all-MiniLM-L6-v2",
+      "retrieval_strategy": "hybrid",
+      "k": 3,
+      "context_precision": 0.74,
+      "answer_relevancy": 0.8,
+      "faithfulness": 0.4,
+      "response_time": 0.058,
+      "success_rate": 1.0
+    },
+    {
+      "name": "Hybrid_512_5",
+      "chunk_size": 512,
+      "chunk_overlap": 50,
+      "embedding_model": "all-MiniLM-L6-v2",
+      "retrieval_strategy": "hybrid",
+      "k": 5,
+      "context_precision": 1.0,
+      "answer_relevancy": 0.8,
+      "faithfulness": 0.4,
+      "response_time": 0.051,
+      "success_rate": 1.0
+    },
+    {
+      "name": "HybridRerank_512_3",
+      "chunk_size": 512,
+      "chunk_overlap": 50,
+      "embedding_model": "all-MiniLM-L6-v2",
+      "retrieval_strategy": "hybrid_rerank",
+      "k": 3,
+      "context_precision": 0.6,
+      "answer_relevancy": 0.9,
+      "faithfulness": 0.45,
+      "response_time": 1.399,
+      "success_rate": 1.0
+    },
+    {
+      "name": "HybridRerank_1024_3",
+      "chunk_size": 1024,
+      "chunk_overlap": 100,
+      "embedding_model": "all-MiniLM-L6-v2",
+      "retrieval_strategy": "hybrid_rerank",
+      "k": 3,
+      "context_precision": 0.6,
+      "answer_relevancy": 0.9,
+      "faithfulness": 0.45,
+      "response_time": 0.899,
+      "success_rate": 1.0
+    }
+  ]
+}

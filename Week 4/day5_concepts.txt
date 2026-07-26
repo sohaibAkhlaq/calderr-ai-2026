@@ -1,0 +1,20 @@
+Week 4 - Day 5: Production Graphs, Persistence, and Standup Readiness
+
+1. LangSmith Tracing & Observability
+   - Enables full visibility into multi-node execution, state transitions, latency, and token consumption.
+   - Set environment variables (`LANGCHAIN_TRACING_V2=true`, `LANGCHAIN_API_KEY=...`) to record traces automatically.
+   - Allows step-by-step debugging of branching logic, conditional edges, and error states.
+
+2. SqliteSaver & Persistent Checkpoint Storage
+   - `SqliteSaver` persists graph checkpoints to an SQLite database file (`checkpoints.db`) on disk.
+   - Unlike in-memory checkpointers (`MemorySaver`), `SqliteSaver` survives application restarts, system reboots, and server redeployments.
+   - Enables multi-day workflows, pause/resume across sessions, and audit trail retention.
+
+3. Graph Visualization & Architecture Review
+   - Visualizing graphs as ASCII, Markdown diagrams, or PNG via `graph.get_graph().draw_mermaid_png()`.
+   - Architectural criteria: Linear chains (simple, deterministic tasks) vs. LangGraph (cyclic loops, stateful branching, human-in-the-loop, long-running persistence).
+
+4. Production Readiness & Standup Requirements
+   - Explicit TypedDict schemas for clear contract definitions.
+   - Error handling, cycle bounds (`recursion_limit`), and checkpointer isolation by `thread_id`.
+   - Ready to demonstrate end-to-end execution, state inspection, and architectural design choices.

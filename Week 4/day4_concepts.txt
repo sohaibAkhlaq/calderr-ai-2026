@@ -1,0 +1,30 @@
+Week 4 - Day 4: Human-in-the-Loop (HITL), Interrupts, and Breakpoints
+
+1. LangGraph Interrupt Patterns
+   - `interrupt()` pauses graph execution deterministically within a node or edge.
+   - Execution stops, state is saved to the checkpointer, and control returns to the caller.
+   - When resumed with `graph.invoke(Command(resume=...), config)`, execution picks up from the interrupted node/point.
+   - Breakpoints can also be set compiled graph-wide using `interrupt_before=["node_name"]` or `interrupt_after=["node_name"]`.
+
+2. Human Approval & Review Nodes
+   - Allows human review of AI-generated actions before execution (e.g., publishing, code execution, sending emails, processing payments).
+   - The graph can pass proposed payload/actions to the human, wait for resume input (`approve`, `reject`, or modified payload), and handle the response cleanly.
+
+3. Breakpoints & State Inspection
+   - Static/Dynamic breakpoints allow inspecting state at designated steps.
+   - `graph.get_state(config)` retrieves current node position (`next`), state values, and metadata.
+   - `graph.update_state(config, {"key": "value"})` allows editing state during an interrupt before resuming.
+
+4. State Persistence Across Interrupts
+   - Checkpointers (`MemorySaver`, `SqliteSaver`) preserve the exact thread checkpoint.
+   - Enables multi-session human workflows where approval occurs hours or days later.
+   - Each thread is isolated using `thread_id` in configuration.
+
+5. Content Moderation & Approval Flow Pattern
+   - Entry -> Auto-filter (auto-approve low risk / auto-reject high risk) -> Borderline Review (Interrupt)
+   - Human inspects payload -> Returns approval/rejection/feedback -> Process decision -> Publish/End.
+
+6. Key Takeaways
+   - HITL ensures safety and governance in production agent systems.
+   - Interrupts pause execution cleanly without holding CPU or thread locks open.
+   - State updates during interrupts enable dynamic human corrections in flight.

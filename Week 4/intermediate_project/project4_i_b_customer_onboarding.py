@@ -246,10 +246,9 @@ def run_streamlit_ui():
 
     st.markdown("""
         <style>
-        .main-header { font-size: 2.2rem; color: #4F46E5; font-weight: 700; }
-        .sub-header { font-size: 1.1rem; color: #6B7280; margin-bottom: 20px; }
-        .stButton>button { width: 100%; background-color: #4F46E5; color: white; font-weight: 600; border-radius: 8px; }
-        .card { background-color: #F9FAFB; padding: 20px; border-radius: 10px; border: 1px solid #E5E7EB; margin-bottom: 15px; }
+        .main-header { font-size: 2.2rem; color: #6366F1; font-weight: 700; }
+        .sub-header { font-size: 1.05rem; color: #9CA3AF; margin-bottom: 20px; }
+        .stButton>button { width: 100%; font-weight: 600; border-radius: 8px; }
         </style>
     """, unsafe_allow_html=True)
 

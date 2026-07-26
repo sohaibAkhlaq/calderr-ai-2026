@@ -1,25 +1,43 @@
-# Project 4-I-B: Customer Onboarding Agent (LangGraph Intermediate Project)
+# Project 4-I-B: Customer Onboarding Agent
 
 **Author:** Sohaib Akhlaq  
 **Week:** Week 4 Intermediate Project  
-**Tech Stack:** Python 3.11 · LangGraph · Streamlit · MemorySaver / SqliteSaver
+**Tech Stack:** Python 3.11 · LangGraph · Streamlit · MemorySaver / SqliteSaver  
 
 ---
 
-## 📌 Project Overview
+## 🎯 1. Rationale: Why I Chose This Project
 
-The **Customer Onboarding Agent** is an enterprise-grade agentic workflow built using **LangGraph**. It automates multi-step customer onboarding while enforcing governance through **Human-in-the-Loop (HITL)** approval breakpoints for high-value Enterprise accounts.
+Enterprise customer onboarding requires multi-step coordination across data validation, account creation, welcome package dispatching, and follow-up scheduling. 
 
-### **Core Capabilities**
-1. **Multi-Stage Graph Execution**: Collect info → Validate data → Route account → Generate Account ID → Send Welcome Package → Schedule CS Check-in.
-2. **Conditional Routing**: Automatically routes standard accounts to immediate auto-approval, while Enterprise VIP accounts (ARR ≥ $10,000) are routed to a human review interrupt.
-3. **Human-in-the-Loop Interrupts**: Uses native LangGraph `interrupt()` and `Command(resume=...)` to pause graph execution and wait for human manager approval.
-4. **State Persistence**: Preserves complete state checkpoints across sessions using `MemorySaver`.
-5. **Interactive Streamlit UI**: Fully responsive web app for initiating onboarding, reviewing pending interrupts, and inspecting persistent audit trails.
+Standard accounts can be auto-approved, but high-value Enterprise VIP accounts (ARR ≥ $10,000) carry significant financial and SLA risks that necessitate mandatory human authorization.
+
+I chose **Project 4-I-B: Customer Onboarding Agent** to demonstrate how **LangGraph** can seamlessly combine automated background pipelines with **Human-in-the-Loop (HITL)** approval breakpoints in an intuitive web portal.
 
 ---
 
-## 📐 Graph Architecture Diagram
+## 🛠️ 2. Comprehensive Tech Stack
+
+- **Graph Engine**: `LangGraph` (`StateGraph`, `MemorySaver`, `interrupt`, `Command`)
+- **Frontend Framework**: `Streamlit` (Interactive onboarding portal & manager review panel)
+- **Data Model**: Python `TypedDict` schema with custom reducer annotations
+- **Runtime Environment**: Python 3.11 (`calderr-env`)
+
+---
+
+## 📋 3. PDF Requirement Mapping
+
+| PDF Requirement | Implementation Detail | Location in Code |
+| :--- | :--- | :--- |
+| **Collect Info** | Ingests company name, email, ARR, and target tier. | `collect_info_node()` |
+| **Validate Info** | Validates email syntax, company length, and ARR bounds. | `validate_info_node()` |
+| **Routing Gate** | Standard tier auto-approved; VIP routed to HITL interrupt. | `route_after_validation()` |
+| **Human Review (HITL)** | Interrupts graph for manager decision (`approved` / `rejected`). | `human_review_node()` |
+| **Create Account & Notify** | Generates account ID (`ACC-XXXXXX`), sends welcome notice, schedules check-in. | `create_account_node()`, `send_welcome_node()`, `schedule_followup_node()` |
+
+---
+
+## 📐 4. LangGraph Workflow Architecture
 
 ```
                              ┌────────────────┐
@@ -35,7 +53,7 @@ The **Customer Onboarding Agent** is an enterprise-grade agentic workflow built 
         [Standard Tier / Low ARR]          [Enterprise VIP / High ARR]
                           /                     \
                 ┌────────▼───────┐        ┌──────▼────────┐
-                │  Auto Approve  │        │ HITL Interrupt│ (Pauses Execution)
+                │  Auto Approve  │        │ HITL Interrupt│ (Pauses Graph)
                 └────────┬───────┘        └──────┬────────┘
                          │                       │
                          │               [Manager Decision]
@@ -60,38 +78,25 @@ The **Customer Onboarding Agent** is an enterprise-grade agentic workflow built 
 
 ---
 
-## 🚀 How to Run the Project
+## 🛡️ 5. Error Flows & System Design Principles
 
-### **Option 1: Streamlit Web UI Mode (Recommended)**
+- **Validation Error Handling**: Invalid emails or negative ARR inputs immediately route the graph to `rejection_notice_node` without attempting account creation.
+- **State Isolation**: Each customer submission runs on an isolated `thread_id` to prevent session data collision.
+- **Accessible UI Design**: Theme colors adapt seamlessly to dark mode and light mode without low-contrast text artifacts.
 
-Run the following command in PowerShell inside `calderr-env`:
+---
+
+## 💡 6. Challenges Faced & Solutions
+
+| Challenge | Solution |
+| :--- | :--- |
+| **Handling Streamlit Reruns on Resumption** | Used `st.session_state` thread tracking to reload snapshots cleanly after calling `graph.invoke(Command(resume=...))`. |
+| **Contrast Visibility on Metric Cards** | Removed hardcoded background cards and used transparent border containers. |
+
+---
+
+## 🏃 How to Run
 
 ```powershell
-cd C:\Users\USER\Desktop\calderr-ai-2026
-.\calderr-env\Scripts\python.exe -m streamlit run "Week 4/intermediate_project/project4_i_b_customer_onboarding.py"
+calderr-env\Scripts\python.exe -m streamlit run "Week 4/intermediate_project/project4_i_b_customer_onboarding.py"
 ```
-
-1. Open your browser at `http://localhost:8501`.
-2. Select a **Sample Customer Profile** from the sidebar dropdown (e.g. `Enterprise VIP`).
-3. Click **Start Onboarding Workflow**.
-4. Observe the **Workflow Execution Dashboard**. If an Enterprise account is submitted, execution will pause at the **HITL Approval Breakpoint**.
-5. Click **Approve Enterprise Account** or **Reject Account** to resume the graph to completion.
-
----
-
-## 🧪 Verification & Sample Test Cases
-
-| Test Case | Inputs | Expected Behavior |
-| :--- | :--- | :--- |
-| **Test Case 1: Standard Account** | Acme Widgets Corp, ARR $4,500 | Auto-approved immediately; Account number generated (`ACC-XXXXXX`). |
-| **Test Case 2: Enterprise VIP** | Apex Global Enterprise, ARR $25,000 | Execution pauses at `human_review_node`; awaits UI approval. |
-| **Test Case 3: Invalid Payload** | Email: `invalid_format`, ARR: -$100 | Fails validation; routes directly to `rejection_notice_node`. |
-
----
-
-## 🛠️ Week 4 Concepts Applied
-
-- **TypedDict State Schema**: `OnboardingState` explicitly tracks customer data, approval status, and audit logs.
-- **Annotated Reducers**: `audit_logs` uses list concatenation reducer `lambda a, b: a + b` to accumulate workflow logs.
-- **Conditional Edges**: Dynamic routing function `route_after_validation` selects between standard auto-approval, HITL interrupt, or failure handling.
-- **State Checkpointing**: `MemorySaver` preserves thread checkpoints via unique `thread_id`.

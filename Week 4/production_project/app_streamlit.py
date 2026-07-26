@@ -17,13 +17,13 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom Styling
+# Custom Accessible Styling (Dark & Light Mode Friendly)
 st.markdown("""
     <style>
-    .main-header { font-size: 2.2rem; color: #1E3A8A; font-weight: 800; }
-    .sub-header { font-size: 1.1rem; color: #4B5563; margin-bottom: 25px; }
-    .stMetric { background-color: #F3F4F6; padding: 12px; border-radius: 8px; }
-    .card-box { background-color: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .main-header { font-size: 2.2rem; color: #3B82F6; font-weight: 800; margin-bottom: 5px; }
+    .sub-header { font-size: 1.05rem; color: #9CA3AF; margin-bottom: 25px; }
+    .stMetric { background-color: rgba(243, 244, 246, 0.08); padding: 12px; border-radius: 8px; border: 1px solid rgba(229, 231, 235, 0.2); }
+    div[data-testid="stMarkdownContainer"] p { font-size: 1rem; }
     </style>
 """, unsafe_allow_html=True)
 

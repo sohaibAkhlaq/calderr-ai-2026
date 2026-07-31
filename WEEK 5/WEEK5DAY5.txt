@@ -1,0 +1,42 @@
+===============================================================================
+CALDERR AGENTIC AI ENGINEERING INTERNSHIP 2026
+WEEK 5 - DAY 5: PRODUCTION INTEGRATION, OBSERVABILITY & STANDUP
+===============================================================================
+
+1. CORE LEARNING BLOCK SUMMARY
+-------------------------------------------------------------------------------
+* Observability & Metrics:
+  - Per-Agent Token Counting: Instrumenting LLM calls to track prompt and completion tokens.
+  - Latency Measurement: Timing agent executions to identify system bottlenecks.
+  - Decision Logging: Capturing explicit agent reasoning and confidence scores.
+  - Cost Attribution: Computing per-agent API expenses using token reference pricing.
+
+* FastAPI REST Control Plane:
+  - Exposing multi-agent execution and observability through standard REST endpoints:
+    - POST /api/v1/agent/run: Accepts task requests and executes multi-agent pipeline.
+    - GET /api/v1/agent/logs: Returns decision audit logs.
+    - GET /api/v1/agent/metrics: Returns token, latency, and cost attribution metrics.
+    - GET /api/v1/agent/audit: Returns trace audit trail.
+    - GET /api/v1/agent/health: Returns system status.
+
+* Streamlit Dashboarding:
+  - Real-time visualization of active agents, metrics tables, decision logs, and audit trails.
+
+2. STANDUP REQUIREMENTS & REHEARSAL SUMMARY
+-------------------------------------------------------------------------------
+* Requirement 1 (Live Demo): Tested 5 active agents (Supervisor, Security, Performance,
+  Maintainability, Consensus).
+* Requirement 2 (Decision Log): Rendered full audit trail with timestamps and reasoning.
+* Requirement 3 (Architecture Review): Documented 3-tier node graph, edges, and failure paths.
+* Requirement 4 (Code Review): Shared Pydantic message schemas and supervisor rerouting logic.
+* Requirement 5 (Failure Test): Simulated specialist timeout failure and verified graceful degradation.
+* Requirement 6 (Reflection): Evaluated initial raw-string schema drift vs refactored typed message bus.
+
+3. WEEK 5 COMPLETION SUMMARY
+-------------------------------------------------------------------------------
+* Day 1: Lab 5.1 - Typed Message Bus (Pydantic Schemas, MessageBus, 3 Agents)
+* Day 2: Lab 5.2 - Supervisor with Failure Recovery (LangGraph, Failure Modes, Rerouting)
+* Day 3: Lab 5.3 - Hierarchical Teams (3-Tier Hierarchy, State Isolation, Parallel Execution)
+* Day 4: Lab 5.3 - Consensus Engine (Debate Pattern, 60% Confidence Voting, Dissent Log)
+* Day 5: Production Integration (Observability, FastAPI, Streamlit, Standup Demo)
+===============================================================================

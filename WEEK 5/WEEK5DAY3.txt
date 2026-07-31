@@ -1,0 +1,49 @@
+===============================================================================
+CALDERR AGENTIC AI ENGINEERING INTERNSHIP 2026
+WEEK 5 - DAY 3: HIERARCHICAL TEAMS ARCHITECTURE
+===============================================================================
+
+1. CORE LEARNING BLOCK SUMMARY
+-------------------------------------------------------------------------------
+* Hierarchical Teams Architecture:
+  - 3-Tier Multi-Level Agent Structure:
+    Level 1: Executive Supervisor (Technical PM / Top-Level Orchestrator)
+    Level 2: Team Leads (Research Lead, Engineering Lead, QA Lead)
+    Level 3: Specialized Worker Agents (Backend, Frontend, QA, DevOps)
+  - Distributes cognitive load across organizational layers rather than managing
+    a flat unstructured pool of workers.
+
+* State Flow & Context Isolation:
+  - Top-Down Information Flow: Executive decomposes high-level goals into team-scoped
+    tasks without exposing internal worker implementation details.
+  - Bottom-Up Aggregation Flow: Workers execute tasks, Team Leads synthesize
+    domain deliverables, and Executive compiles final Release Reports.
+  - Context Isolation: Each level sees only what is necessary for its scope,
+    preventing context leakage and token bloat across branches.
+
+* Subgraph Delegation & Parallel Worker Execution:
+  - Subgraph Delegation: Encapsulating team execution as modular graph nodes.
+  - Parallel Workers: Independent worker execution (e.g. Backend Developer and
+    Frontend Developer building in parallel) under Engineering Lead coordination.
+
+2. LAB 5.3 ARCHITECTURE & FLOW
+-------------------------------------------------------------------------------
+* State Schemas:
+  - WorkerState: Granular task prompt, worker output, and status.
+  - LeadState: Team name, assigned tasks, worker deliverables dict, summary.
+  - ExecutiveState: Project name, requirements, team lead states, final report.
+
+* Execution Nodes (LangGraph):
+  - Node 1 (Plan): Executive decomposes requirements into Research, Engineering, and QA tasks.
+  - Node 2 (Research): Research Lead dispatches research tasks to worker pool.
+  - Node 3 (Engineering): Engineering Lead dispatches parallel API & UI build tasks.
+  - Node 4 (QA): QA Lead executes test suite and container verification tasks.
+  - Node 5 (Synthesize): Executive compiles comprehensive Markdown Release Report.
+
+3. LAB 5.3 VERIFICATION RESULTS
+-------------------------------------------------------------------------------
+* Test 1 (Context Isolation Audit): Verified context scope boundary isolation across levels.
+* Test 2 (Parallel Execution): Verified independent output generation across worker roles.
+* Test 3 (Workflow Execution): Successfully executed end-to-end multi-tier delivery simulation
+  generating complete release reports across multiple software scenarios.
+===============================================================================

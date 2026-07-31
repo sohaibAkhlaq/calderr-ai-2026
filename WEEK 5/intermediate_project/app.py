@@ -142,7 +142,7 @@ with st.sidebar:
         target_company = preset
 
     st.markdown("---")
-    execute_btn = st.button("Generate Intelligence Briefing", use_container_width=True, type="primary")
+    execute_btn = st.button("Generate Intelligence Briefing", width="stretch", type="primary")
 
     st.markdown("---")
     st.markdown("#### System Observability")
@@ -310,7 +310,7 @@ with tab_observability:
         {"Agent Node": "ConflictResolver", "Type": "Adjudication", "Status": "Completed", "Tokens": 150},
         {"Agent Node": "SynthesisAgent", "Type": "Assembly", "Status": "Completed", "Tokens": 120}
     ])
-    st.dataframe(trace_df, use_container_width=True)
+    st.dataframe(trace_df, width="stretch")
 
     st.markdown("#### Download Intelligence Briefing")
     col_dl1, col_dl2 = st.columns(2)
@@ -322,7 +322,7 @@ with tab_observability:
             data=md_content,
             file_name=f"{briefing.company_name.lower()}_intelligence.md",
             mime="text/markdown",
-            use_container_width=True
+            width="stretch"
         )
 
     with col_dl2:
@@ -332,5 +332,5 @@ with tab_observability:
             data=json_content,
             file_name=f"{briefing.company_name.lower()}_intelligence.json",
             mime="application/json",
-            use_container_width=True
+            width="stretch"
         )

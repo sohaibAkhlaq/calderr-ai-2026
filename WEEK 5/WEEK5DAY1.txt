@@ -1,0 +1,58 @@
+===============================================================================
+CALDERR AGENTIC AI ENGINEERING INTERNSHIP 2026
+WEEK 5 - DAY 1: FOUNDATIONS & FIRST TEAM (MULTI-AGENT ARCHITECTURES)
+===============================================================================
+
+1. CORE LEARNING BLOCK SUMMARY
+-------------------------------------------------------------------------------
+* Multi-Agent Architectures:
+  - Orchestrator-Worker: A central orchestrator decomposes a monolithic task
+    into parallel or sequential sub-tasks and delegates them to worker agents.
+    Best for predictable pipelines with single points of coordination.
+  - Supervisor Pattern: A supervisor agent evaluates ongoing worker outputs,
+    monitors state/confidence, dynamically re-routes tasks, and aggregates results.
+  - Peer-to-Peer Networks: Equal agents communicate directly through message passing
+    or shared memory channels without centralized control. Best for multi-perspective
+    debates, negotiation, or dynamic problem solving.
+  - Hierarchical Teams: Multi-layered control structure (e.g. Executive -> Team Lead -> Workers)
+    providing contextual isolation at each sub-graph boundary.
+
+* Foundational Research Papers:
+  - CAMEL (Communicative Agents for Mind Exploration, 2023): Defined role-playing
+    multi-agent cooperation with inception prompting and autonomous dialog loops.
+  - AutoGen (Microsoft, 2023): Enterprise multi-agent conversational framework enabling
+    flexible worker orchestration, tool integration, and human-in-the-loop interoperation.
+  - AgentVerse (2023): Framework showcasing structured collaboration, dynamic group formation,
+    and consensus resolution for complex task execution.
+
+* Typed Message Passing:
+  - Inter-agent communication built on Pydantic schemas guarantees schema validation,
+    type safety, clear API contracts, and early rejection of malformed payloads before
+    agent execution.
+
+2. LAB 5.1 ARCHITECTURE (TYPED MESSAGE BUS)
+-------------------------------------------------------------------------------
+* Pydantic Schemas:
+  - TaskRequest: Defines task metadata, instructions, priority (1-5), and requester.
+  - TaskResult: Contains task output, confidence score (0.0-1.0), and execution metrics.
+  - ErrorReport: Captures failures with error type classification and agent attribution.
+  - Handoff: Transfers context, task state, and task ownership across agents.
+
+* In-Memory MessageBus:
+  - Manages agent registry and handler dispatches.
+  - Enforces schema validation on every send/dispatch.
+  - Records an audit history log of all inter-agent messages.
+
+* Agent Personas & Specialization:
+  - ResearchAgent: Leverages multi-source research tools and structures empirical evidence.
+  - SynthesisAgent: Synthesizes research outputs into structured executive summaries.
+  - QA_Agent: Evaluates output criteria compliance and confidence integrity.
+
+3. LAB 5.1 VERIFICATION & TEST RESULTS
+-------------------------------------------------------------------------------
+* Test 1 (Schema Constraints): Validated field rules for priority and confidence bounds.
+* Test 2 (Malformed Message Rejection): Verified that malformed message payloads raise
+  validation errors before hitting handler endpoints.
+* Test 3 (Workflow Execution): Successfully executed end-to-end task routing:
+  ResearchAgent -> SynthesisAgent (Handoff) -> QA_Agent (Handoff) -> TaskResult.
+===============================================================================

@@ -1,0 +1,48 @@
+===============================================================================
+CALDERR AGENTIC AI ENGINEERING INTERNSHIP 2026
+WEEK 5 - DAY 4: DEBATE & CONSENSUS ENGINE
+===============================================================================
+
+1. CORE LEARNING BLOCK SUMMARY
+-------------------------------------------------------------------------------
+* Debate Pattern:
+  - Multi-perspective evaluation using distinct agent personas:
+    1. Proposer: Formulates initial recommendation or implementation strategy.
+    2. Challenger: Critiques proposal, highlighting vulnerabilities or edge cases.
+    3. Arbiter: Weighs arguments objectively and decides optimal outcome.
+
+* Consensus Mechanisms & Confidence-Weighted Voting:
+  - Reaching multi-agent agreement via normalized confidence scores.
+  - Formula:
+    Normalized Score_i = Sum(Confidence_i for Option_i) / Total_Confidence
+  - Thresholding: Requires top option to clear 60% weighted confidence.
+  - Debate Round 2: Triggered automatically when no single option clears 60% in Round 1.
+
+* Conflict Resolution & Dissent Tracking:
+  - Auditing contradictions between disagreeing specialist agents.
+  - Dissent Tracking logs exact points of disagreement, agent attribution, and
+    confidence scores for complete decision transparency.
+
+2. LAB 5.3 CONSENSUS ENGINE ARCHITECTURE
+-------------------------------------------------------------------------------
+* Specialist Agents:
+  - SecurityAgent: Analyzes vulnerability risk, authorization, and threat posture.
+  - PerformanceAgent: Evaluates latency, throughput, memory, and scalability.
+  - MaintainabilityAgent: Evaluates code quality, design patterns, and testability.
+
+* Consensus Agent (Arbiter):
+  - Aggregates structured opinions (Answer + Confidence 0.0-1.0 + Reasoning).
+  - Calculates confidence-weighted scores.
+  - Controls conditional routing:
+    If Consensus >= 60% -> Finalize Decision.
+    If Consensus < 60% -> Trigger Round 2 Debate -> Re-aggregate -> Finalize Decision.
+
+* Outputs:
+  - Final consensus answer, overall confidence score, voting breakdown, and dissent summary.
+
+3. LAB 5.3 VERIFICATION RESULTS
+-------------------------------------------------------------------------------
+* Test 1 (Voting Formula Audit): Verified mathematical accuracy of normalized score calculations.
+* Test 2 (Consensus Engine Workflow): Executed full 4-agent consensus state graph,
+  auditing voting score normalization, debate loops, and dissent summaries.
+===============================================================================

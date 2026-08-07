@@ -1,0 +1,42 @@
+===============================================================================
+CALDERR AGENTIC AI ENGINEERING INTERNSHIP 2026
+WEEK 6 - DAY 3: KNOWLEDGE GRAPHS & GRAPH TRAVERSAL
+===============================================================================
+
+1. CORE LEARNING BLOCK SUMMARY
+-------------------------------------------------------------------------------
+* Graph Theory Fundamentals for AI Agents:
+  - Nodes (Entities): Represent objects, concepts, people, companies, places, or events.
+  - Edges (Relationships): Directed, typed, weighted connections defining how entities relate.
+  - Graph Properties: Multi-relational, directed multigraphs allowing multiple edge types between nodes.
+  - Why Knowledge Graphs Outperform Vector RAG for Relational Reasoning:
+    - Vector RAG retrieves isolated document chunks based on semantic similarity; it fails when answering questions requiring multi-step reasoning across multiple documents (e.g., "What common investors backed Company A and Company B before 2024?").
+    - Knowledge Graphs allow explicit multi-hop traversal along named edge paths.
+
+* Automated Entity & Relationship Extraction Pipeline:
+  - Input: Unstructured domain corpus (20 text paragraphs / Wikipedia articles).
+  - Processing: LLM structured extraction using Pydantic models:
+    - `Entity`: name, category (Person, Organization, Location, Concept), attributes.
+    - `Relationship`: source_entity, target_entity, relation_type (works_at, founded_by, part_of, acquired_by), weight, evidence_text.
+  - Storage: NetworkX `MultiDiGraph` serialized to JSON (`knowledge_graph.json`).
+
+2. LAB 6.2 ARCHITECTURE (KG QUERY AGENT)
+-------------------------------------------------------------------------------
+* Natural Language to Graph Traversal Engine:
+  - Step 1: User Question -> LLM Entity & Intent Classifier identifies target seed nodes and desired relationship pattern.
+  - Step 2: Seed Node Matching -> Fuzzy matching against NetworkX node list or ChromaDB entity index.
+  - Step 3: Multi-Hop Traversal -> Executes Breadth-First Search (BFS) or shortest-path algorithm across NetworkX edges (crossing 2+ hops).
+  - Step 4: Reasoning Path Generation -> Formats traversal chain (e.g., `NodeA -[founded_by]-> NodeB -[located_in]-> NodeC`).
+  - Step 5: Answer Synthesis -> LLM generates precise answer grounded strictly in graph traversal path.
+
+* Interactive Graph Visualization:
+  - Pyvis HTML Generator: Renders interactive physics-enabled web visualization (`knowledge_graph.html`).
+
+3. LAB 6.2 VERIFICATION & BENCHMARKING
+-------------------------------------------------------------------------------
+* Multi-Hop Question Suite (5 Test Cases):
+  - Test 1 (2-Hop Path): Identified parent company headquarters correctly.
+  - Test 2 (3-Hop Path): Traced co-authorship through shared research institution.
+  - Test 3 (Relationship Filter): Filtered edge types by specific relation types.
+  - Benchmark Result: KG Agent achieved 5/5 correct multi-hop answers, while pure vector retrieval failed on 3/5 due to context fragmenting across documents.
+===============================================================================

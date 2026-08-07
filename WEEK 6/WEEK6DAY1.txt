@@ -1,0 +1,59 @@
+===============================================================================
+CALDERR AGENTIC AI ENGINEERING INTERNSHIP 2026
+WEEK 6 - DAY 1: EPISODIC & SEMANTIC MEMORY FOUNDATIONS
+===============================================================================
+
+1. CORE LEARNING BLOCK SUMMARY
+-------------------------------------------------------------------------------
+* The Stateless Agent Problem:
+  - Default LLM interactions are stateless. Once a session ends, the context window resets, forgetting user history, preferences, and context.
+  - Week 6 solves this by introducing persistent long-term memory architectures that grant agents a past, a domain world model, and self-improvement loops.
+
+* The Four Memory Types Overview:
+  1. Working Memory:
+     - Stores: Active conversation context, current task state, intermediate scratchpad steps.
+     - Implementation: In-context messages, LangGraph state schema.
+     - Example: Tracking steps during multi-step tool execution.
+  2. Episodic Memory:
+     - Stores: Sequential past events, raw interaction logs, timestamps, user/agent message histories, importance scores.
+     - Implementation: Relational database (SQLite) + vector search (ChromaDB semantic index).
+     - Example: Recalling that a user asked about database optimization two weeks ago.
+  3. Semantic Memory:
+     - Stores: Extracted facts, user preferences, entity attributes, domain knowledge, generalized concepts.
+     - Implementation: Vector embeddings (ChromaDB) + structured key-value/JSON stores.
+     - Example: Knowing a user prefers concise code snippets in Python over verbose explanations.
+  4. Procedural Memory:
+     - Stores: Learned rules, correction history, dynamic prompt modifiers, successful tool invocation patterns.
+     - Implementation: SQLite correction log + dynamic prompt injection engine.
+     - Example: Applying a rule learned from a past correction to never generate invalid SQL syntax.
+
+* Foundational Paper Review - MemGPT (Packer et al., 2023):
+  - MemGPT introduces an operating system architecture for LLMs, managing memory via OS-like virtual memory pages.
+  - Key concepts: Main Context (Working Memory), Recall Storage (Episodic Memory), and Archival Storage (Semantic Memory).
+  - Explicit memory management function calls allow agents to read/write/edit memory blocks dynamically.
+
+2. LAB 6.1 ARCHITECTURE (MEMORY-AUGMENTED CHATBOT)
+-------------------------------------------------------------------------------
+* Dual Memory Store Setup:
+  - SQLite Store (`episodic_memory.db`):
+    - Table: `episodes` (id, session_id, timestamp, user_input, agent_response, importance_score, embedding_id).
+    - Stores raw, chronologically ordered interactions with timestamps and metadata.
+  - ChromaDB Store (`chroma_semantic_index`):
+    - Collection: `episodic_summaries`.
+    - Embeds interaction summaries with metadata (`session_id`, `timestamp`, `importance`).
+
+* Retrieval Strategy (Recency + Relevance Blending):
+  - Combined Score Formula: 
+    Final_Score = (Relevance_Similarity * alpha) + (Recency_Weight * beta) + (Importance_Score * gamma)
+  - Recency Weighting: Exponential decay function based on time elapsed since interaction.
+  - Relevance Scoring: Cosine similarity derived from ChromaDB dense vector matching.
+  - Top-5 Injector: On session initialization, retrieves top 5 past memory blocks and injects them into the system prompt.
+
+3. LAB 6.1 VERIFICATION & TEST RESULTS
+-------------------------------------------------------------------------------
+* Multi-Session Persistence Test:
+  - Session 1: User mentions key project preferences (e.g., "I use PostgreSQL with FastAPI for backend").
+  - Session 2: Unrelated query on front-end styling.
+  - Session 3: User asks "What database stack should I use for my API?"
+  - Result: Agent correctly retrieves Session 1 context without any session 1 messages in the current context window, recommending PostgreSQL with FastAPI.
+===============================================================================

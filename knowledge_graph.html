@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Week 6 Knowledge Graph Visualization</title>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style>#network { width: 100%; height: 600px; border: 1px solid lightgray; background: #0f172a; }</style>
+</head>
+<body>
+    <h2>Knowledge Graph Visualization (21 Nodes, 20 Edges)</h2>
+    <div id="network"></div>
+    <script type="text/javascript">
+        var nodes = new vis.DataSet([
+            {id: 'Geoffrey Hinton', label: 'Geoffrey Hinton', group: 'Person'},{id: 'Google', label: 'Google', group: 'Organization'},{id: 'Mountain View', label: 'Mountain View', group: 'Location'},{id: 'Santa Clara County', label: 'Santa Clara County', group: 'Location'},{id: 'Yann LeCun', label: 'Yann LeCun', group: 'Person'},{id: 'Meta', label: 'Meta', group: 'Organization'},{id: 'Menlo Park', label: 'Menlo Park', group: 'Location'},{id: 'Demis Hassabis', label: 'Demis Hassabis', group: 'Person'},{id: 'DeepMind', label: 'DeepMind', group: 'Organization'},{id: 'London', label: 'London', group: 'Location'},{id: 'Google DeepMind', label: 'Google DeepMind', group: 'Organization'},{id: 'AlphaFold', label: 'AlphaFold', group: 'Concept'},{id: 'Ilya Sutskever', label: 'Ilya Sutskever', group: 'Person'},{id: 'University of Toronto', label: 'University of Toronto', group: 'Organization'},{id: 'Toronto', label: 'Toronto', group: 'Location'},{id: 'OpenAI', label: 'OpenAI', group: 'Organization'},{id: 'San Francisco', label: 'San Francisco', group: 'Location'},{id: 'ChatGPT', label: 'ChatGPT', group: 'Concept'},{id: 'GPT Architecture', label: 'GPT Architecture', group: 'Concept'},{id: 'Transformer Model', label: 'Transformer Model', group: 'Concept'},{id: 'Google Research', label: 'Google Research', group: 'Organization'}
+        ]);
+        var edges = new vis.DataSet([
+            {from: 'Geoffrey Hinton', to: 'Google', label: 'worked_at'},{from: 'Google', to: 'Mountain View', label: 'located_in'},{from: 'Google', to: 'Google DeepMind', label: 'merged_unit'},{from: 'Mountain View', to: 'Santa Clara County', label: 'located_in'},{from: 'Yann LeCun', to: 'Meta', label: 'works_at'},{from: 'Yann LeCun', to: 'Geoffrey Hinton', label: 'co_won_award_with'},{from: 'Meta', to: 'Menlo Park', label: 'located_in'},{from: 'Demis Hassabis', to: 'DeepMind', label: 'founded'},{from: 'DeepMind', to: 'London', label: 'located_in'},{from: 'Google DeepMind', to: 'AlphaFold', label: 'developed'},{from: 'Ilya Sutskever', to: 'Geoffrey Hinton', label: 'studied_under'},{from: 'Ilya Sutskever', to: 'University of Toronto', label: 'studied_at'},{from: 'Ilya Sutskever', to: 'OpenAI', label: 'co_founded'},{from: 'University of Toronto', to: 'Toronto', label: 'located_in'},{from: 'OpenAI', to: 'San Francisco', label: 'located_in'},{from: 'OpenAI', to: 'ChatGPT', label: 'developed'},{from: 'ChatGPT', to: 'GPT Architecture', label: 'based_on'},{from: 'GPT Architecture', to: 'Transformer Model', label: 'relies_on'},{from: 'Google Research', to: 'Transformer Model', label: 'created'},{from: 'Google Research', to: 'Google', label: 'part_of'}
+        ]);
+        var container = document.getElementById('network');
+        var data = { nodes: nodes, edges: edges };
+        var options = { physics: { enabled: true } };
+        var network = new vis.Network(container, data, options);
+    </script>
+</body>
+</html>

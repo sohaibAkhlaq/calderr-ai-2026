@@ -1,0 +1,50 @@
+===============================================================================
+CALDERR AGENTIC AI ENGINEERING INTERNSHIP 2026
+WEEK 6 - DAY 2: SEMANTIC MEMORY & USER PROFILE SYNTHESIS
+===============================================================================
+
+1. CORE LEARNING BLOCK SUMMARY
+-------------------------------------------------------------------------------
+* Semantic Memory Extraction Architecture:
+  - Unlike episodic memory (raw logs), semantic memory extracts explicit facts, rules, user attributes, preferences, goals, and constraints.
+  - LLM-Driven Extraction: Raw user inputs pass through a structured Fact Extractor Agent using Pydantic schemas (`UserFact`, `UserProfile`).
+
+* Structured Pydantic User Model Schema:
+  - `UserFact`:
+    - `fact_id`: Unique UUID.
+    - `category`: Enum (preference, goal, constraint, background, skill).
+    - `fact_text`: Structured declarative statement.
+    - `confidence`: Float (0.0 to 1.0).
+    - `recency_timestamp`: ISO 8601 string.
+  - `UserProfile`:
+    - `user_id`: Unique identifier.
+    - `known_topics`: List[str] representing domain expertise.
+    - `preferred_depth`: Enum (concise, detailed, code_only, academic).
+    - `communication_style`: Enum (formal, casual, technical).
+    - `active_goals`: List[str].
+    - `hard_constraints`: List[str].
+
+* Automated User Profile Builder Workflow:
+  - Trigger Condition: Runs automatically after every 10 interactions or post-session.
+  - Workflow:
+    1. Query SQLite episodic store for the last N sessions.
+    2. Pass raw conversations to the Fact Extractor Agent.
+    3. Deduplicate extracted facts against existing ChromaDB semantic records.
+    4. Synthesize an updated `UserProfile` JSON document.
+    5. Save profile to SQLite KV store and persist embeddings to ChromaDB.
+
+2. APPLIED PRACTICE: AGENT BEHAVIOR ADAPTATION
+-------------------------------------------------------------------------------
+* Dynamic Behavior Invalidation & Update:
+  - When the profile changes (e.g., preference shifts from "verbose explanation" to "concise code-first answers"), the agent's system prompt dynamically mutates.
+  - Before Profile Update (Session 1): Agent provides 300-word explanations with background context.
+  - After Profile Synthesis (Session 10): Agent detects `preferred_depth: concise` and responds directly with code snippets and minimal commentary.
+
+3. VERIFICATION & REPRODUCIBILITY
+-------------------------------------------------------------------------------
+* Automated Test Execution:
+  - Ingested 10 multi-turn user conversations containing implicit preference cues.
+  - Fact Extractor extracted 14 unique structured user facts with >0.85 confidence.
+  - ChromaDB vector store updated with zero entity duplication via cosine similarity thresholding (>0.92 duplicate merger).
+  - Profile state verified across app restarts.
+===============================================================================

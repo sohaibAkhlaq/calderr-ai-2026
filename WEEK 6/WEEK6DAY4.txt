@@ -1,0 +1,39 @@
+===============================================================================
+CALDERR AGENTIC AI ENGINEERING INTERNSHIP 2026
+WEEK 6 - DAY 4: GRAPHRAG PATTERN & MEMORY CONSOLIDATION
+===============================================================================
+
+1. CORE LEARNING BLOCK SUMMARY
+-------------------------------------------------------------------------------
+* The GraphRAG Architectural Pattern:
+  - Combines dense vector retrieval (ChromaDB) with graph traversal (NetworkX) in parallel to achieve both broad semantic search and precise multi-hop relational reasoning.
+  - Parallel Execution Pipeline:
+    1. Query Classification: Smart router classifies incoming prompt into `factual` (vector win), `relational` (graph win), or `complex` (hybrid win).
+    2. Vector Retrieval: Queries ChromaDB for top-5 semantically relevant text passages.
+    3. Graph Traversal: Identifies entity seeds and expands 2-hop subgraphs in NetworkX.
+    4. Context Merging & Deduplication: Merges text passages and structured subgraphs, removing duplicate facts.
+    5. Generation: LLM generates answer backed by dual-context evidence.
+
+* Memory Consolidation & Context Window Management:
+  - Context Window Problem: Unbounded growth of episodic logs eventually exceeds model context limits and increases token costs exponentially.
+  - Compression Trigger: When episode count exceeds 50 in SQLite.
+  - Summarization Strategy: Oldest 25 episodes are summarized into a compressed memory block using LLM synthesis, preserving key facts while shrinking token length by >80%.
+  - Importance-Based Forgetting:
+    - Each episode has an `importance_score` (1-10) assigned at creation.
+    - Decay Formula: `Current_Importance = Initial_Importance * exp(-lambda * days_elapsed)`.
+    - Episodes dropping below threshold (<2.0) are archived or permanently pruned.
+
+2. LAB 6.3 ARCHITECTURE (HYBRID GRAPHRAG PIPELINE)
+-------------------------------------------------------------------------------
+* Automatic Query Routing Classifier:
+  - Pydantic Route Decision: `QueryRoute(category='factual'|'relational'|'complex', confidence=0.95, reasoning=...)`.
+  - Benchmark Dataset: 15 multi-domain questions (5 factual, 5 relational, 5 complex multi-hop).
+
+3. LAB 6.3 VERIFICATION & EVALUATION TABLE
+-------------------------------------------------------------------------------
+* Router Accuracy: Correctly classified 13 out of 15 test questions (86.6% accuracy).
+* Retrieval Quality Comparison:
+  - Factual Questions: Vector Retrieval (100% accuracy), Graph (60% accuracy).
+  - Relational Questions: Graph Traversal (100% accuracy), Vector Retrieval (40% accuracy).
+  - Complex Questions: Hybrid GraphRAG (100% accuracy), Vector (40%), Graph (60%).
+===============================================================================

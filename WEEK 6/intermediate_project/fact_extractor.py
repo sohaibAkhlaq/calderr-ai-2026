@@ -25,7 +25,7 @@ class FactExtractor:
     def __init__(self):
         self.client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
         # Using a reliable model for JSON extraction
-        self.model = "llama-3.1-8b-instant" 
+        self.model = "llama-3.3-70b-versatile"
 
     def extract_information(self, user_message: str, assistant_message: str) -> ExtractionResult:
         prompt = f"""
@@ -62,5 +62,7 @@ class FactExtractor:
             result_json = json.loads(response.choices[0].message.content)
             return ExtractionResult(**result_json)
         except Exception as e:
+            with open("debug_extractor.txt", "a", encoding="utf-8") as f:
+                f.write(f"Extraction error: {str(e)}\n")
             print(f"Extraction error: {e}")
             return ExtractionResult()

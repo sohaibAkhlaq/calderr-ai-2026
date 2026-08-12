@@ -39,6 +39,9 @@ WEEK 7/
 ├── lab7_4_public_api_mcp.py      # Lab 7.4: Hardened Public API MCP Server (GitHub Intelligence Wrapper)
 ├── Dockerfile.lab7_4             # Docker Containerization for Lab 7.4 HTTP+SSE MCP Server
 ├── test_lab7_4.py                # Automated Verification Suite for Lab 7.4 (8/8 Passed)
+│
+├── WEEK7DAY5.txt                 # Friday Concept Journal: Standup Requirements & Weekly Assessment Q&A (All 6 Answered)
+├── lab7_5_standup_demo.py        # Lab 7.5: Automated Friday Standup Live Demo & Failure Resilience Suite
 └── README.md                     # Master Week 7 Documentation
 ```
 
@@ -82,6 +85,16 @@ WEEK 7/
   5. **Docker Containerization**: Includes `Dockerfile.lab7_4` for containerized HTTP+SSE deployment.
 - **Validation**: `python "WEEK 7\test_lab7_4.py"` $\rightarrow$ **`8 / 8 Tests Passed (100.0%)`**
 
+### 5. Lab 7.5: Automated Friday Standup Live Demonstration & Ecosystem Failure Resilience Suite (`lab7_5_standup_demo.py`)
+- **Overview**: Live automated demonstration suite fulfilling all 5 Friday Standup Requirements:
+  1. **Ecosystem Architecture Review**: Full diagram printout.
+  2. **Live Tool Discovery**: Discovers 9 tools across `fs:`, `db:`, and `util:` namespaces.
+  3. **Schema Walkthrough**: Validates JSON Schema definitions.
+  4. **Security Walkthrough**: Live demo of 401 Auth Rejection, 429 Rate Limit Firing, and SQLite Audit Store verification.
+  5. **Downstream Failure Demonstration**: Simulates Database Server failure (`OFFLINE`); Gateway catches condition gracefully (`DEGRADED` status) without agent crash, then recovers (`HEALTHY`).
+  6. **Multi-Step Composite Agent Execution**: Completes 4-step workflow.
+- **Validation**: `python "WEEK 7\lab7_5_standup_demo.py"` $\rightarrow$ **`Completed Successfully`**
+
 ---
 
 ## Quick Start & Running Commands
@@ -97,9 +110,6 @@ python "WEEK 7\test_lab7_2.py"
 python "WEEK 7\test_lab7_3.py"
 python "WEEK 7\test_lab7_4.py"
 
-# Run Production MCP Servers & Gateway
-python "WEEK 7\lab7_1_first_mcp_server.py"
-python "WEEK 7\lab7_2_database_mcp.py"
-python "WEEK 7\lab7_3_mcp_gateway.py"
-python "WEEK 7\lab7_4_public_api_mcp.py"
+# Run Friday Standup Live Ecosystem Demonstration & Failure Resilience Suite
+python "WEEK 7\lab7_5_standup_demo.py"
 ```

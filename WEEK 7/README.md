@@ -29,6 +29,11 @@ WEEK 7/
 ├── WEEK7DAY2.txt                 # Tuesday Concept Journal: Tools, Resources, Prompts, Auth & Audit Logs
 ├── lab7_2_database_mcp.py        # Lab 7.2: Authenticated MCP Server with Rate Limiting & SQLite Audit Log
 ├── test_lab7_2.py                # Automated Verification Suite for Lab 7.2 (14/14 Passed)
+│
+├── WEEK7DAY3.txt                 # Wednesday Concept Journal: MCP + LangGraph Integration & Gateway Architecture
+├── lab7_3_mcp_gateway.py         # Lab 7.3: MCP Gateway with Tool Namespace Routing (fs:, db:, util:) & Schema Cache
+├── lab7_3_composite_agent.py     # Lab 7.3: LangGraph Composite Agent executing multi-step workflow via Gateway
+├── test_lab7_3.py                # Automated Verification Suite for Lab 7.3 (12/12 Passed)
 └── README.md                     # Master Week 7 Documentation
 ```
 
@@ -38,12 +43,10 @@ WEEK 7/
 
 ### 1. Lab 7.1: Three-Tool Production MCP Server (`lab7_1_first_mcp_server.py`)
 - **Overview**: Production MCP Server built with `FastMCP` exposing 3 safe utility tools:
-  1. `calculate(expression)`: Evaluates math expressions safely using Python AST parsing (blocks dangerous code like `os.system` without using unsafe `eval()`).
+  1. `calculate(expression)`: Evaluates math expressions safely using Python AST parsing (blocks dangerous code without using unsafe `eval()`).
   2. `string_processor(text, operation)`: Performs text operations (`upper`, `lower`, `reverse`, `word_count`, `snake_case`).
   3. `date_helper(action, date_str, days)`: Handles date utilities (`now`, `add_days`, `diff_days`, `format_date`).
-- **Validation**:
-  - Run verification suite: `python "WEEK 7\test_lab7_1.py"`
-  - **Results**: `17 / 17 Tests Passed (100.0% Pass Rate)`
+- **Validation**: `python "WEEK 7\test_lab7_1.py"` $\rightarrow$ **`17 / 17 Tests Passed (100.0%)`**
 
 ### 2. Lab 7.2: Authenticated Production MCP Server with Audit Log (`lab7_2_database_mcp.py`)
 - **Overview**: Production-hardened MCP Server supporting authentication, token-bucket rate limiting, and structured SQLite audit logging:
@@ -54,9 +57,16 @@ WEEK 7/
   5. **Filesystem Tools**: `write_file`, `read_file`, `list_directory` (sandboxed inside `data/sandbox`).
   6. **Resource URIs**: `resource://sandbox/files`, `resource://db/schema`.
   7. **Prompt Templates**: `file_summarization`, `database_report`.
-- **Validation**:
-  - Run verification suite: `python "WEEK 7\test_lab7_2.py"`
-  - **Results**: `14 / 14 Tests Passed (100.0% Pass Rate)`
+- **Validation**: `python "WEEK 7\test_lab7_2.py"` $\rightarrow$ **`14 / 14 Tests Passed (100.0%)`**
+
+### 3. Lab 7.3: MCP Gateway with Tool Namespace Routing (`lab7_3_mcp_gateway.py` & `lab7_3_composite_agent.py`)
+- **Overview**: Enterprise MCP Gateway proxying requests across 3 downstream tool servers:
+  1. **Tool Namespace Routing**: Namespaces tools by server prefix (`fs:*`, `db:*`, `util:*`). Strips prefix and routes to downstream servers.
+  2. **60-Second Schema Caching**: Caches tool discovery schemas to eliminate redundant discovery round-trips.
+  3. **Aggregated Health Monitoring (`/health`)**: Polls and aggregates server status (`HEALTHY`, `DEGRADED`, `UNHEALTHY`).
+  4. **Graceful Failure Handling**: Safely rejects calls targeting offline downstream servers (`ServerOfflineError`).
+  5. **Composite LangGraph Agent (`lab7_3_composite_agent.py`)**: Executes 4-step workflow through Gateway (Read specs $\rightarrow$ Query DB $\rightarrow$ Calculate budget & string formatting $\rightarrow$ Write executive report to disk).
+- **Validation**: `python "WEEK 7\test_lab7_3.py"` $\rightarrow$ **`12 / 12 Tests Passed (100.0%)`**
 
 ---
 
@@ -67,13 +77,16 @@ WEEK 7/
 cd C:\Users\USER\Desktop\calderr-ai-2026
 .\calderr-env\Scripts\Activate.ps1
 
-# Run Lab 7.1 Automated Verification Suite
+# Run All Lab Verification Test Suites
 python "WEEK 7\test_lab7_1.py"
-
-# Run Lab 7.2 Automated Verification Suite (Auth, Rate Limit, Audit Log)
 python "WEEK 7\test_lab7_2.py"
+python "WEEK 7\test_lab7_3.py"
 
-# Run Production MCP Servers
+# Run Production MCP Servers & Gateway
 python "WEEK 7\lab7_1_first_mcp_server.py"
 python "WEEK 7\lab7_2_database_mcp.py"
+python "WEEK 7\lab7_3_mcp_gateway.py"
+
+# Run LangGraph Composite Agent Demo
+python "WEEK 7\lab7_3_composite_agent.py"
 ```

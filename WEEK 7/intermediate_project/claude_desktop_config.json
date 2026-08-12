@@ -1,0 +1,31 @@
+{
+  "mcpServers": {
+    "developer-productivity-suite": {
+      "command": "python",
+      "args": [
+        "C:/Users/USER/Desktop/calderr-ai-2026/WEEK 7/intermediate_project/dev_gateway.py"
+      ],
+      "env": {
+        "MCP_API_KEY": "key_dev_suite"
+      }
+    },
+    "code-intelligence-server": {
+      "command": "python",
+      "args": [
+        "C:/Users/USER/Desktop/calderr-ai-2026/WEEK 7/intermediate_project/code_intel_server.py"
+      ]
+    },
+    "github-mcp-server": {
+      "command": "python",
+      "args": [
+        "C:/Users/USER/Desktop/calderr-ai-2026/WEEK 7/intermediate_project/github_mcp_server.py"
+      ]
+    },
+    "documentation-mcp-server": {
+      "command": "python",
+      "args": [
+        "C:/Users/USER/Desktop/calderr-ai-2026/WEEK 7/intermediate_project/doc_mcp_server.py"
+      ]
+    }
+  }
+}

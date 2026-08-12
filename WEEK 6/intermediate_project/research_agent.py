@@ -8,7 +8,7 @@ class ResearchAgent:
     def __init__(self, memory_engine, fact_extractor):
         self.client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
         # Use a highly capable model for general chat and reasoning
-        self.model = "llama-3.1-70b-versatile"
+        self.model = "llama-3.3-70b-versatile"
         self.memory = memory_engine
         self.extractor = fact_extractor
         
@@ -54,6 +54,7 @@ class ResearchAgent:
         messages.append({"role": "user", "content": user_input})
         
         # 3. Generate Response
+        assistant_reply = ""
         try:
             response = self.client.chat.completions.create(
                 messages=messages,
@@ -61,35 +62,41 @@ class ResearchAgent:
                 temperature=0.4
             )
             assistant_reply = response.choices[0].message.content
-            
-            # 4. Post-Session Memory Sync
-            self.memory.log_interaction(session_id, "user", user_input)
-            self.memory.log_interaction(session_id, "assistant", assistant_reply)
-            
-            # Extract facts based on the new turn
-            extraction = self.extractor.extract_information(user_input, assistant_reply)
-            
-            # Update semantic memory
-            for fact in extraction.facts:
-                self.memory.add_fact(fact.fact, fact.category)
-                
-            # Update user profile
-            if extraction.profile_updates:
-                updates = extraction.profile_updates
-                
-                # Merge updates intelligently
-                if updates.known_topics:
-                    user_profile["known_topics"] = list(set(user_profile.get("known_topics", []) + updates.known_topics))
-                if updates.active_research_goals:
-                    user_profile["active_research_goals"] = list(set(user_profile.get("active_research_goals", []) + updates.active_research_goals))
-                if updates.preferred_depth:
-                    user_profile["preferred_depth"] = updates.preferred_depth
-                if updates.communication_style:
-                    user_profile["communication_style"] = updates.communication_style
-                    
-                self.memory.update_user_profile(user_profile)
-                
-            return assistant_reply
-            
         except Exception as e:
-            return f"I encountered an error connecting to my core processing node: {e}"
+            assistant_reply = f"I encountered an error connecting to my core processing node: {e}"
+            
+        # 4. Post-Session Memory Sync (Always log interaction)
+        self.memory.log_interaction(session_id, "user", user_input)
+        self.memory.log_interaction(session_id, "assistant", assistant_reply)
+        
+        # Only try to extract facts if there was no error generating the response
+        if not assistant_reply.startswith("I encountered an error"):
+            try:
+                # Extract facts based on the new turn
+                extraction = self.extractor.extract_information(user_input, assistant_reply)
+                
+                # Update semantic memory
+                for fact in extraction.facts:
+                    self.memory.add_fact(fact.fact, fact.category)
+                    
+                # Update user profile
+                if extraction.profile_updates:
+                    updates = extraction.profile_updates
+                    
+                    # Merge updates intelligently
+                    if updates.known_topics:
+                        user_profile["known_topics"] = list(set(user_profile.get("known_topics", []) + updates.known_topics))
+                    if updates.active_research_goals:
+                        user_profile["active_research_goals"] = list(set(user_profile.get("active_research_goals", []) + updates.active_research_goals))
+                    if updates.preferred_depth:
+                        user_profile["preferred_depth"] = updates.preferred_depth
+                    if updates.communication_style:
+                        user_profile["communication_style"] = updates.communication_style
+                        
+                    self.memory.update_user_profile(user_profile)
+            except Exception as extract_error:
+                with open("debug_agent.txt", "a", encoding="utf-8") as f:
+                    f.write(f"Fact extraction failed: {str(extract_error)}\n")
+                print(f"Fact extraction failed: {extract_error}")
+                
+        return assistant_reply

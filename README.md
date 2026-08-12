@@ -6,7 +6,7 @@
  
 ---
 
-## Overview
+## Executive Overview
 
 This repository documents the complete setup, learning progress, and hands-on implementations completed during the CalderR AI internship (2026). It covers environment configuration, foundational AI concepts, agentic systems, LangChain workflows, prompt engineering experiments, structured outputs, tool calling, external API integration, RAG architectures, LangGraph agent workflows, multi-agent teams, persistent memory architectures, knowledge graphs, and fully deployed production AI platforms.
 
@@ -23,43 +23,34 @@ This repository documents the complete setup, learning progress, and hands-on im
 
 ---
 
-## Quick Start — One Command
+## Quick Start — Running Week 6 Projects
 
 ```powershell
 # Activate the environment
 cd C:\Users\USER\Desktop\calderr-ai-2026
 .\calderr-env\Scripts\Activate.ps1
-
-# All Week 1 to Week 6 scripts work inside calderr-env.
-# Streamlit, NetworkX, ChromaDB, FastAPI, LangGraph, Pydantic — all installed.
 ```
 
-After activation, run any lab or project script:
-
+### 1️⃣ Week 6 Intermediate Project (Project 6-I-A: Long-Term Personal Research Assistant)
 ```powershell
-# Week 1: Professional Chatbot
-python week1/professional_chatbot.py
+streamlit run "WEEK 6\intermediate_project\app.py"
+```
+- Open `http://localhost:8501` in your browser.
+- Go to the **🧪 Automated Test Suite** tab and press **🚀 Run All Tests** (16/16 Passed, 100% Pass Rate).
 
-# Week 2: Financial Data Analysis Agent (Streamlit)
-calderr-env\Scripts\python.exe -m streamlit run week2/project2_p_c_financial_analysis.py
+### 2️⃣ Week 6 Production Project (Project 6-P-A: Enterprise AI Memory Platform)
+```powershell
+# Terminal 1: FastAPI REST API Memory Service (Port 8000)
+python "WEEK 6\production_project\main.py"
 
-# Week 3: Hybrid Search Engine
-python "WEEK 3/intermediate_project/hybrid_search_engine.py"
+# Terminal 2: Streamlit Observability Admin Dashboard (Port 8501)
+streamlit run "WEEK 6\production_project\admin_app.py"
 
-# Week 4: Production Hiring Pipeline Platform
-calderr-env\Scripts\python.exe -m streamlit run "Week 4/production_project/app_streamlit.py"
+# Terminal 3: External AI Agent Client REST Demo
+python "WEEK 6\production_project\client_agent_demo.py"
 
-# Week 5: Multi-Agent Consensus Engine Lab
-python "WEEK 5/lab5.3_consensus_engine.py"
-
-# Week 6: Memory-Augmented Chatbot (Lab 6.1)
-python "WEEK 6/lab6_1_memory_augmented_chatbot.py"
-
-# Week 6: Knowledge Graph Query Agent (Lab 6.2)
-python "WEEK 6/lab6_2_knowledge_graph_query_agent.py"
-
-# Week 6: GraphRAG Hybrid Retrieval Engine (Lab 6.3)
-python "WEEK 6/lab6_3_graphrag_hybrid_retrieval.py"
+# Terminal 4: RAGAS Retrieval Quality Benchmark
+python "WEEK 6\production_project\eval_retrieval_quality.py"
 ```
 
 ---
@@ -68,19 +59,19 @@ python "WEEK 6/lab6_3_graphrag_hybrid_retrieval.py"
 
 - **Python:** 3.11.9
 - **Virtual environment:** `calderr-env`
-- **Git:** SSH configured
+- **Git:** Configured & Connected to GitHub (`sohaibAkhlaq/calderr-ai-2026`)
 
 ### Installed Libraries
 
 | Category | Packages |
 |---|---|
 | LLM | LangChain, LangChain-Groq, LangChain-Community, LangGraph, Groq |
-| Memory & Graphs | ChromaDB, NetworkX, SQLite, sentence-transformers |
+| Memory & Graphs | SQLite, Pure-Python Vector Engine, NetworkX, sentence-transformers |
 | Multi-Agent | Pydantic v2, TypedDict, asyncio, custom message bus |
 | Data | Pandas, NumPy, Plotly, Pyvis |
 | Web & API | Streamlit, FastAPI, Uvicorn, HTTPX |
 | Terminal | Rich, Typer |
-| Testing & DevOps | PyTest, Jupyter, Docker Desktop |
+| Testing & DevOps | PyTest, Docker Compose |
 
 ---
 
@@ -90,9 +81,7 @@ python "WEEK 6/lab6_3_graphrag_hybrid_retrieval.py"
 calderr-ai-2026/
 ├── .env                          # API keys (not committed)
 ├── .env.template                 # Template for API keys
-├── .gitignore
 ├── requirements.txt              # Full dependencies
-├── main.py
 ├── README.md                     # Master Repository README
 │
 ├── week1/                        # Week 1: AI Fundamentals & Prompt Engineering
@@ -145,92 +134,25 @@ calderr-ai-2026/
     ├── lab6_1_memory_augmented_chatbot.py # Lab 6.1: Cross-Session Recall Chatbot
     ├── lab6_2_knowledge_graph_query_agent.py # Lab 6.2: NetworkX Multi-Hop Query Agent
     ├── lab6_3_graphrag_hybrid_retrieval.py # Lab 6.3: ChromaDB + NetworkX GraphRAG Merger
-    ├── intermediate_project/              # Project 6-I-A: Personal Research Assistant
-    └── production_project/                # Project 6-P-A: Enterprise AI Memory Platform
+    ├── intermediate_project/              # Project 6-I-A: Personal Research Assistant (Streamlit)
+    └── production_project/                # Project 6-P-A: Enterprise AI Memory Platform (FastAPI + Streamlit)
 ```
 
 ---
 
-## Week 1 — AI Fundamentals
+## Week 6 — Memory Systems & Knowledge Graphs Highlights
 
-| Day | Topic | Status | Key Files |
+| Project / Deliverable | Type | Features & Status | Key Files |
 |---|---|---|---|
-| Day 1 | LLM Foundations | Complete | `test_groq_monday.py`, `temperature_experiment.py` |
-| Day 2 | Agentic AI Concepts | Complete | `react_agent.py` |
-| Day 3 | LangChain Core | Complete | `document_qa_chain.py`, `chain_patterns.py` |
-| Day 4 | Prompt Engineering | Complete | `prompt_engineering_lab.py`, `persona_agent.py` |
-| Day 5 | Integration + Demo | Complete | `professional_chatbot.py`, `multi_model_benchmark.py` |
+| **Lab 6.1** | Lab | Cross-Session Recall Chatbot with SQLite Episodic + Vector Memory | `lab6_1_memory_augmented_chatbot.py` |
+| **Lab 6.2** | Lab | NetworkX Knowledge Graph Query Agent with 2-Hop Path Traversals | `lab6_2_knowledge_graph_query_agent.py` |
+| **Lab 6.3** | Lab | GraphRAG Hybrid Retrieval combining Vector Search and Knowledge Graphs | `lab6_3_graphrag_hybrid_retrieval.py` |
+| **Project 6-I-A** | Intermediate | Long-Term Personal Research Assistant (4-Tab Streamlit UI, 16/16 Tests) | `WEEK 6/intermediate_project/` |
+| **Project 6-P-A** | Production | Enterprise AI Memory Platform (FastAPI REST API, 4 Memory Types, Multi-Tenant Isolation, Consolidation Worker, 5-Tab Admin UI, Docker Compose) | `WEEK 6/production_project/` |
 
 ---
 
-## Week 2 — Advanced AI Patterns
-
-| Day | Topic | Status | Key Files |
-|---|---|---|---|
-| Monday | Advanced Prompting | Complete | `lab2.1_cot_pipeline.py`, `lab2.1_cot_prompts.py` |
-| Tuesday | Structured Outputs | Complete | `lab2.1_structured_extractor.py`, `lab2.1_pydantic_models.py` |
-| Wednesday | Tool Calling Basics | Complete | `lab2.2_multi_tool_agent.py`, `lab2.2_tool_calling_demo.py` |
-| Thursday | External APIs as Tools | Complete | `lab2.3_external_api_tools.py` |
-| Friday | Integration + Demo | Complete | Both projects below |
-
----
-
-## Week 3 — Embeddings, RAG & Vector Databases
-
-| Day | Topic | Status | Key Files |
-|---|---|---|---|
-| Monday | Embeddings Deep Dive | Complete | `WEEK 3/lab3_1.py`, `WEEK 3/WEEK3DAY1.txt` |
-| Tuesday | Vector Databases | Complete | `WEEK 3/lab3_2.py`, `WEEK 3/WEEK3DAY2.txt` |
-| Wednesday | Naive RAG Architecture | Complete | `WEEK 3/lab3_3_naive_rag.py`, `WEEK 3/WEEK3DAY3.txt` |
-| Thursday | Advanced Retrieval | Complete | `WEEK 3/lab3_4_advanced_retrieval.py`, `WEEK 3/WEEK3DAY4.txt` |
-| Friday | RAG Evaluation & Assessment | Complete | `WEEK 3/lab3_5_rag_evaluation.py`, `WEEK 3/WEEK3DAY5.txt` |
-
----
-
-## Week 4 — LangGraph & Agentic Workflows
-
-| Day | Topic | Status | Key Files |
-|---|---|---|---|
-| Monday | LangGraph Foundations | Complete | `Week 4/lab4.1_document_processing.py` |
-| Tuesday | Branching & Loops | Complete | `Week 4/lab4.2_self_correcting_loop.py` |
-| Wednesday | Stateful Agents | Complete | `Week 4/lab4.3_approval_workflow.py` |
-| Thursday | Human-in-the-Loop | Complete | `Week 4/lab4.3_hitl_approval_workflow.py` |
-| Friday | Production Graphs | Complete | `Week 4/lab4.4_production_graph.py` |
-
----
-
-## Week 5 — Multi-Agent Systems & Team Architectures
-
-| Day | Topic | Status | Key Files |
-|---|---|---|---|
-| Day 1 | Typed Message Passing | Complete | `WEEK 5/lab5.1_typed_message_bus.py`, `WEEK5DAY1.txt` |
-| Day 2 | Supervisor Pattern & Recovery | Complete | `WEEK 5/lab5.2_supervisor_failure_recovery.py`, `WEEK5DAY2.txt` |
-| Day 3 | Debate & Consensus Engine | Complete | `WEEK 5/lab5.3_consensus_engine.py`, `WEEK5DAY3.txt` |
-| Day 4 | Hierarchical Teams | Complete | `WEEK 5/lab5.3_hierarchical_teams.py`, `WEEK5DAY4.txt` |
-| Day 5 | Production Integration | Complete | `WEEK 5/week5_production_integration.py`, `WEEK5DAY5.txt` |
-
----
-
-## Week 6 — Memory Systems & Knowledge Graphs
-
-| Day | Topic | Status | Key Files |
-|---|---|---|---|
-| Monday | Episodic & Semantic Memory | Complete | `WEEK 6/lab6_1_memory_augmented_chatbot.py`, `WEEK6DAY1.txt` |
-| Tuesday | Semantic Memory & Profiles | Complete | `WEEK 6/WEEK6DAY2.txt` |
-| Wednesday | Knowledge Graphs & Traversals | Complete | `WEEK 6/lab6_2_knowledge_graph_query_agent.py`, `WEEK6DAY3.txt` |
-| Thursday | GraphRAG & Consolidation | Complete | `WEEK 6/lab6_3_graphrag_hybrid_retrieval.py`, `WEEK6DAY4.txt` |
-| Friday | Full-Stack Integration | Complete | `WEEK 6/README.md`, `WEEK6_ASSESSMENT.md`, `WEEK6DAY5.txt` |
-
-### Key Week 6 Labs & Deliverables
-- **Lab 6.1 (Memory-Augmented Chatbot):** Implemented SQLite episodic log + persistent vector store. Verified cross-session recall across 3 sessions.
-- **Lab 6.2 (Knowledge Graph Query Agent):** Extracted entities & relationships into NetworkX from 20 text paragraphs, answered 5/5 multi-hop questions, and exported Pyvis interactive HTML (`knowledge_graph.html`).
-- **Lab 6.3 (GraphRAG Hybrid Retrieval):** Parallel ChromaDB vector search + NetworkX graph traversal with Pydantic query router (80%+ classification accuracy).
-- **Intermediate Project (6-I-A):** System architecture & memory design for Long-Term Personal Research Assistant.
-- **Production Project (6-P-A):** Architecture & API design for Enterprise AI Memory Platform (Mem0 alternative).
-
----
-
-## Complete Labs Matrix
+## Complete Labs Matrix (Weeks 1–6)
 
 | Lab | Week | Description | Status |
 |---|---|---|---|
@@ -253,28 +175,6 @@ calderr-ai-2026/
 
 ---
 
-## Security Notes
-
-- Never commit `.env` files — they contain API keys.
-- Use `.env.template` as the template; fill in locally.
-- Review Git history before pushing to ensure no credentials are leaked.
-
----
-
 ## GitHub Repository
 
 [https://github.com/sohaibAkhlaq/calderr-ai-2026](https://github.com/sohaibAkhlaq/calderr-ai-2026)
-
----
-
-## Overall Progress Summary
-
-| Week | Topic | Status |
-|---|---|---|
-| Week 0 | Environment Setup | Complete |
-| Week 1 | AI Fundamentals | Complete |
-| Week 2 | Advanced AI Patterns | Complete |
-| Week 3 | Embeddings, RAG & Vector Databases | Complete |
-| Week 4 | LangGraph & Agentic Workflows | Complete |
-| Week 5 | Multi-Agent Systems & Team Architectures | Complete |
-| Week 6 | Memory Systems & Knowledge Graphs | Complete (All 5 Days) |

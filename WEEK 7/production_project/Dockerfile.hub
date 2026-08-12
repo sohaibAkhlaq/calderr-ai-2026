@@ -1,0 +1,19 @@
+# Production Dockerfile for Project 7-P-A: Universal Enterprise Tool Hub
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt fastmcp mcp pandas requests streamlit
+
+COPY . /app/
+RUN mkdir -p /app/data
+
+EXPOSE 8000 8501
+
+CMD ["python", "WEEK 7/production_project/hub_gateway.py"]

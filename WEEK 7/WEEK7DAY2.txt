@@ -1,0 +1,49 @@
+==============================================================================
+CALDER AI INTERNSHIP — WEEK 7 DAY 2 CONCEPT JOURNAL
+Topic: Tools, Resources, Prompts & Authenticated MCP Servers
+Date: Tuesday 11 August 2026
+==============================================================================
+
+1. RECAP OF MCP PRIMITIVES (TOOLS vs RESOURCES vs PROMPTS)
+   MCP defines three foundational primitives to expose server capabilities to AI agents:
+
+   a. Tools (Executable Actions):
+      - Standard callable functions that perform actions or run queries.
+      - Examples: `query_table()`, `read_file()`, `insert_record()`, `search_files()`.
+      - Requires strict JSON Schema input validation to prevent SQL injection or path traversal attacks.
+
+   b. Resources (Browsable Data URIs):
+      - Read-only data endpoints exposed to the LLM as browsable URI patterns.
+      - Format: `file:///data/docs/{filename}`, `db://tables/{table_name}`.
+      - Enables LLMs to browse directory listings or table schemas directly without executing tool calls.
+
+   c. Prompts (Structured Workflow Templates):
+      - Pre-configured prompt templates exposed by the server for standard agent tasks.
+      - Examples: `summarize_file(filepath)`, `analyze_database_schema(table_name)`.
+      - Returns structured message lists (`UserMessage`, `AssistantMessage`) pre-populated with context.
+
+2. SECURITY & PRODUCTION HARDENING IN MCP SERVERS
+   A production MCP server exposed over network transports (HTTP+SSE) must implement multi-layer security:
+
+   a. API Key Authentication:
+      - Every incoming request must provide a valid API key in headers (`Authorization: Bearer <key>`) or request parameters.
+      - Invalid or missing keys must return a structured 401 Unauthorized response.
+
+   b. Rate Limiting (Token Bucket Algorithm):
+      - Limits request velocity per API key (e.g., maximum 10 tool calls per minute).
+      - Excess requests must return a 429 Too Many Requests response without executing backend logic.
+
+   c. SQLite Audit Logging:
+      - Every tool execution (successful or failed) must be immutably recorded into a database log.
+      - Logged fields: `timestamp`, `api_key_hash` (SHA-256), `tool_name`, `input_params_hash`, `status` (SUCCESS/FAILURE), `latency_ms`.
+
+   d. Input Validation & Sandboxing:
+      - Path Traversal Protection: Enforce strict directory root boundaries (`os.path.abspath`) for file tools.
+      - SQL Sanitization: Whitelist allowed table names and enforce parameterized SQL queries to prevent destructive queries (`DROP`, `DELETE`, `ALTER`).
+
+3. FASTMCP ADVANCED PATTERNS
+   FastMCP provides decorators for all three primitives:
+   - `@mcp.tool()`: Registers executable tool functions.
+   - `@mcp.resource("uri://pattern")`: Registers browsable data URI endpoints.
+   - `@mcp.prompt()`: Registers structured prompt templates.
+==============================================================================

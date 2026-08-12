@@ -25,6 +25,10 @@ WEEK 7/
 ├── WEEK7DAY1.txt                 # Monday Concept Journal: Protocol Overview, Transports & JSON-RPC
 ├── lab7_1_first_mcp_server.py    # Lab 7.1: Three-Tool FastMCP Production Server (Calculator, String, Date)
 ├── test_lab7_1.py                # Automated Verification Suite for Lab 7.1 (17/17 Passed)
+│
+├── WEEK7DAY2.txt                 # Tuesday Concept Journal: Tools, Resources, Prompts, Auth & Audit Logs
+├── lab7_2_database_mcp.py        # Lab 7.2: Authenticated MCP Server with Rate Limiting & SQLite Audit Log
+├── test_lab7_2.py                # Automated Verification Suite for Lab 7.2 (14/14 Passed)
 └── README.md                     # Master Week 7 Documentation
 ```
 
@@ -32,7 +36,7 @@ WEEK 7/
 
 ## Completed Lab Deliverables
 
-### Lab 7.1: Three-Tool Production MCP Server (`lab7_1_first_mcp_server.py`)
+### 1. Lab 7.1: Three-Tool Production MCP Server (`lab7_1_first_mcp_server.py`)
 - **Overview**: Production MCP Server built with `FastMCP` exposing 3 safe utility tools:
   1. `calculate(expression)`: Evaluates math expressions safely using Python AST parsing (blocks dangerous code like `os.system` without using unsafe `eval()`).
   2. `string_processor(text, operation)`: Performs text operations (`upper`, `lower`, `reverse`, `word_count`, `snake_case`).
@@ -40,6 +44,19 @@ WEEK 7/
 - **Validation**:
   - Run verification suite: `python "WEEK 7\test_lab7_1.py"`
   - **Results**: `17 / 17 Tests Passed (100.0% Pass Rate)`
+
+### 2. Lab 7.2: Authenticated Production MCP Server with Audit Log (`lab7_2_database_mcp.py`)
+- **Overview**: Production-hardened MCP Server supporting authentication, token-bucket rate limiting, and structured SQLite audit logging:
+  1. **Authentication**: Bearer API Key validation (`key_alpha_123`, `key_beta_999`). Rejects unauthorized requests with 401.
+  2. **Token Bucket Rate Limiting**: Maximum 10 requests / 60 seconds per API key. Returns 429 when exceeded.
+  3. **SQLite Audit Store**: Records `timestamp`, `api_key_hash`, `tool_name`, `status`, and `latency_ms` to `data/mcp_audit.db`.
+  4. **Database Tools**: `describe_schema`, `query_table`, `insert_record`.
+  5. **Filesystem Tools**: `write_file`, `read_file`, `list_directory` (sandboxed inside `data/sandbox`).
+  6. **Resource URIs**: `resource://sandbox/files`, `resource://db/schema`.
+  7. **Prompt Templates**: `file_summarization`, `database_report`.
+- **Validation**:
+  - Run verification suite: `python "WEEK 7\test_lab7_2.py"`
+  - **Results**: `14 / 14 Tests Passed (100.0% Pass Rate)`
 
 ---
 
@@ -50,9 +67,13 @@ WEEK 7/
 cd C:\Users\USER\Desktop\calderr-ai-2026
 .\calderr-env\Scripts\Activate.ps1
 
-# Run Lab 7.1 Automated Verification Test Suite
+# Run Lab 7.1 Automated Verification Suite
 python "WEEK 7\test_lab7_1.py"
 
-# Run Lab 7.1 FastMCP Server
+# Run Lab 7.2 Automated Verification Suite (Auth, Rate Limit, Audit Log)
+python "WEEK 7\test_lab7_2.py"
+
+# Run Production MCP Servers
 python "WEEK 7\lab7_1_first_mcp_server.py"
+python "WEEK 7\lab7_2_database_mcp.py"
 ```

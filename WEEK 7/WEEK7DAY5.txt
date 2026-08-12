@@ -1,0 +1,115 @@
+==============================================================================
+CALDER AI INTERNSHIP — WEEK 7 DAY 5 CONCEPT JOURNAL
+Topic: Tool Ecosystem, Standup Requirements & Weekly Assessment Q&A
+Date: Friday 14 August 2026
+==============================================================================
+
+1. FRIDAY STANDUP DEMONSTRATION REQUIREMENTS
+   The Friday Standup verifies the complete Week 7 MCP Tool Ecosystem live:
+   - Live Ecosystem Demo: Single command launches gateway and downstream servers; LangGraph agent discovers and calls tools across namespaces.
+   - Tool Schema Review: Walkthrough of JSON Schemas for all exposed tools.
+   - Security Walkthrough: Live demonstration of 401 Authentication Rejection, 429 Rate Limiting, and SQLite Audit Store logging.
+   - Failure Demonstration: Downstream server simulation killed mid-run; gateway catches error gracefully without agent process crashing.
+
+==============================================================================
+2. WEEKLY ASSESSMENT — ALL 6 QUESTIONS ANSWERED IN WRITING
+==============================================================================
+
+[QUESTION 1 - CONCEPTUAL]
+Explain the difference between stdio and HTTP+SSE transport in MCP. When would you choose each, and what are the tradeoffs?
+
+[ANSWER]
+- stdio (Standard Input / Output):
+  Communication occurs over standard OS process pipes (stdin/stdout).
+  - Use Case: Local desktop integration (e.g. Claude Desktop app running on local developer machine).
+  - Tradeoffs: Zero network latency, lightweight, inherently isolated by OS process boundaries. Cannot be accessed remotely or over network boundaries.
+
+- HTTP + Server-Sent Events (SSE):
+  Communication occurs over standard HTTP POST endpoints with persistent SSE streaming channels.
+  - Use Case: Production microservices, Docker containers, multi-tenant enterprise tool gateways.
+  - Tradeoffs: Scalable, network-accessible, easy to containerize, load-balance, and secure with API keys. Requires network authentication, HTTPS encryption, and rate limiting.
+
+------------------------------------------------------------------------------
+[QUESTION 2 - CONCEPTUAL]
+What are the three MCP primitives (tools, resources, prompts) and what is the correct use case for each? Why does the distinction matter in production?
+
+[ANSWER]
+1. Tools (Executable Actions):
+   - Use Case: Side-effecting operations or dynamic computations (e.g. `query_table()`, `write_file()`, `calculate()`).
+2. Resources (Read-Only Data URIs):
+   - Use Case: Browsable static or dynamic data sources exposed to the LLM (e.g. `file://logs/app.log`, `resource://db/schema`).
+3. Prompts (Structured Workflow Templates):
+   - Use Case: Pre-configured prompt templates exposed by the server for structured workflow guidance (e.g. `file_summarization`, `database_report`).
+
+Why Distinction Matters in Production:
+- Security & Permissioning: Read-only resources do not alter state, whereas tools can mutate databases or filesystem state. Keeping them distinct allows enterprise gateways to grant read-only resource browsing while restricting executable tool access based on tenant RBAC roles.
+
+------------------------------------------------------------------------------
+[QUESTION 3 - CONCEPTUAL]
+How does MCP improve on custom function calling? What specific problems does it solve that bespoke tool integration does not?
+
+[ANSWER]
+- Problems Solved by MCP:
+  1. Decoupling Tool Logic from Agent Framework: Tools built once as an MCP server can be consumed by Claude Desktop, LangChain, LangGraph, AutoGen, or custom LLMs without modification.
+  2. Dynamic Discovery: Agents discover available tool schemas dynamically at runtime via protocol handshakes rather than hardcoding function signatures in python files.
+  3. Standardization & Ecosystem Portability: Prevents vendor lock-in to specific model providers (OpenAI function calling format vs Anthropic tool format).
+
+------------------------------------------------------------------------------
+[QUESTION 4 - TECHNICAL]
+Write the JSON Schema definition for an MCP tool called `query_database` that accepts a SQL query string, a maximum row count, and an optional list of allowed table names.
+
+[ANSWER]
+{
+  "type": "object",
+  "properties": {
+    "sql_query": {
+      "type": "string",
+      "description": "The SQL SELECT statement to execute."
+    },
+    "max_rows": {
+      "type": "integer",
+      "description": "Maximum number of rows to return.",
+      "default": 10
+    },
+    "allowed_tables": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Optional list of table names permitted for querying."
+    }
+  },
+  "required": ["sql_query"]
+}
+
+------------------------------------------------------------------------------
+[QUESTION 5 - TECHNICAL]
+Describe how you would implement per-API-key rate limiting in an MCP server without a Redis dependency. What data structure would you use and why?
+
+[ANSWER]
+- Data Structure: Sliding-Window Token Bucket stored in an in-memory Python dictionary:
+  `RATE_LIMIT_STORE: Dict[str, List[float]] = {}`
+  where keys are API keys and values are lists of request timestamps (`time.time()`).
+- Algorithm:
+  On each incoming request:
+  1. Fetch current time `now = time.time()`.
+  2. Purge timestamps older than window (`now - 60.0`).
+  3. If remaining timestamps count >= limit, reject with HTTP 429.
+  4. Otherwise, append `now` and allow execution.
+- Why: Extremely fast ($O(N)$ filter where $N \le \text{limit}$), in-process, zero external dependencies required for standalone single-instance MCP servers.
+
+------------------------------------------------------------------------------
+[QUESTION 6 - DESIGN]
+Design the MCP tool ecosystem for a legal AI platform that needs to access case databases, generate documents, check compliance, and send notifications. How many MCP servers would you build, and how would you structure the gateway?
+
+[ANSWER]
+- Ecosystem Architecture:
+  Build 4 specialized downstream MCP servers behind 1 MCP Gateway:
+  1. Case DB MCP Server (`casedb:*`): Tools for searching legal precedents, court filings, and case metadata.
+  2. Document Generation MCP Server (`docgen:*`): Tools for drafting legal contracts, Briefs, and PDFs.
+  3. Compliance Checker MCP Server (`compliance:*`): Tools for validating regulatory clauses against law databases.
+  4. Notification MCP Server (`notify:*`): Tools for emailing partners and scheduling court calendar events.
+
+- Gateway Structure:
+  - Central MCP Gateway proxy enforcing tenant authentication, RBAC permissions, and tool namespace routing.
+  - Role-Based Access Control (RBAC): Paralegals can access `casedb:*` and `docgen:*` but cannot trigger `notify:*` tools.
+  - Aggregated `/health` health monitoring across all 4 underlying servers.
+==============================================================================

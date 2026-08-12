@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "universal-enterprise-tool-hub": {
+      "command": "python",
+      "args": [
+        "C:/Users/USER/Desktop/calderr-ai-2026/WEEK 7/production_project/hub_gateway.py"
+      ],
+      "env": {
+        "MCP_API_KEY": "key_enterprise_admin"
+      }
+    }
+  }
+}

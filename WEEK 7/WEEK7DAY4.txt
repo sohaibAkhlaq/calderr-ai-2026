@@ -1,0 +1,30 @@
+==============================================================================
+CALDER AI INTERNSHIP — WEEK 7 DAY 4 CONCEPT JOURNAL
+Topic: Security, Auth, Production Hardening & Public API MCP Servers
+Date: Thursday 13 August 2026
+==============================================================================
+
+1. OWASP GUIDELINES FOR AI TOOL & MCP SECURITY
+   Exposing tools to autonomous AI agents creates unique attack vectors. OWASP identifies critical security risks for Agentic AI & Tool Ecosystems:
+
+   a. Excessive Agency / Over-Privileged Tools (OWASP LLM08):
+      - Risk: Giving an LLM raw shell access or broad database write access (`DROP`, `DELETE`).
+      - Defense: Enforce least privilege. Principle of Minimum Agency — tools should perform narrow, well-defined tasks with strict JSON Schema parameter validation.
+
+   b. Insecure Plugin / Tool Design (OWASP LLM07):
+      - Risk: Unsanitized inputs passed directly into third-party APIs or database queries (SQL Injection, Command Injection, Path Traversal).
+      - Defense: Strict input validation, path sandboxing (`os.path.abspath`), and parameterized API requests.
+
+   c. Unauthenticated Tool Execution & Denial of Service (DoS):
+      - Risk: Malicious actors or runaway agent loops spamming tool servers with thousands of requests.
+      - Defense: Mandatory API Key authentication headers (`Authorization: Bearer <token>`) and Token-Bucket rate limiting.
+
+2. HTTP + SSE (SERVER-SENT EVENTS) PRODUCTION TRANSPORT
+   While `stdio` transport works for local desktop apps (Claude Desktop), production enterprise servers use `HTTP + SSE`:
+   - **HTTP Endpoint (`POST /messages` or `/tools/call`)**: Standard POST endpoint for clients to send requests.
+   - **Server-Sent Events (`GET /sse`)**: Persistent event stream allowing the server to push real-time notifications, tool status updates, and responses back to the agent client.
+
+3. WRAPPING PUBLIC APIs AS MCP SERVERS
+   An MCP server can wrap external public APIs (GitHub, HuggingFace, Weather, Financial APIs) to convert unstructured web services into standardized, schema-validated MCP tools.
+   - Per-Endpoint Rate Limits: Public APIs have external rate limits. The MCP server must track and enforce client quotas before proxying to the public API to avoid IP bans or quota depletion.
+==============================================================================

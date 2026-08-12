@@ -1,0 +1,23 @@
+# Production Dockerfile for Lab 7.4 Public API MCP Server
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt fastmcp mcp requests
+
+# Copy source code and create data directory
+COPY . /app/
+RUN mkdir -p /app/data
+
+EXPOSE 8000
+
+# Run MCP Server
+CMD ["python", "WEEK 7/lab7_4_public_api_mcp.py"]

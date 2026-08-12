@@ -65,9 +65,59 @@ flowchart TD
 
 ---
 
-## Automated Test Suite (16/16 Passed, 100% Coverage)
+## 🎯 Step-by-Step Team Lead Presentation & Demo Script
 
-The application features a built-in **Automated Test Suite** tab in the Streamlit interface with 16 automated integration and component tests:
+Follow these steps to demonstrate the project live to your team lead:
+
+### 1. Start the Streamlit App
+```bash
+streamlit run app.py
+```
+Open **`http://localhost:8501`** in your browser.
+
+---
+
+### 2. Live Demo Sequence (Copy-Paste Prompts)
+
+#### Step 1: Run Automated Verification (Tab 4)
+- Click on the **`🧪 Automated Test Suite`** tab.
+- Click **`🚀 Run All Tests`**.
+- **Say**: *"Before interacting, let's run our automated test suite to verify component integrity."*
+- **Highlight**: Show all **16/16 Tests Passed (100% Pass Rate)**.
+
+---
+
+#### Step 2: Session 1 — Persona Injection & Preference Storing (Tab 1)
+- Switch to **`💬 Live Interaction`** tab.
+- **Copy & Paste this prompt into the chat box**:
+  ```text
+  I'm actually a Senior Backend Engineer. I know a lot about PostgreSQL and system design. For all future answers, please use highly technical language, prioritize bullet points, and skip basic definitions.
+  ```
+- **Observe**: Assistant acknowledges your profile, expertise in PostgreSQL, and preference for bullet points.
+
+---
+
+#### Step 3: Inspect Real-Time Memory Extraction (Tabs 2 & 3)
+- Click on **`🔍 Memory Inspector`** (Tab 2):
+  - Point out that **Semantic Facts** now contains extracted entries for `PostgreSQL`, `Senior Backend Engineer`, and `bullet points`.
+  - Point out the **Episodic Logs** table showing the raw interaction log.
+- Click on **`👤 User Profile Viewer`** (Tab 3):
+  - Point out that **Known Topics** has automatically updated with ``PostgreSQL`` and ``system design``.
+  - Point out **Communication Style Preference** has updated to `bullet points / highly technical`.
+
+---
+
+#### Step 4: Session 2 — Demonstrating Adaptive Personalization (Tab 1)
+- Switch back to **`💬 Live Interaction`** tab.
+- **Copy & Paste this query**:
+  ```text
+  Can you explain how index scanning works in relational databases?
+  ```
+- **Observe**: Notice how the assistant **SKIPS basic definitions of SQL**, directly discusses B-Tree / Bitmap Index Scans using **concise bullet points**, referencing your persona from Session 1!
+
+---
+
+## Automated Test Suite (16/16 Passed, 100% Coverage)
 
 | Test Group | Test Name | Description | Status |
 |---|---|---|---|
@@ -87,28 +137,3 @@ The application features a built-in **Automated Test Suite** tab in the Streamli
 | **Group 5: Integration** | 5.1 Full Pipeline | Verifies end-to-end flow (Query → LLM → Memory Sync) | ✅ Pass |
 | | 5.2 Memory Persistence | Verifies state retention across simulated restarts | ✅ Pass |
 | | 5.3 Profile Adaptation | Verifies multi-turn learning across multiple interactions | ✅ Pass |
-
----
-
-## Quick Start & Running
-
-### Prerequisites
-- Python 3.11+
-- `GROQ_API_KEY` set in your `.env` file
-
-### Installation
-```bash
-pip install -r requirements.txt
-```
-
-### Execution
-```bash
-streamlit run app.py
-```
-
-### Live Demo Instructions
-1. Open `http://localhost:8501` in your browser.
-2. Click on the **🧪 Automated Test Suite** tab and press **🚀 Run All Tests** to showcase the 100% pass rate.
-3. Switch to **💬 Live Interaction** and test persona injection:
-   > *"I'm a Senior Backend Engineer. I know PostgreSQL and system design. For all future answers, use concise bullet points and skip basic definitions."*
-4. Switch to **🔍 Memory Inspector** and **👤 User Profile Viewer** to see the synthesized persona update live.

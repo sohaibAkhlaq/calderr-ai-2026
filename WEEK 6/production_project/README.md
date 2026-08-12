@@ -51,6 +51,71 @@ flowchart TD
 
 ---
 
+## 🎯 Step-by-Step Team Lead Presentation & Demo Script
+
+Follow these steps to showcase the production platform to your team lead:
+
+### 1. Launch Services
+```bash
+# Terminal 1: FastAPI REST Service (Port 8000)
+python main.py
+
+# Terminal 2: Streamlit Observability Admin Dashboard (Port 8501)
+streamlit run admin_app.py
+```
+
+---
+
+### 2. Live Demo Steps
+
+#### Step 1: Show OpenAPI Swagger Documentation (Browser `http://localhost:8000/docs`)
+- Open **`http://localhost:8000/docs`** in your browser.
+- **Say**: *"This is an open-source alternative to Mem0. It's a production-grade Memory-as-a-Service REST platform built with FastAPI."*
+- **Highlight**:
+  - Show endpoints for all 4 memory types: `/episodic`, `/semantic/search`, `/procedural/rules`, `/graph/query`.
+  - Point out that every endpoint requires a `tenant_id` for strict multi-tenant isolation.
+
+---
+
+#### Step 2: Automated Platform Verification (Browser `http://localhost:8501`)
+- Open **`http://localhost:8501`** (Streamlit Admin Dashboard).
+- Go to **`🧪 Automated Test Suite`** (Tab 5).
+- Click **`🚀 Run All Platform Tests`**.
+- **Say**: *"Let's execute the automated platform verification suite directly from the admin dashboard."*
+- **Highlight**: Show **100% Platform Pass Rate** covering Multi-Tenant Boundary Isolation, Semantic Vector Engine, Procedural Rules, and Knowledge Graph Multi-Hop Traversals.
+
+---
+
+#### Step 3: Demonstrate Multi-Tenant Isolation & Knowledge Graph (Tab 1 & Tab 2)
+- Click **`🏢 Multi-Tenant Inspector`** (Tab 1):
+  - Switch dropdown between `tenant_alpha` and `tenant_beta`.
+  - Point out: *"Tenant A cannot search or read Tenant B's memories."*
+- Click **`🕸️ Knowledge Graph`** (Tab 2):
+  - Add a triple: Subject: `Spanner`, Predicate: `REPLACES`, Object: `PostgreSQL`.
+  - Click **Add Triple** and show the graph structure updating with 2 nodes and 1 edge.
+
+---
+
+#### Step 4: Run External AI Agent Integration Demo (Terminal 3)
+- In a third terminal window, run:
+  ```bash
+  python client_agent_demo.py
+  ```
+- **Say**: *"Here is an external AI agent connecting to the platform over HTTP REST API."*
+- **Highlight**: Point out the `201 Created` responses, vector search hit, multi-hop entity traversal, and background consolidation execution report.
+
+---
+
+#### Step 5: Run RAGAS Retrieval Quality Benchmark (Terminal 4)
+- In a fourth terminal window, run:
+  ```bash
+  python eval_retrieval_quality.py
+  ```
+- **Say**: *"Finally, we run automated RAGAS-style retrieval quality evaluation."*
+- **Highlight**: Point out the **Composite Quality Score of 0.875 (PASS)** and **Multi-Tenant Isolation Score of 1.0 (100%)**.
+
+---
+
 ## API Documentation (OpenAPI / Swagger)
 
 Interactive documentation is available at `http://localhost:8000/docs` when running the service.
@@ -76,8 +141,6 @@ Interactive documentation is available at `http://localhost:8000/docs` when runn
 
 ## Verification & Automated Test Suite (100% Pass Rate)
 
-The platform features an automated verification suite accessible via the Streamlit Admin Dashboard (**🧪 Automated Test Suite** tab):
-
 | Test Group | Test Name | Result |
 |---|---|---|
 | **1. Multi-Tenant Isolation** | 1.1 Semantic Vector Isolation | ✅ Pass |
@@ -91,27 +154,7 @@ The platform features an automated verification suite accessible via the Streaml
 
 ---
 
-## Quick Start & Execution
-
-### Option 1: Local Execution (FastAPI + Streamlit)
-```bash
-# 1. Install Dependencies
-pip install -r requirements.txt
-
-# 2. Start FastAPI REST Service (Port 8000)
-python main.py
-
-# 3. Start Streamlit Admin Dashboard (Port 8501)
-streamlit run admin_app.py
-
-# 4. Run Client Agent Integration Demo
-python client_agent_demo.py
-
-# 5. Run RAGAS Retrieval Quality Evaluation
-python eval_retrieval_quality.py
-```
-
-### Option 2: Docker Compose Deployment
+## Docker Compose Deployment
 ```bash
 docker-compose up --build
 ```

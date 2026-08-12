@@ -1,0 +1,56 @@
+==============================================================================
+CALDER AI INTERNSHIP — WEEK 7 DAY 1 CONCEPT JOURNAL
+Topic: Model Context Protocol (MCP) Specification & First Server
+Date: Monday 10 August 2026
+==============================================================================
+
+1. WHAT IS MODEL CONTEXT PROTOCOL (MCP)?
+   Published by Anthropic in late 2024, Model Context Protocol (MCP) is an open-standard
+   architectural specification for connecting AI applications to external tools, data
+   sources, and prompt templates.
+
+   Before MCP:
+   - Every AI framework (LangChain, AutoGen, LlamaIndex, OpenAI Assistant API) reinvented
+     tool definitions and custom function calling from scratch.
+   - Integrations were tightly coupled to specific LLMs or frameworks.
+
+   With MCP:
+   - Tools and data sources are implemented ONCE inside a standalone "MCP Server".
+   - Any MCP-compatible client (Claude Desktop, LangChain Agents, AutoGen, custom LLMs)
+     can discover, authenticate, and execute tools without rewriting code.
+
+2. THE THREE MCP PRIMITIVES
+   a. Tools: Callable functions that LLMs invoke to take actions or perform computations.
+      Examples: calculate(), query_database(), search_codebase(), send_email().
+   b. Resources: Read-only data sources exposed to the LLM (like URLs or file URI endpoints).
+      Examples: file://logs/app.log, db://users/schema.
+   c. Prompts: Pre-written prompt templates exposed by the server for structured workflows.
+      Examples: summarize_codebase, generate_weekly_report.
+
+3. TRANSPORT LAYERS: STDIO vs HTTP+SSE
+   a. stdio Transport (Standard Input / Standard Output):
+      - Communication occurs over standard OS process streams (stdin/stdout).
+      - Best for: Local desktop integration (e.g., Claude Desktop running on your machine).
+      - Pros: Zero network overhead, fast, inherently secure local process boundaries.
+      - Cons: Cannot be accessed over the network or across remote servers.
+
+   b. HTTP + Server-Sent Events (SSE) Transport:
+      - Communication occurs over standard HTTP endpoints with SSE streaming for server notifications.
+      - Best for: Remote production microservices, Docker containers, multi-tenant cloud tool hubs.
+      - Pros: Scalable, network-accessible, easy to containerize, load-balance, and secure with API keys.
+      - Cons: Slightly higher latency, requires network authentication and security management.
+
+4. MESSAGE FORMAT & CAPABILITY NEGOTIATION
+   - MCP uses standard JSON-RPC 2.0 message framing over transport layers.
+   - On startup, the client and server engage in "Handshake / Capability Negotiation":
+     1. Client sends `initialize` request specifying client version and supported capabilities.
+     2. Server responds with server version, tool capabilities, resource capabilities, and prompt capabilities.
+     3. Client sends `notifications/initialized` confirmation.
+     4. Client invokes `tools/list` to discover available tool schemas.
+     5. Client invokes `tools/call` to execute a specific tool with JSON arguments.
+
+5. FASTMCP FRAMEWORK
+   - FastMCP is a high-level Python framework built on top of the low-level `mcp` SDK (similar to FastAPI for web services).
+   - Automatically generates valid JSON Schema definitions from Python type hints and docstrings.
+   - Handles transport serialization, error formatting, and tool discovery seamlessly.
+==============================================================================

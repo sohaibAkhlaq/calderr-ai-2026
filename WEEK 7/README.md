@@ -14,7 +14,7 @@ By decoupling tool implementation from agent framework logic, MCP enables tools 
 2. **Transport Layer Engineering**: Understand stdio (local high-performance desktop transport) vs HTTP+SSE (remote, containerized production microservice transport).
 3. **FastMCP Server Development**: Build production FastMCP servers with JSON Schema validation and structured error handling.
 4. **Agent Integration & Gateways**: Connect MCP tool providers to LangChain / LangGraph agents and build composable tool gateways with namespace routing.
-5. **Security & Production Hardening**: Implement API key authentication, token-bucket rate limiting, sandboxed AST math evaluation, and SQLite audit logging.
+5. **Security & Production Hardening**: Implement API key authentication, token-bucket rate limiting, sandboxed AST math evaluation, per-endpoint quotas, and SQLite audit logging.
 
 ---
 
@@ -34,6 +34,11 @@ WEEK 7/
 ├── lab7_3_mcp_gateway.py         # Lab 7.3: MCP Gateway with Tool Namespace Routing (fs:, db:, util:) & Schema Cache
 ├── lab7_3_composite_agent.py     # Lab 7.3: LangGraph Composite Agent executing multi-step workflow via Gateway
 ├── test_lab7_3.py                # Automated Verification Suite for Lab 7.3 (12/12 Passed)
+│
+├── WEEK7DAY4.txt                 # Thursday Concept Journal: Security, OWASP Guidelines & Public API MCP Wrappers
+├── lab7_4_public_api_mcp.py      # Lab 7.4: Hardened Public API MCP Server (GitHub Intelligence Wrapper)
+├── Dockerfile.lab7_4             # Docker Containerization for Lab 7.4 HTTP+SSE MCP Server
+├── test_lab7_4.py                # Automated Verification Suite for Lab 7.4 (8/8 Passed)
 └── README.md                     # Master Week 7 Documentation
 ```
 
@@ -68,6 +73,15 @@ WEEK 7/
   5. **Composite LangGraph Agent (`lab7_3_composite_agent.py`)**: Executes 4-step workflow through Gateway (Read specs $\rightarrow$ Query DB $\rightarrow$ Calculate budget & string formatting $\rightarrow$ Write executive report to disk).
 - **Validation**: `python "WEEK 7\test_lab7_3.py"` $\rightarrow$ **`12 / 12 Tests Passed (100.0%)`**
 
+### 4. Lab 7.4: Production Hardened Public API MCP Server (`lab7_4_public_api_mcp.py` & `Dockerfile.lab7_4`)
+- **Overview**: Security-hardened MCP server wrapping the GitHub Developer Intelligence Public API:
+  1. **Header Authentication**: Validates authorized developer keys (`gh_key_alpha`, `gh_key_beta`).
+  2. **Per-Endpoint Quotas**: Enforces specific rate limits per tool (e.g. 5 calls/min for expensive code searches, 10 calls/min for repository info).
+  3. **Tools Exposed**: `get_repo_info`, `search_github_code`, `get_user_profile`, `analyze_repo_health`.
+  4. **Security Audit Log**: Persists all access logs to `data/mcp_security_audit.db`.
+  5. **Docker Containerization**: Includes `Dockerfile.lab7_4` for containerized HTTP+SSE deployment.
+- **Validation**: `python "WEEK 7\test_lab7_4.py"` $\rightarrow$ **`8 / 8 Tests Passed (100.0%)`**
+
 ---
 
 ## Quick Start & Running Commands
@@ -77,16 +91,15 @@ WEEK 7/
 cd C:\Users\USER\Desktop\calderr-ai-2026
 .\calderr-env\Scripts\Activate.ps1
 
-# Run All Lab Verification Test Suites
+# Run All Lab Verification Test Suites (Labs 7.1, 7.2, 7.3, 7.4)
 python "WEEK 7\test_lab7_1.py"
 python "WEEK 7\test_lab7_2.py"
 python "WEEK 7\test_lab7_3.py"
+python "WEEK 7\test_lab7_4.py"
 
 # Run Production MCP Servers & Gateway
 python "WEEK 7\lab7_1_first_mcp_server.py"
 python "WEEK 7\lab7_2_database_mcp.py"
 python "WEEK 7\lab7_3_mcp_gateway.py"
-
-# Run LangGraph Composite Agent Demo
-python "WEEK 7\lab7_3_composite_agent.py"
+python "WEEK 7\lab7_4_public_api_mcp.py"
 ```

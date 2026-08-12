@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  enterprise-hub-gateway:
+    build:
+      context: .
+      dockerfile: WEEK 7/production_project/Dockerfile.hub
+    container_name: enterprise_hub_gateway
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+    restart: always
+
+  enterprise-hub-dashboard:
+    build:
+      context: .
+      dockerfile: WEEK 7/production_project/Dockerfile.hub
+    container_name: enterprise_hub_dashboard
+    command: streamlit run "WEEK 7/production_project/app.py" --server.port=8501 --server.address=0.0.0.0
+    ports:
+      - "8501:8501"
+    depends_on:
+      - enterprise-hub-gateway
+    restart: always

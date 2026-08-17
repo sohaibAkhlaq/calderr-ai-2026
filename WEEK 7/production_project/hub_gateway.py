@@ -223,7 +223,10 @@ class EnterpriseHubGateway:
         target_func = tool_item["func"]
 
         try:
-            res = target_func(**kwargs)
+            import inspect
+            sig = inspect.signature(target_func)
+            valid_kwargs = {k: v for k, v in kwargs.items() if k in sig.parameters}
+            res = target_func(**valid_kwargs)
             latency = (time.time() - start_t) * 1000
             log_hub_audit(api_key, tenant_id, namespaced_tool, "SUCCESS", latency)
             return {
